@@ -1,0 +1,24 @@
+<h2 mat-dialog-title>
+  {{ 'LOGOUT.LOGOUT_MODAL.TITLE' | translate }}
+</h2>
+<div mat-dialog-content style="padding-bottom:20px">
+  <p>{{ 'LOGOUT.LOGOUT_MODAL.CONTENT' | translate }}</p>
+</div>
+<div mat-dialog-actions style="justify-content:flex-end">
+  <button mat-button (click)="onCancel()" class="uppercase">
+    {{ 'GLOBAL.CTA.CANCEL' | translate }}
+  </button>
+  <button
+    class="mat-warn uppercase"
+    [ngClass]="{
+      cih: userService.getBrand() === brands.CIH,
+      nh: userService.getBrand() === brands.NH
+    }"
+    mat-button
+    mat-raised-button
+    cdkFocusInitial
+    (click)="onConfirm()"
+  >
+    {{ 'GLOBAL.CTA.OK' | translate }}
+  </button>
+</div>

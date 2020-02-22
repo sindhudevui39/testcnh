@@ -1,0 +1,24 @@
+.vehicle-data {
+  height: 348px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.no-data {
+  display: flex;
+  flex: 1;
+}
+.no-data-text {
+  font-size: 0.8em;
+  color: var(--color-grey);
+  margin: auto;
+}
+@media only screen and (max-width: 1024px) {
+  .ipad-override-card {
+    min-height: 0;
+  }
+  .card-data {
+    min-height: 234px;
+    overflow: auto;
+  }
+}

@@ -1,0 +1,98 @@
+.list-item {
+  background-color: var(--color-white);
+  border-left: 5px solid;
+  border-bottom: 0.5px solid var(--color-light-grey);
+  color: var(--color-med-grey);
+  font-size: 12px;
+  font-family: Roboto;
+  height: 64px;
+  padding-right: 10px;
+}
+.vehicle-info {
+  align-items: center;
+  display: flex;
+  max-width: 25%;
+  min-width: 25%;
+}
+.vehicle-info-image {
+  padding-left: 12px;
+  padding-right: 12px;
+}
+.disconneted-img {
+  height: 45px;
+}
+.vehicle-info-detail {
+  width: calc(100% - 75px);
+}
+.vehicle-info-detail img {
+  padding-left: 5px;
+}
+.alerts-info {
+  padding-left: 5px;
+  width: 18%;
+}
+.alerts-info b,
+.disconnected-img {
+  padding-right: 3px;
+}
+.no-faults {
+  color: var(--color-grey);
+}
+.status-info,
+.hours-info {
+  width: 13%;
+}
+.margin-auto {
+  margin-bottom: auto;
+  margin-top: auto;
+}
+.status-info-circle {
+  border-radius: 50%;
+  height: 10px;
+  width: 10px;
+}
+.status-info-text {
+  margin-left: 5px;
+}
+.custom1-info,
+.custom2-info {
+  width: 14%;
+}
+.menu-col {
+  width: 2%;
+}
+.dashes {
+  color: var(--color-grey);
+}
+.status-disconnected {
+  color: var(--color-status-inactive);
+}
+/* helper classes */
+.bold {
+  color: var(--black);
+  font-weight: bold;
+}
+.large-font {
+  font-size: 24px;
+}
+.flex-col-jcsb {
+  display: flex;
+  flex-direction: column;
+  height: 77%;
+  justify-content: space-between;
+}
+.unit-height {
+  height: 12px;
+}
+.unit-margin {
+  margin-left: 5px;
+}
+a,
+a:hover,
+a:active,
+a:visited {
+  outline: none;
+  color: rgba(0, 0, 0, 0.87);
+  text-decoration: none;
+  text-align: center;
+}

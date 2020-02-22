@@ -1,0 +1,110 @@
+.fleet-fuel-report {
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+}
+.fleet-fuel__content {
+  position: relative;
+}
+.fleet-fuel__title {
+  display: flex;
+  justify-content: space-between;
+}
+.fleet-fuel__title__main {
+  font-weight: 700;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+}
+.fleet-fuel__title__sub {
+  text-transform: uppercase;
+  color: #707070;
+  font-size: 10px;
+}
+.fleet-fuel__total {
+  width: 100%;
+  margin-bottom: 10px;
+  display: flex;
+}
+.fleet-fuel__total--left,
+.fleet-fuel__total--right {
+  display: flex;
+  flex-direction: column;
+}
+.fleet-fuel__total--left {
+  margin-right: 50px;
+}
+.fleet-fuel__total--left .title,
+.fleet-fuel__total--right .title {
+  font-size: 12px;
+  color: #707070;
+  text-transform: capitalize;
+}
+.fleet-fuel__total--left .number,
+.fleet-fuel__total--right .number {
+  font-size: 24px;
+  font-weight: 700;
+}
+.fleet-fuel__total--left .uom,
+.fleet-fuel__total--right .uom {
+  font-size: 12px;
+  color: #707070;
+  text-transform: uppercase;
+  margin-left: 4px;
+}
+.fleet-fuel__selector {
+  width: 100%;
+  padding-top: 14px;
+  border-top: 1px solid #dcdcdc;
+}
+.fleet-fuel__selector__info {
+  display: flex;
+  color: var(--color-main-grey);
+  font-size: 14px;
+}
+.fleet-fuel__selector__info span {
+  margin-right: 15px;
+  text-transform: capitalize;
+}
+.fleet-fuel__selector__info .select {
+  width: 100px;
+  margin-right: 15px;
+}
+.fleet-fuel__selector__values {
+  width: 100%;
+  margin-bottom: 50px;
+  font-size: 12px;
+  text-transform: capitalize;
+  color: var(--color-med-grey);
+}
+.fleet-fuel__selector__values div {
+  margin-top: 12px;
+}
+.fleet-fuel__selector__values .label {
+  margin-right: 10px;
+}
+.fleet-fuel__selector__values .value {
+  font-weight: 700;
+  margin-right: 2px;
+  color: var(--color-main-grey);
+}
+.fleet-fuel__selector__values .uom {
+  text-transform: lowercase;
+}
+.fleet-fuel__chart {
+  position: absolute;
+  left: 0;
+  right: 0;
+}
+.fleet-fuel__chart__loader {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+@media screen and (max-width: 1280px) {
+  .fleet-fuel__chart {
+    left: 5%;
+    right: 5%;
+  }
+}

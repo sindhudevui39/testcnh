@@ -1,0 +1,276 @@
+.cnh-page-integrations {
+  width: 100%;
+  height: 100%;
+}
+/* ::ng-deep .cdk-overlay-container {
+  top: 0 !important;
+} */
+.cnh-page-integrations--inner {
+  max-width: 1440px;
+  width: auto;
+  margin: 0 auto;
+  /* height: 100%; */
+  overflow-y: auto;
+}
+.cnh-page-integrations--inner p {
+  padding-top: 24px;
+  padding-bottom: 4px;
+  font-family: Roboto;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: center;
+  color: #707070;
+}
+.cnh-page-integrations .grid {
+  width: 100%;
+  font-size: 0;
+}
+.cnh-page-integrations .grid > * {
+  font-size: medium;
+  display: inline-block;
+  vertical-align: top;
+  padding: 20px 24px;
+  width: 33.33333%;
+}
+@media (min-width: 1024px) {
+  .cnh-page-integrations .grid > * {
+    width: 25%;
+  }
+}
+@media (min-width: 1380px) {
+  .cnh-page-integrations .grid > * {
+    width: 20%;
+  }
+}
+
+.cnh-card-app {
+  width: 100%;
+  height: 294px;
+  background-color: #fff;
+  border-radius: 2px;
+  border: solid 1px #e2e2e2;
+  text-align: center;
+  position: relative;
+  color: #000;
+  padding: 16px;
+}
+.cnh-card-app .menu {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  cursor: pointer;
+  padding: 4px;
+}
+::ng-deep .disconnectModel {
+  position: relative;
+  right: 88px;
+  top: 40px;
+  margin-top: -13px;
+}
+::ng-deep .nopaddingForData {
+  padding-left: 0px !important;
+}
+
+::ng-deep .disconnectModel .mat-menu-item {
+  line-height: 40px;
+  height: 36px;
+  padding: 0 18px;
+  margin-top: 0px;
+}
+::ng-deep .mat-dialog-actions {
+  padding: 12px 0px 16px 0px !important;
+}
+.cnh-card-app .image {
+  width: 164px;
+  height: 64px;
+  margin: 0 auto;
+}
+.cnh-card-app .image img {
+  height: 64px;
+  max-width: 100%;
+}
+.cnh-card-app .title {
+  padding: 16px 0 8px;
+  font-family: Roboto;
+  font-size: 16px;
+  font-weight: 500;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 1.25;
+  letter-spacing: normal;
+  text-align: center;
+  color: #262626;
+}
+.cnh-card-app .txt {
+  padding: 0px;
+  opacity: 0.65;
+  font-family: Roboto;
+  font-size: 12px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: center;
+  color: #000000;
+}
+.cnh-card-app .info {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  -webkit-transform: translate(-50%);
+  transform: translate(-50%);
+  width: 100%;
+  padding-bottom: 16px;
+  padding-top: 16px;
+  background-color: #fff;
+}
+.cnh-card-app .info .connected .icon {
+  margin-right: 6px;
+  line-height: 22px;
+  color: #2bbb44;
+}
+.cnh-card-app .info .connected .icon,
+.cnh-card-app .info .connected .text {
+  display: inline-block;
+  vertical-align: top;
+}
+.cnh-card-app .info .connected .text {
+  font-family: Roboto;
+  font-size: 14px;
+  font-weight: 500;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 1.9;
+  letter-spacing: normal;
+  text-align: center;
+  color: #262626;
+  margin-left: 6px;
+}
+.cnh-card-app .info button {
+  width: 116px;
+  height: 36px;
+}
+
+.cnh-card-app .info cnh-button {
+  max-width: 110px;
+  display: block;
+  margin: 0 auto;
+}
+
+.cnh-modal-content .step-1 .image {
+  max-width: 168px;
+  height: 64px;
+  margin: 0 auto;
+  text-align: center;
+}
+.cnh-modal-content .step-1 .image img {
+  max-height: 100%;
+}
+.cnh-modal-content .step-1 .title {
+  font-size: 18px;
+  font-weight: 700;
+  color: #000;
+  padding-top: 24px;
+}
+.cnh-modal-content .step-1 .content .txt {
+  font-size: 16px;
+  color: #000;
+  padding: 24px 0;
+}
+.cnh-modal-content .step-1 .legal {
+  font-size: 12px;
+  color: #707070;
+}
+
+.theme-new-holland .loader-icon,
+.theme-new-holland .loader-icon {
+  stroke: #003e85;
+}
+.theme-case-ih .loader-icon,
+.theme-case-ih .loader-icon {
+  stroke: #a21c22;
+}
+@-webkit-keyframes rotate {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  to {
+    -webkit-transform: rotate(1turn);
+    transform: rotate(1turn);
+  }
+}
+@keyframes rotate {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  to {
+    -webkit-transform: rotate(1turn);
+    transform: rotate(1turn);
+  }
+}
+.cnh-loader {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.cnh-loader .svg-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+.cnh-loader .svg-container svg {
+  -webkit-animation: rotate 1s infinite linear;
+  animation: rotate 1s infinite linear;
+}
+.cnh-loader-small svg {
+  width: 15px;
+  height: 15px;
+  display: block;
+}
+.cnh-loader-small,
+.cnh-loader-small .tc-content-box.loading {
+  min-height: 30px;
+}
+.cnh-loader-default {
+  min-height: 50px;
+}
+.cnh-loader-default svg {
+  width: 50px;
+  height: 50px;
+  display: block;
+}
+.cnh-loader-default,
+.cnh-loader-default .tc-content-box.loading {
+  min-height: 100px;
+}
+.cnh-loader-large {
+  min-height: 70px;
+}
+.cnh-loader-large svg {
+  width: 70px;
+  height: 70px;
+  display: block;
+}
+.cnh-loader-large,
+.cnh-loader-large .tc-content-box.loading {
+  min-height: 140px;
+}
+.cnh-loader .tc-content-box {
+  display: block;
+  height: 100%;
+  overflow: auto;
+}
+.cnh-balloon-vehicle .cnh-loader,
+.cnh-balloon-vehicle .cnh-loader {
+  height: auto;
+}

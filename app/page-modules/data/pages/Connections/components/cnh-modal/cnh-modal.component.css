@@ -1,0 +1,273 @@
+.cnh-form-modal-with-header-background,
+:host {
+  width: 100%;
+  height: 100%;
+}
+.cnh-form-modal-with-header-background .mat-dialog-title {
+  padding: 5px;
+  font-size: 16px;
+  font-weight: 500;
+  padding-left: 24px;
+  padding-bottom: 12px;
+  padding-top: 10px;
+  color: #fff;
+  background-color: #262626;
+  margin: -24px;
+  margin-bottom: 24px;
+  height: 40px;
+  overflow: hidden;
+
+  font-family: Roboto;
+  font-size: 15px;
+  font-weight: bold;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 1.33;
+  letter-spacing: normal;
+  color: rgba(255, 255, 255, 0.87);
+}
+.cnh-modal-content .image {
+  max-width: 80%;
+  height: 64px;
+  margin: 0 auto;
+}
+.cnh-modal-content .image img {
+  max-height: 100%;
+  max-width: 100%;
+}
+.cnh-modal-content .image {
+  max-width: 168px;
+  height: 64px;
+  margin: 0 auto;
+  text-align: center;
+}
+.cnh-modal-content .image img {
+  max-height: 100%;
+  height: 64px;
+  width: 100%;
+}
+.cnh-modal-content.step-1 .title {
+  font-family: Roboto;
+  font-size: 18px;
+  font-weight: 500;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: #262626;
+  padding-top: 24px;
+}
+.marginTop24 {
+  margin-top: 24px;
+}
+.cnh-modal-content.step-1 .legal {
+  opacity: 0.8;
+  font-family: Roboto;
+  font-size: 12px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: #707070;
+  margin-bottom: 20px;
+}
+.cnh-form-modal-with-header-background .mat-dialog-actions {
+  -webkit-box-pack: end;
+  -ms-flex-pack: end;
+  justify-content: flex-end;
+}
+.cnh-form-modal-with-header-background .mat-dialog-content {
+  overflow: visible;
+}
+.cnh-form-modal-with-header-background .mat-dialog-container {
+  border-radius: 5px !important;
+  -webkit-box-shadow: 0 0 4px 1px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 0 4px 1px rgba(0, 0, 0, 0.4);
+  padding: 24px;
+  overflow: visible;
+  position: relative;
+}
+.cnh-form-modal-with-header-background .modal-button {
+  text-transform: uppercase;
+}
+.cnh-form-modal-with-header-background .modal-button-accept {
+  margin-left: 10px;
+}
+.cnh-form-modal-with-header-background .close-icon {
+  color: #fff;
+}
+.cnh-form-modal {
+  width: 100%;
+  height: 100%;
+}
+.cnh-form-modal form {
+  padding-top: 10px;
+}
+.cnh-form-modal form .mat-dialog-actions {
+  padding: 0;
+  margin: 0;
+}
+.cnh-form-modal h2 {
+  font-size: 18px;
+  font-weight: 500;
+  color: #262626;
+}
+.cnh-form-modal .modal-button span {
+  text-transform: uppercase;
+}
+.cnh-form-modal .modal-button-accept {
+  font-weight: 700;
+  margin-left: 10px;
+}
+.close-icon {
+  background: none;
+  border: 0;
+  color: #262626;
+  font: inherit;
+  line-height: normal;
+  overflow: visible;
+  -webkit-appearance: button;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 16px;
+  padding: 5px;
+  cursor: pointer;
+}
+.close-icon:focus {
+  outline: none;
+}
+.close-icon:hover {
+  opacity: 0.8;
+}
+.close-icon span.cnh-evo-icon-close:before {
+  font-weight: 700;
+}
+.mat-dialog-container {
+  border-radius: 2px !important;
+  -webkit-box-shadow: 0 0 4px 1px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 0 4px 1px rgba(0, 0, 0, 0.4);
+  padding: 24px;
+  overflow: visible;
+  position: relative;
+}
+.mat-dialog-content {
+  overflow: initial;
+}
+.mat-dialog-actions {
+  -webkit-box-pack: end;
+  -ms-flex-pack: end;
+  justify-content: flex-end;
+}
+.mat-dialog-actions .mat-button {
+  min-width: 98px;
+}
+.cnh-modal-content .header .cnh-evo-iconfont,
+.cnh-modal-content .header .cnh-evo-iconfont {
+  color: #bd1d22;
+  border: 1px solid #bd1d22;
+}
+.cnh-modal-content .header .cnh-evo-iconfont.icon-color-primary,
+.cnh-modal-content .header .cnh-evo-iconfont.icon-color-primary {
+  color: #003e85;
+  border-color: #003e85;
+}
+.cnh-modal-content .header .cnh-evo-iconfont.icon-color-secondary,
+.cnh-modal-content .header .cnh-evo-iconfont.icon-color-secondary {
+  color: #f1b514;
+  border-color: #f1b514;
+}
+.cnh-modal-content .header .cnh-evo-iconfont.icon-color-warn,
+.cnh-modal-content .header .cnh-evo-iconfont.icon-color-warn {
+  color: #bd1d22;
+  border-color: #bd1d22;
+}
+.theme-case-ih .cnh-modal-content .header .cnh-evo-iconfont,
+.theme-case-ih .cnh-modal-content .header .cnh-evo-iconfont {
+  color: #bd1d22;
+  border: 1px solid #bd1d22;
+}
+.theme-case-ih .cnh-modal-content .header .cnh-evo-iconfont.icon-color-primary,
+.theme-case-ih .cnh-modal-content .header .cnh-evo-iconfont.icon-color-primary {
+  color: #a21c22;
+  border-color: #a21c22;
+}
+.theme-case-ih .cnh-modal-content .header .cnh-evo-iconfont.icon-color-secondary,
+.theme-case-ih .cnh-modal-content .header .cnh-evo-iconfont.icon-color-secondary {
+  color: #3d3d3d;
+  border-color: #3d3d3d;
+}
+.theme-case-ih .cnh-modal-content .header .cnh-evo-iconfont.icon-color-warn,
+.theme-case-ih .cnh-modal-content .header .cnh-evo-iconfont.icon-color-warn {
+  color: #bd1d22;
+  border-color: #bd1d22;
+}
+.mat-raised-button {
+  padding: 0 27px;
+}
+.mat-raised-button.mat-warn {
+  background-color: #bd1d22;
+}
+.mat-raised-button.mat-secondary {
+  background-color: #262626;
+  color: #ffffff;
+}
+
+.cnh-modal-content .title {
+  font-size: 16px;
+  font-weight: 500;
+}
+.cnh-modal-content .header {
+  font-family: Roboto;
+  font-size: 18px;
+  font-weight: 500;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: rgba(155, 124, 124, 0.87);
+  padding-bottom: 16px;
+}
+.cnh-modal-content .header .cnh-evo-iconfont {
+  border-radius: 100%;
+  padding: 3px;
+  font-size: 24px;
+  margin-right: 12px;
+}
+.cnh-modal-content .header .cnh-evo-iconfont:before {
+  position: relative;
+  bottom: 2px;
+}
+.cnh-modal-content .header .txt {
+  position: relative;
+  bottom: 6px;
+  /* left: 5px; */
+  color: #262626;
+  /* margin-left: 12px; */
+}
+.cnh-modal-content .content {
+  padding-bottom: 20px;
+  font-family: Roboto;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: rgba(0, 0, 0, 0.87);
+}
+/* .cnh-modal-content .content:not(.has-reduced-text) {
+  line-height: 1.4;
+  font-size: 16px;
+  color: #262626;
+} */
+.cnh-modal-content .content.has-reduced-text {
+  margin-top: 7px;
+  line-height: 1.67;
+  font-size: 12px;
+  color: #707070;
+}

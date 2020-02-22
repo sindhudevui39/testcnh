@@ -1,0 +1,91 @@
+<div
+  [ngClass]="{
+    'cnh-form-modal-with-header-background': modalData.isConnect,
+    'cnh-form-modal': !modalData.isConnect,
+    nh: brand === 'NHAG',
+    cih: brand !== 'NHAG'
+  }"
+>
+  <h2 mat-dialog-title *ngIf="modalData.isConnect">{{ modalData.header }}</h2>
+  <button
+    *ngIf="!modalData.disableClose"
+    type="button"
+    role="button"
+    class="close-icon"
+    tabindex="-1"
+    (click)="onClose($event)"
+  >
+    <span class="cnh-evo-iconfont cnh-evo-icon-close"></span>
+  </button>
+  <mat-dialog-content>
+    <div class="cnh-modal-content" [ngClass]="modalData.isConnect ? 'step-1' : ''">
+      <div *ngIf="modalData.header && !modalData.isConnect" class="header">
+        <span
+          *ngIf="modalData.iconName"
+          class="cnh-evo-iconfont"
+          [ngClass]="[
+            'cnh-evo-icon-' + modalData.iconName,
+            modalData.iconColor ? 'icon-color-' + modalData.iconColor : 'cnh-evo-color-warn'
+          ]"
+        ></span>
+        <span
+          class="txt"
+          *ngIf="!modalData.isConnect"
+          [ngClass]="[modalData.iconName ? '' : 'cnh-evo-color-warn']"
+          >{{ modalData.header }}
+        </span>
+      </div>
+      <div class="image" *ngIf="modalData.isConnect">
+        <img
+          [src]="modalData?.app?.logo_uri || './assets/images/ic-placeholder.svg'"
+          [alt]="modalData?.app?.name"
+        />
+      </div>
+      <div *ngIf="modalData.isConnect" class="title">{{ modalData.title }}</div>
+      <div
+        class="content"
+        [class.has-reduced-text]="modalData.hasReducedText"
+        [ngClass]="modalData.isConnect ? 'marginTop24' : ''"
+      >
+        {{ modalData.contentText }}
+      </div>
+      <!-- <div class="legal" *ngIf="modalData.isConnect">
+        [ {{ translate.instant('GLOBAL.LEGAL_DISCLAMER') }} ]
+      </div> -->
+      <div class="extra">
+        <mat-checkbox
+          *ngFor="let checkbox of modalData.checkboxes; trackBy: trackByKey"
+          [required]="checkbox.required"
+          [name]="checkbox.key"
+          [(ngModel)]="checkbox.checked"
+        >
+          {{ checkbox.label }}
+        </mat-checkbox>
+      </div>
+    </div>
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <button
+      mat-button
+      tabindex="1"
+      type="button"
+      role="button"
+      class="modal-button modal-button-cancel uppercase"
+      (click)="onCancel($event)"
+      *ngIf="modalData.hasCancel"
+    >
+      {{ modalData.cancelLabel }}
+    </button>
+    <button
+      mat-raised-button
+      tabindex="0"
+      [type]="modalData.hasForm ? 'submit' : 'button'"
+      [attr.role]="modalData.hasForm ? 'submit' : 'button'"
+      class="modal-button modal-button-accept uppercase"
+      [color]="modalData.confirmColor"
+      (click)="onConfirm()"
+    >
+      {{ modalData.confirmLabel }}
+    </button>
+  </mat-dialog-actions>
+</div>

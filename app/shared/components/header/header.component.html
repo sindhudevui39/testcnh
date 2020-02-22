@@ -1,0 +1,163 @@
+<header>
+  <div class="header-brand" [ngClass]="{ cih: brand === brands.CIH, nh: brand === brands.NH }">
+    <div class="logo" *ngIf="brand === brands.CIH">
+      <img class="cih" src="assets/header-images/logo-case-ih-afs.png" alt="Case Header" />
+    </div>
+    <div class="header-icons">
+      <span *ngIf="notDataModule()"> </span>
+      <div
+        *ngIf="showIconInFleetAndData()"
+        appClickOutside
+        (clickOutside)="closefileuploadDropdown()"
+        class="dropdown-toggle"
+      >
+        <img
+          *ngIf="showFileTransfer()"
+          src="assets/header-images/nav-file-transfer.svg"
+          (click)="togglefileuploadDropdown()"
+        />
+        <div
+          class="dropdown-content"
+          [ngClass]="{ 'file-upload-dropdown-open': openfileuploadDropdown }"
+        >
+          <app-file-upload [activeRoute]="activeRoute"></app-file-upload>
+        </div>
+      </div>
+      <div
+        appClickOutside
+        (clickOutside)="closenotificationHistroy()"
+        class="dropdown-toggle"
+        *ngIf="notfleetModule()"
+      >
+        <img src="assets/header-images/nav-alert.svg" (click)="togglenotificationHistroy()" />
+        <span
+          class="icon-badge"
+          [hidden]="unReadNotify === 0"
+          (click)="togglenotificationHistroy()"
+        >
+          <span [hidden]="unReadNotify > 99">&nbsp;</span>
+          <span [hidden]="unReadNotify > 9">&nbsp;</span>{{ unReadNotify }}</span
+        >
+        <div
+          class="dropdown-content"
+          [ngClass]="{
+            'notification-histroy-dropdown-open': opennotificationHistory
+          }"
+        >
+          <app-notification-histroy *ngIf="opennotificationHistory"></app-notification-histroy>
+        </div>
+      </div>
+      <div appClickOutside (clickOutside)="closeUserDropdown()" class="dropdown-toggle">
+        <div
+          class="users"
+          [ngClass]="{ cih: brand === brands.CIH, nh: brand === brands.NH }"
+          (click)="toggleUserDropdown()"
+        >
+          {{ userInitials }}
+        </div>
+        <div class="dropdown-content" [ngClass]="{ 'users-dropdown-open': openUserDropdown }">
+          <div class="users-information">
+            <div class="name">{{ user.firstName }} {{ user.lastName }}</div>
+            <div class="email">{{ user.email }}</div>
+          </div>
+          <div class="logout-action" (click)="openDialog()">
+            {{ 'LOGOUT.SIGNOUT' | translate }}
+          </div>
+        </div>
+      </div>
+      <div
+        appClickOutside
+        (clickOutside)="closeApplicationDropdown()"
+        class="dropdown-toggle applicationList"
+        (click)="toggleApplicationDropdown()"
+      >
+        <div
+          class="users-drawer"
+          [ngClass]="{ cih: brand === brands.CIH, nh: brand === brands.NH }"
+        >
+          <img src="assets/header-images/navbar-app-drawer.svg" />
+        </div>
+        <div
+          class="dropdown-content"
+          *ngIf="this.applicationList.length > 0"
+          [ngClass]="{ 'users-dropdown-open': openApplicationDropdown }"
+        >
+          <div *ngFor="let app of applicationList">
+            <div class="logout-action" (click)="redirectToApp(app.url)">
+              <span class="cnh-evo-iconfont cnh-evo-icon-topbar-apps-drawer icon"></span>
+              <span class="themeTextColor">{{ app.label | uppercase }}</span>
+              <span class="cnh-evo-iconfont cnh-evo-icon-chevron-right arrow themeTextColor"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="header-menus">
+    <div class="sub-header" [ngClass]="{ cih: brand === brands.CIH, nh: brand === brands.NH }">
+      <div class="logo" *ngIf="brand === brands.NH">
+        <img src="assets/header-images/logo-case-nh.svg" />
+      </div>
+      <div class="drawer" appClickOutside (clickOutside)="closeNav()">
+        <img class="menu" src="assets/header-images/menu.svg" (click)="openNav()" />
+        <span *ngIf="activeRoute === 'dashboard'" class="menu-name" (click)="openNav()">
+          {{ 'PAGE_DASHBOARD.SINGULAR' | translate | uppercase }}
+        </span>
+        <span *ngIf="activeRoute === 'farm'" class="menu-name" (click)="openNav()">
+          {{ 'PAGE_FARM.SINGULAR' | translate | uppercase }}
+        </span>
+        <span *ngIf="activeRoute === 'fleet'" class="menu-name" (click)="openNav()">
+          {{ 'PAGE_FLEET.SINGULAR' | translate | uppercase }}
+        </span>
+        <span *ngIf="activeRoute === 'data'" class="menu-name" (click)="openNav()">
+          {{ 'PAGE_DATA.SINGULAR' | translate | uppercase }}
+        </span>
+        <ng-container [ngSwitch]="activeRoute">
+          <ng-container *ngSwitchCase="'fleet'">
+            <ng-template [ngTemplateOutlet]="fleet"></ng-template>
+          </ng-container>
+          <ng-container *ngSwitchCase="'data'">
+            <ng-template [ngTemplateOutlet]="data"></ng-template>
+          </ng-container>
+          <div class="main-menu" *ngSwitchDefault></div>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+</header>
+
+<app-side-nav appClickOutside [brand]="brand" [open]="drawerOpen"></app-side-nav>
+
+<ng-template #data>
+  <ul class="main-menu">
+    <li class="main-menu--item" [ngClass]="{ cih: brand === brands.CIH }" routerLinkActive="active">
+      <a routerLink="/data/inbox"> {{ 'PAGE_DATA.MENU.INBOX' | translate }}</a>
+    </li>
+
+    <li class="main-menu--item" [ngClass]="{ cih: brand === brands.CIH }" routerLinkActive="active">
+      <a routerLink="/data/data-access/my-data">{{ 'PAGE_DATA.MENU.DATA_ACCESS' | translate }}</a>
+      <a routerLink="/data/data-access/partner-data" class="displayNone">&nbsp;</a>
+    </li>
+    <li class="main-menu--item" [ngClass]="{ cih: brand === brands.CIH }" routerLinkActive="active">
+      <a routerLink="/data/connections">{{ 'PAGE_DATA.MENU.CONNECTIONS' | translate }}</a>
+    </li>
+  </ul>
+</ng-template>
+
+<ng-template #fleet>
+  <ul class="main-menu">
+    <li class="main-menu--item" [ngClass]="{ cih: brand === brands.CIH }" routerLinkActive="active">
+      <a routerLink="/fleet/overview">{{ 'PAGE_FLEET.MENU.OVERVIEW' | translate }}</a>
+    </li>
+    <li class="main-menu--item" [ngClass]="{ cih: brand === brands.CIH }" routerLinkActive="active">
+      <a routerLink="/fleet/faults">{{ 'PAGE_FLEET.MENU.FAULTS' | translate }}</a>
+    </li>
+    <li class="main-menu--item" [ngClass]="{ cih: brand === brands.CIH }" routerLinkActive="active">
+      <a routerLink="/fleet/notifications/manage">{{
+        'PAGE_FLEET.MENU.NOTIFICATIONS' | translate
+      }}</a>
+      <a routerLink="/fleet/notifications/history" class="displayNone">&nbsp;</a>
+    </li>
+  </ul>
+</ng-template>

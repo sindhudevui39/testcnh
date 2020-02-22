@@ -1,0 +1,51 @@
+<div class="item-content">
+  <div class="card">
+    <div class="card-item">
+      <db-widget-header>
+        <span class="card-title">High Severity Faults</span> <span class="text-active">ACTIVE</span>
+        <db-widget-menu (click)="removeWidget()"></db-widget-menu>
+      </db-widget-header>
+
+      <ng-template #loading> <app-loader></app-loader> </ng-template>
+
+      <div style="display:flex;flex-direction:column;flex:1;" *ngIf="dataLoaded; else: loading">
+        <div class="fault-info">
+          <p>
+            <img src="assets/severity-high-active-24.svg" alt="warning icon" />
+            <span class="number"
+              >{{ totalFaults }} <small>{{ totalFaults === 1 ? 'Fault' : 'Faults' }}</small>
+            </span>
+          </p>
+          <p>
+            <span class="number"
+              >{{ totalFaultyVechicles }}
+              <small>{{ totalFaultyVechicles === 1 ? 'Vehicle' : 'Vehicles' }}</small>
+            </span>
+          </p>
+        </div>
+
+        <div class="no-faults-msg" *ngIf="noData">No active high severity faults</div>
+
+        <perfect-scrollbar
+          style="max-width: 1024px; height: 214px; max-height: 214px;"
+          *ngIf="!noData"
+        >
+          <div *ngFor="let fault of faults; let i = index">
+            <div><db-fault-item [fault]="fault"></db-fault-item></div>
+          </div>
+        </perfect-scrollbar>
+
+        <div class="view-more">
+          <span
+            [ngClass]="{
+              cih: userService.getBrand() === brands.CIH,
+              nh: userService.getBrand() === brands.NH
+            }"
+            (click)="goToFleet()"
+            >VIEW FAULT HISTORY</span
+          >
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

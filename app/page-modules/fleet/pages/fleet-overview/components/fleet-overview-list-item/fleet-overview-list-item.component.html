@@ -1,0 +1,167 @@
+<div
+  class="list-item flex flex-ai-c"
+  [ngStyle]="{
+    'border-left-color': !item.isClimateVehicleDisconneted ? item.statusColor : 'white',
+    'border-bottom': isLast ? 'solid 1.5px #e2e2e2' : ''
+  }"
+>
+  <div class="vehicle-info">
+    <div class="vehicle-info-image">
+      <img [src]="item.image" [ngClass]="{ 'disconneted-img': item.isClimateVehicleDisconneted }" />
+    </div>
+    <div class="vehicle-info-detail">
+      <div class="flex" appWordWrapTooltip [tooltipContent]="getTooltipText('NAME')">
+        <div class="bold word-wrap" [innerHTML]="item.name | searchHighlight: highlightValue"></div>
+        <div *ngIf="item.isClimateVehicle">
+          <img [src]="'assets/climate/climate-fav.png'" alt="climate vehicle" />
+        </div>
+      </div>
+      <div class="word-wrap" appWordWrapTooltip [tooltipContent]="getTooltipText('DESC')">
+        {{ item.brand }} {{ item.model }} | {{ item.serialNumber }}
+      </div>
+    </div>
+  </div>
+
+  <div class="alerts-info">
+    <div *ngIf="item.statusALERTS">
+      <img class="severity-img" src="./assets/svg/high.svg" /><b>{{ item.statusALERTS }}</b
+      ><span *ngIf="item.statusALERTS > 1">{{ 'PAGE_MAIN.ALERTS.HIGH_FAULTS' | translate }}</span>
+      <span *ngIf="item.statusALERTS == 1">{{ 'PAGE_MAIN.ALERTS.HIGH_FAULT' | translate }} </span>
+    </div>
+    <div class="no-faults" *ngIf="!item.statusALERTS">
+      {{ 'PAGE_MAIN.ALERTS.NO_HIGH_SEVERITY_FAULTS' | translate }}
+    </div>
+  </div>
+
+  <div
+    class="status-info flex-col-jcsb"
+    *ngIf="item.statusText !== 'Unknown' || item.isClimateVehicleDisconneted; else status_unknown"
+  >
+    <div class="" *ngIf="item.lastUpdate">
+      {{
+        (item.lastUpdate | date: dateFormat:tzOffset) === (currentDate | date: dateFormat:tzOffset)
+          ? (item.lastUpdate | date: 'hh:mm a':tzOffset)
+          : (item.lastUpdate | date: dateFormat:tzOffset)
+      }}
+    </div>
+    <div
+      class="flex flex-ai-c"
+      *ngIf="!item.isClimateVehicleDisconneted; else status_disconnected"
+      [ngClass]="{ 'margin-auto': item.lastUpdate === undefined }"
+    >
+      <span class="status-info-circle" [ngStyle]="{ 'background-color': item.statusColor }"></span>
+
+      <span class="unit-margin" [ngStyle]="{ color: item.statusColor }">{{
+        getTranslationString() | translate | titlecase
+      }}</span>
+    </div>
+  </div>
+
+  <div class="hours-info flex-col-jcsb">
+    <div class="">
+      {{ 'PAGE_FLEET_LIST.ENGINE' | translate }}
+    </div>
+    <div class="flex flex-ai-c" *ngIf="item.engineHoursData.value !== ' '; else not_available">
+      <div class="bold large-font">
+        {{ item.engineHoursData.value }}
+      </div>
+      <div class="unit-margin unit-height">{{ item.engineHoursData.unit }}</div>
+    </div>
+  </div>
+
+  <div
+    class="custom1-info flex-col-jcsb"
+    *ngIf="item.custom1ParamLabel !== ''; else not_available_center"
+  >
+    <div class="word-wrap" appWordWrapTooltip [tooltipContent]="item.custom1ParamLabel">
+      {{ item.custom1ParamLabel }}
+    </div>
+    <div class="flex flex-ai-c" *ngIf="item.custom1.value !== 'N/A'; else not_available">
+      <span class="large-font dashes" [ngClass]="{ bold: item.custom1.value !== '--' }">
+        {{ item.custom1.value }}
+      </span>
+      <span class="unit-margin unit-height">{{ item.custom1.unit }}</span>
+    </div>
+  </div>
+
+  <div
+    class="custom2-info flex-col-jcsb"
+    *ngIf="item.custom1ParamLabel !== ''; else not_available_center"
+  >
+    <div class="word-wrap" appWordWrapTooltip [tooltipContent]="item.custom2ParamLabel">
+      {{ item.custom2ParamLabel }}
+    </div>
+    <div class="flex flex-ai-c " *ngIf="item.custom2.value !== 'N/A'; else not_available">
+      <span class="large-font dashes" [ngClass]="{ bold: item.custom2.value !== '--' }">
+        {{ item.custom2.value }}
+      </span>
+      <span class="unit-margin unit-height">{{ item.custom2.unit }}</span>
+    </div>
+  </div>
+
+  <div class="menu-col flex flex-jc-e">
+    <button mat-icon-button [matMenuTriggerFor]="menu">
+      <mat-icon>more_vert</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu" xPosition="before" style=" margin-top:5px;margin-right:15px;">
+      <button mat-menu-item (click)="getVehicleInfo(item)">
+        {{ 'PAGE_FLEET_LIST.CTA.VEHICLE_DETAIL' | translate | uppercase }}
+      </button>
+      <button
+        mat-menu-item
+        (click)="openTeamViewerDialog(item); $event.stopPropagation()"
+        [disabled]="disableRemoteDisplay"
+        [ngStyle]="{
+          'line-height': disableRemoteDisplay ? 'unset' : '48px',
+          cursor: disableRemoteDisplay ? 'not-allowed' : 'pointer'
+        }"
+        *ngIf="
+          displayRDVOption &&
+          item.capabilities &&
+          item.capabilities.deviceType &&
+          item.capabilities.deviceType === 'PCM'
+        "
+      >
+        <span *ngIf="!disableRemoteDisplay">{{ 'PAGE_RDV.DISPLAY' | translate | uppercase }}</span>
+        <span *ngIf="disableRemoteDisplay"
+          >{{ 'PAGE_RDV.DISPLAY' | translate | uppercase }} <br /><small
+            *ngIf="rdvStatusMsg === 'WAITING'"
+            >{{ 'PAGE_RDV.MESSAGES.WAITING' | translate }}</small
+          >
+          <small *ngIf="rdvStatusMsg !== 'WAITING'">{{ 'PAGE_RDV.FULL' | translate }}</small>
+        </span>
+      </button>
+      <!-- <a mat-menu-item *ngIf="etimLink" [href]="etimLink" target="_blank">
+        <span>eTIM SmartView</span>
+      </a> -->
+    </mat-menu>
+  </div>
+</div>
+
+<ng-template #not_available>
+  <div>{{ 'GLOBAL.NO_DATA' | translate }}</div>
+</ng-template>
+
+<ng-template #not_available_center>
+  <div class="custom1-info flex flex-ai-c ">{{ 'GLOBAL.NO_DATA' | translate }}</div>
+</ng-template>
+
+<ng-template #status_unknown>
+  <div class="status-info flex flex-ai-c" style="color: black">
+    {{ 'GLOBAL.VEHICLE.STATUS.UNKNOWN' | translate | titlecase }}
+  </div>
+</ng-template>
+
+<ng-template #status_disconnected>
+  <div
+    class="flex status-disconnected"
+    [ngClass]="{ 'margin-auto': item.lastUpdate === undefined }"
+  >
+    <img
+      class="disconnected-img"
+      src="assets/climate-disconnected/disconnected-status.svg"
+      alt=""
+    />
+    <p>{{ 'GLOBAL.DISCONNECTED' | translate }}</p>
+  </div>
+</ng-template>

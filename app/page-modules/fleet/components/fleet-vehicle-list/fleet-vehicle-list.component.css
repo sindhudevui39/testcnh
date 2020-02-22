@@ -1,0 +1,75 @@
+.vehicleData {
+  display: flex;
+  border-bottom: 1px solid gray;
+  height: 64px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  background-color: white;
+  cursor: pointer;
+  border-left: 4px solid;
+}
+.vehicleText {
+  top: 2px;
+  width: calc(100% - 46px);
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  float: left;
+  padding: 0 10px;
+}
+.vehicleText img {
+  height: 14px;
+  margin-left: 5px;
+  width: 14px;
+}
+.disconnected-img {
+  width: 45px;
+}
+.vehicleName {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-weight: bold;
+  font-size: 15px !important;
+}
+.vehicleContentt {
+  display: flex;
+  padding-right: 35px;
+  padding-bottom: 14px;
+  padding-top: 14px;
+  padding-left: 20px;
+  height: 100%;
+  width: 100%;
+}
+div:hover {
+  background-color: #f4f5f5;
+}
+.clicked {
+  background-color: #f4f5f5;
+}
+.active {
+  border-left: 4px solid #25b03d;
+}
+.idle {
+  border-left: 4px solid #f47825;
+}
+.travelling {
+  border-left: 4px solid #035db1;
+}
+.moving {
+  border-left: 4px solid #01a8b4;
+}
+.keyOn {
+  border-left: 4px solid #e7a603;
+}
+.none {
+  border-left: 4px solid #adadad;
+}
+.list-active {
+  background-color: #f3f6f9;
+}
+.brandModel {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 12px !important;
+}

@@ -1,0 +1,273 @@
+<div class="cnh-page-data-access">
+  <ng-container *ngTemplateOutlet="showpartnerPageStart ? startView : partnersView"></ng-container>
+</div>
+
+<ng-template #startView>
+  <div class="cnh-data-access-start">
+    <div class="cnh-data-access-start--inner">
+      <div class="title">{{ 'DATA_ACCESS.COLLABORATE' | translate }}</div>
+      <div class="subtitle">{{ 'DATA_ACCESS.PARTNER_UP' | translate }}</div>
+      <div class="info-grid">
+        <div class="element">
+          <div class="inviteimage">
+            <img src="assets/images/data-access-intro-1.png" />
+          </div>
+          <div class="txt">{{ 'DATA_ACCESS.INVITE_PARTNER' | translate }}</div>
+          <div class="subtxt">{{ 'DATA_ACCESS.INVITE_PARTNER_TXT' | translate }}</div>
+        </div>
+        <div class="element">
+          <div class="dataaccessimage">
+            <img src="assets/images/data-access-intro-2.png" />
+          </div>
+          <div class="txt">{{ 'DATA_ACCESS.GIVE_ACCESS' | translate }}</div>
+          <div class="subtxt">{{ 'DATA_ACCESS.GIVE_ACCESS_TXT' | translate }}</div>
+        </div>
+        <div class="element">
+          <div class="viewdataimage">
+            <img src="assets/images/data-access-intro-3.png" />
+          </div>
+          <div class="txt">{{ 'DATA_ACCESS.VIEW_DATA' | translate }}</div>
+          <div class="subtxt">{{ 'DATA_ACCESS.VIEW_DATA_TXT' | translate }}</div>
+        </div>
+      </div>
+      <button mat-raised-button color="primary" (click)="addPartner()" class="uppercase">
+        {{ 'DATA_ACCESS.GET_STARTED' | translate }}
+      </button>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #partnersView>
+  <div class="cnh-page-data-access--active">
+    <div class="cnh-layout-horizontal-split">
+      <div class="cnh-layout-horizontal-split--top">
+        <ng-container slot-top>
+          <div class="cnh-utility-bar" [class.filters-expanded]="filtersExpanded">
+            <div class="top-row">
+              <div class="cnh-utility-bar--searchbar" *ngIf="!isLoading">
+                <div
+                  class="utility-element"
+                  (click)="focusInput()"
+                  [ngClass]="{ searchBlack: !searchIconColor }"
+                >
+                  <div class="utility-button">
+                    <span class="cnh-evo-iconfont cnh-evo-icon-search"></span>
+                  </div>
+                  <cnh-search
+                    [placeholder]="translate.instant('GLOBAL.SEARCH_PLACEHOLDER')"
+                    [(value)]="searchValue"
+                    (valueChange)="onSearchValueChange($event)"
+                    (onblurAndFocus)="blurFocusChange($event)"
+                  ></cnh-search>
+                </div>
+              </div>
+
+              <div class="cnh-utility-bar--left" [class.no-searchbar]="!hasSearchbar">
+                <div *ngIf="!!activePartner || true" class="info-bar">
+                  <div>
+                    <div class="cnh-info-area">
+                      <div class="title" [class.reversed]="reversed">{{ seletedItem.title }}</div>
+                      <div class="subtitle" [class.reversed]="reversed">
+                        {{ seletedItem.subtitle | translate }}
+                      </div>
+                    </div>
+                  </div>
+                  <div *ngIf="seletedItem.isPendingInvitation" class="info-acceptance">
+                    <span
+                      class="cnh-evo-icon-circle-time cnh-evo-iconfont info-acceptance--icon"
+                    ></span>
+                    <span class="info-acceptance--text">
+                      {{ 'DATA_ACCESS.ACCEPTANCE_PENDING' | translate }}
+                    </span>
+                  </div>
+                  <div class="spacer"></div>
+                </div>
+              </div>
+              <div class="cnh-utility-bar--right" [class.no-searchbar]="!hasSearchbar">
+                <div *ngIf="tabs && tabs.length" class="data-tabs">
+                  <ng-container *ngFor="let tab of tabs; let i = index">
+                    <div
+                      class="cnh-tab-header-parent"
+                      [ngClass]="{ active: tab.active, disabled: tab.disabled }"
+                    >
+                      <div
+                        class="cnh-tab-header "
+                        [ngClass]="{ active: active, disabled: disabled }"
+                        (click)="onTabClicked(i)"
+                      >
+                        <span class="cnh-tab-header--title">{{ tab.titleKey | translate }}</span>
+                      </div>
+                    </div>
+                  </ng-container>
+                </div>
+              </div>
+            </div>
+            <div class="cnh-utility-bar--hideable" [class.hide]="!hasFilters">
+              <ng-content select="[slot-filters]"></ng-content>
+              <div class="hideable-right" [class.hide]="!hasResetButton">
+                <span (click)="onClearFilters()">Reset</span>
+              </div>
+            </div>
+          </div>
+        </ng-container>
+      </div>
+      <app-loader *ngIf="isLoading"></app-loader>
+      <div class="cnh-layout-horizontal-split--bottom" *ngIf="!isLoading">
+        <ng-container slot-bottom>
+          <div class="cnh-loader cnh-loader-default">
+            <div class="tc-content-box" [class.loading]="isLoading">
+              <div class="cnh-layout-vertical-split-header">
+                <div
+                  class="cnh-layout-vertical-split"
+                  [ngClass]="expanded ? 'left-expanded' : 'left-collapsed'"
+                >
+                  <div class="cnh-layout-vertical-split--left">
+                    <div
+                      class="cnh-layout-vertical-split--left-toggle"
+                      (click)="onLeftToggleClick()"
+                    >
+                      <ng-container slot-left-toggle>
+                        <div class="cnh-sidebar-toggle-header">
+                          <div
+                            class="cnh-sidebar-toggle "
+                            [ngClass]="expanded ? 'expanded' : 'collapsed'"
+                          >
+                            <div class="cnh-sidebar-toggle--icon">
+                              <div class="cnh-action-icon">
+                                <img src="./assets/svg/collapse-panel.svg" />
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </ng-container>
+                    </div>
+                    <div class="cnh-layout-vertical-split--left-content">
+                      <ng-container slot-left>
+                        <div class="cnh-partner-sidebar-header">
+                          <div class="cnh-partner-sidebar">
+                            <div class="top">
+                              <div class="header">{{ 'INVITE.PARTNERS' | translate }}</div>
+                              <div class="filter" (click)="sortListofPartner($event)">
+                                <div
+                                  isactive="true"
+                                  issortable="true"
+                                  key="name"
+                                  class="cnh-sortable-item"
+                                >
+                                  <div class="label active" style="text-align: left;">
+                                    <div class="cnh-action-icon-header">
+                                      <div class="cnh-action-icon">
+                                        <div
+                                          class="cnh-action-icon--symbol"
+                                          style="height: 16px; font-size: 16px; line-height: 16px;"
+                                        >
+                                          <div
+                                            class="cnh-evo-iconfont cnh-evo-icon-sort-asc "
+                                            *ngIf="sortPosition"
+                                          ></div>
+                                          <div
+                                            class="cnh-evo-iconfont cnh-evo-icon-sort-desc "
+                                            *ngIf="!sortPosition"
+                                          ></div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                    {{ sortingOrder }}
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="content" data-simplebar>
+                              <div
+                                class="cnh-partner-list-item-header"
+                                *ngFor="
+                                  let partner of sortAndFilterpartnerDetails;
+                                  let i = index;
+                                  let lastValue = last
+                                "
+                              >
+                                <div (click)="onClick(i)">
+                                  <div
+                                    class="cnh-partner-list-item"
+                                    [class.active]="partner.id === seletedItem.id"
+                                  >
+                                    <div class="content">
+                                      <div
+                                        class="content-top"
+                                        mat-raised-button
+                                        matTooltipClass="partner-email-id"
+                                        matTooltip="{{ partner.email }}"
+                                        [matTooltipHideDelay]="someTooltipHide"
+                                        aria-label="partner email id"
+                                        [matTooltipDisabled]="!partner.showTooltip"
+                                        [matTooltipPosition]="'above'"
+                                        (mouseenter)="mosueEntired()"
+                                      >
+                                        {{ partner.displayTitle }}
+                                      </div>
+                                      <div class="content-bottom">
+                                        {{ partner.subtitle | translate }}
+                                      </div>
+                                    </div>
+                                    <div class="more">
+                                      <span
+                                        *ngIf="partner.isPendingInvitation"
+                                        class="cnh-evo-iconfont cnh-evo-icon-circle-time"
+                                      ></span>
+                                      <span
+                                        mat-icon-button
+                                        class="cnh-evo-iconfont cnh-evo-icon-more2"
+                                        [matMenuTriggerFor]="partnerMenu"
+                                        #partnerMenu
+                                      ></span>
+                                    </div>
+                                    <mat-menu
+                                      class="partner-menu partner-menu-sub data-access-override"
+                                      #partnerMenu="matMenu"
+                                      [backdropClass]="!lastValue ? 'full-width' : ''"
+                                    >
+                                      <button
+                                        mat-menu-item
+                                        (click)="chooseMenuItem('RESEND')"
+                                        *ngIf="partner.isPendingInvitation"
+                                      >
+                                        {{ 'INVITE.RESEND' | translate }}
+                                      </button>
+                                      <button
+                                        mat-menu-item
+                                        class="warningText"
+                                        [ngClass]="{
+                                          cih: brand === 'CSAG',
+                                          nh: brand === 'NHAG'
+                                        }"
+                                        (click)="chooseMenuItem('REMOVE')"
+                                      >
+                                        {{ 'INVITE.REMOVE' | translate }}
+                                      </button>
+                                    </mat-menu>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="button">
+                              <button mat-fab color="primary" (click)="addPartner()">
+                                <span class="cnh-evo-iconfont cnh-evo-icon-plus "></span>
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                      </ng-container>
+                    </div>
+                  </div>
+                  <div class="cnh-layout-vertical-split--right">
+                    <ng-container> <router-outlet></router-outlet> </ng-container>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+</ng-template>

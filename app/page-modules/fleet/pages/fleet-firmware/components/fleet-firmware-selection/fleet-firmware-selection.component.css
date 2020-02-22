@@ -1,0 +1,183 @@
+.cnh-list {
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+}
+.cnh-header {
+  flex-direction: column;
+  height: 166px;
+}
+.cnh-firmware-title {
+  font-size: 18px;
+  font-weight: 500;
+  width: 607px;
+}
+.cnh-firmware-subtitle {
+  font-size: 12px;
+  color: #4c4c51;
+  margin-bottom: 20px;
+  width: 400px;
+}
+.search {
+  border: solid 1px var(--color-grey);
+  display: flex;
+  height: 48px;
+}
+.cih {
+  color: #a21c22;
+}
+.nh {
+  color: #003e85;
+}
+.cnh-filter-bar {
+  display: flex;
+  height: 56px;
+  min-height: 56px;
+  max-height: 56px;
+  font-size: 14px;
+  font-weight: 500;
+  text-rendering: geometricPrecision;
+  color: #fff;
+  border-width: 0 0 1px 0;
+  border-style: solid;
+  border-left: solid 1px var(--color-grey);
+  border-right: solid 1px var(--color-grey);
+  border-bottom: solid 1px var(--color-grey);
+  align-items: center;
+}
+.header-title {
+  font-size: 12px;
+}
+.cnh-campaign-header {
+  height: calc(100% - 166px);
+  max-width: 1248px;
+  display: flex;
+  flex-direction: column;
+}
+
+.cnh-campaign-title {
+  margin-left: 18px;
+  text-align: center;
+  color: var(--color-main-grey);
+  font-size: 12px;
+  font-weight: 500;
+  text-rendering: geometricPrecision;
+  width: 25%;
+}
+
+.firmware-name-col {
+  width: 20%;
+  font-weight: 500;
+}
+.cnh-bold {
+  font-weight: 500;
+  color: #262626;
+}
+.name-overflow {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  padding-top: 14px;
+}
+.cnh-release-notes {
+  font-size: 12px;
+  color: #707070;
+  width: 16%;
+  display: flex;
+  justify-content: center;
+}
+.cnh-release-date {
+  font-size: 15px;
+  font-weight: 500;
+  width: 20%;
+  color: var(--color-main-grey);
+}
+.date-span {
+  cursor: pointer;
+}
+.active {
+  color: black;
+}
+.sort-icon {
+  height: 16px;
+  width: 16px;
+  margin: 0px 5px;
+  cursor: pointer;
+}
+.desc {
+  transform: scaleY(1);
+}
+.asc {
+  transform: scaleY(-1);
+}
+.cnh-vehicle-notified {
+  width: 100%;
+  font-size: 15px;
+  color: var(--color-med-grey);
+  width: 20%;
+}
+.cnh-vehicle-updated {
+  width: 100%;
+  font-size: 15px;
+  color: var(--color-med-grey);
+  width: 20%;
+}
+.cnh-campaign-list {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  border-top: 1em;
+  border-bottom: 1em;
+  align-items: center;
+  border-left: solid 1px var(--color-grey);
+  border-right: solid 1px var(--color-grey);
+}
+.list-border {
+  border-bottom: solid 1px var(--color-grey);
+}
+.list-campaign {
+  background-color: white;
+  height: 56px;
+  display: flex;
+  align-items: center;
+}
+.disable-software {
+  background-color: #f9f9f9;
+}
+.hide-button {
+  display: none !important;
+}
+.selected-software {
+  background-color: #f2f6f9 !important;
+}
+
+.cnh-title {
+  padding-left: 20px;
+  display: flex;
+  font-size: 14px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+.no-notify {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+}
+.no-data-title {
+  font-size: 20px;
+  color: black;
+  display: flex;
+  justify-content: center;
+}
+.radio-button {
+  margin-left: 18px;
+  width: 4%;
+}
+.data-loader {
+  position: relative;
+  height: 100%;
+  width: 100%;
+}

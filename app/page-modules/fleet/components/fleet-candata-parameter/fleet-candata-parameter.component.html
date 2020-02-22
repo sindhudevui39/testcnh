@@ -1,0 +1,20 @@
+<mat-card>
+  <mat-card-content>
+    <perfect-scrollbar #listPS style="max-height:440px">
+      <div>
+        <table>
+          <tr>
+            <th>CAN Parameter</th>
+            <th>Value</th>
+            <th>Last Update</th>
+          </tr>
+          <tr *ngFor="let param of vehicleInfo.parameters">
+            <td>{{ param.label }}</td>
+            <td>{{ param.value }} {{ param.unit }}</td>
+            <td>{{ param.timestamp | date: 'MM/dd/yyyy hh:mm:ss a' }}</td>
+          </tr>
+        </table>
+      </div>
+    </perfect-scrollbar>
+  </mat-card-content>
+</mat-card>

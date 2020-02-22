@@ -1,0 +1,34 @@
+<div class="item-content">
+  <div class="card ipad-override-card">
+    <div class="card-item">
+      <db-widget-header>
+        <span class="card-title">Area Covered</span> <span class="card-date">Today</span>
+        <db-widget-menu (click)="removeWidget()"></db-widget-menu>
+      </db-widget-header>
+
+      <ng-template #loading> <app-loader></app-loader> </ng-template>
+
+      <div *ngIf="dataLoaded; else: loading" [ngClass]="{ 'vehicle-data': noData }">
+        <div class="no-data" *ngIf="noData">
+          <div class="no-data-text">No vehicles to display</div>
+        </div>
+        <div
+          class="card-data"
+          style="display:flex;flex-direction:column;flex:1;min-height:0"
+          *ngIf="!noData"
+        >
+          <div *ngFor="let vehicle of vehicleList" (click)="goToVehicleDetailPage(vehicle)">
+            <db-vehicle-item>
+              <span class="vehicle-name">{{ vehicle.name }}</span>
+              <span class="vehicle-model">{{ vehicle.model }}</span>
+              <div class="area-info">
+                <span class="value">{{ vehicle.value }}</span> <span class="unit">{{ unit }}</span>
+              </div>
+              <span class="right-display">{{ vehicle.time }}</span>
+            </db-vehicle-item>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

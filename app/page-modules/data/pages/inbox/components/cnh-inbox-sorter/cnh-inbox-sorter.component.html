@@ -1,0 +1,20 @@
+<div class="cnh-inbox-sorter">
+    <div class="twelve columns left middle">
+        <div class="cnh-grid">
+            <div *ngFor="let col of columns" class="grid-{{col.size}}">
+                <!--<div class="cnh-sortable-item">
+                <div class="label" [style.text-align]="col?.align" [class.active]="col?.data?.isActive" [class.unsortable]="col?.data?.isSortable === false" (click)="onSortableClicked(col)">
+                    {{ col?.key }}&nbsp;&nbsp;
+                    <span *ngIf="col?.data?.icon"
+                        class="cnh-evo-iconfont"
+                        [ngClass]="'cnh-evo-icon-' + col?.data?.icon"
+                    ></span>
+                </div>
+            </div>-->
+                <cnh-sortable-item [key]="col?.key" [label]="col?.data?.label" [iconSet]="col?.data?.iconSet" [icon]="col?.data?.icon" [isActive]="col?.data?.isActive"
+                    [isSortable]="col?.data?.isSortable" [align]="col?.align" (sorting)="onSortableClicked($event)" class="cnh-sortable-item">
+                </cnh-sortable-item>
+            </div>
+        </div>
+    </div>
+</div>

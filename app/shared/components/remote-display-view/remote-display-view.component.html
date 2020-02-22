@@ -1,0 +1,83 @@
+<div class="remote-display" appEndRdvSession>
+  <div class="remote-display__inner">
+    <div class="left">
+      <div class="info">
+        {{ 'PAGE_RDV.SESSION' | translate }} <span>for {{ rdvStatus.vehicleName }}</span>
+      </div>
+
+      <ng-container
+        *ngIf="currentStatus === connectionStatus.WAITING"
+        [ngTemplateOutlet]="waiting"
+      ></ng-container>
+
+      <ng-container
+        *ngIf="currentStatus === connectionStatus.RUNNING"
+        [ngTemplateOutlet]="running"
+      ></ng-container>
+
+      <ng-container
+        *ngIf="currentStatus === connectionStatus.FAILED"
+        [ngTemplateOutlet]="failed"
+      ></ng-container>
+    </div>
+
+    <div class="right">
+      <button
+        mat-button
+        mat-raised-buttons
+        [ngStyle]="{
+          'background-color': currentStatus === connectionStatus.FAILED ? '' : brandColor,
+          color: currentStatus === connectionStatus.FAILED ? '#3c3c3c' : '#fff'
+        }"
+        (click)="endSession()"
+      >
+        {{ 'PAGE_RDV.CTA.END_SESSION' | translate }}
+      </button>
+      <button
+        mat-button
+        mat-raised-buttons
+        *ngIf="currentStatus === connectionStatus.FAILED"
+        [ngStyle]="{
+          'background-color': brandColor
+        }"
+        (click)="retry()"
+      >
+        {{ 'PAGE_RDV.CTA.RETRY' | translate }}
+      </button>
+    </div>
+  </div>
+</div>
+
+<ng-template #waiting>
+  <div class="status waiting">
+    <div class="loader waiting"></div>
+    <span class="bold" *ngIf="!rdvStatus.socketResponse.code" translate>
+      PAGE_RDV.MESSAGES.WAITING
+    </span>
+    <span
+      class="bold"
+      *ngIf="rdvStatus.socketResponse.code === '007'"
+      [translate]="'PAGE_RDV.CONNECTION_LOST'"
+      [translateParams]="{ vehicleName: rdvStatus.vehicleName }"
+    ></span>
+  </div>
+</ng-template>
+
+<ng-template #running>
+  <div class="status running">
+    <div class="loader running"></div>
+    <span class="bold">{{ 'PAGE_RDV.MESSAGES.RUNNING' | translate }}</span>
+  </div>
+</ng-template>
+
+<ng-template #failed>
+  <div class="status failed">
+    <img src="assets/svg/warning-2.svg" class="warning" />
+    <p class="bold">
+      {{ 'PAGE_RDV.MESSAGES.FAILED' | translate }}&nbsp;
+      <span translate [translateParams]="{ vehicleName: rdvStatus.vehicleName }">{{
+        rdvStatus.socketResponse.updateMessage
+      }}</span>
+    </p>
+  </div>
+</ng-template>

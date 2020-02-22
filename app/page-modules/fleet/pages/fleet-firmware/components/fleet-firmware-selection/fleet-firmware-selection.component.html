@@ -1,0 +1,144 @@
+<div class="cnh-list flex">
+  <div class="cnh-header ">
+    <div class="cnh-firmware-title">
+      {{ 'TROWSER.FOTA.SOFTWARE_SELECTION.TITLE' | translate }}
+    </div>
+    <div class="cnh-firmware-subtitle">
+      {{ 'TROWSER.FOTA.SOFTWARE_SELECTION.SUBTITLE' | translate }}
+    </div>
+    <div class="search">
+      <app-search
+        style="width: 100%;"
+        [placeholder]="'GLOBAL.PLACEHOLDER.SEARCH' | translate"
+        [backgroundColor]="'white'"
+        (changeEvent)="searchFirmware($event)"
+      ></app-search>
+    </div>
+    <div class="cnh-filter-bar">
+      <div class="cnh-campaign-title" style="text-align: center; color: #707070;">
+        SOFTWARE ({{ firmwareCount }})
+      </div>
+      <div style="display: flex; width: 15%;"></div>
+      <div
+        class="cnh-release-date"
+        style="display: flex; font-size: 12px; font-weight: bold"
+        (click)="this.isDesc = !this.isDesc; sortCampaign()"
+      >
+        <span class="date-span" [ngClass]="{ active: 'date' }">
+          {{ 'TROWSER.FOTA.SOFTWARE_SELECTION.RELEASE_DATE' | translate | uppercase }}
+        </span>
+        <img
+          class="sort-icon"
+          [ngClass]="{
+            desc: isDesc,
+            asc: !isDesc
+          }"
+          src="assets/svg/sort-button.svg"
+        />
+      </div>
+      <div class="cnh-vehicle-notified" style="display: flex; font-size: 12px;">
+        {{ 'TROWSER.FOTA.SOFTWARE_SELECTION.VEHICLES_NOTIFIED' | translate | uppercase }}
+      </div>
+      <div class="cnh-vehicle-updated" style="font-size: 12px;">
+        {{ 'TROWSER.FOTA.SOFTWARE_SELECTION.VEHICLES_UPDATED' | translate | uppercase }}
+      </div>
+    </div>
+  </div>
+  <div class="cnh-campaign-header" *ngIf="dataLoaded; else loading">
+    <div class="cnh-campaign-list" *ngIf="!isDataEmpty">
+      <perfect-scrollbar style="max-height: 690px;">
+        <div *ngFor="let element of campaignList; let i = index" class="list-border">
+          <div
+            class="list-campaign"
+            [ngClass]="{
+              'disable-software':
+                element.notifiedVehicles === element.totalVehicles &&
+                element.installedVehicles === element.totalVehicles
+            }"
+            (click)="selectedRow = i"
+            [class.selected-software]="i == selectedRow"
+          >
+            <div class="radio-button">
+              <mat-radio-button
+                style="display: flex;"
+                [value]="campaignId"
+                [checked]="campaignId === element.id"
+                (change)="onFirmwareSelection(element)"
+                [ngClass]="{
+                  'hide-button':
+                    element.notifiedVehicles === element.totalVehicles &&
+                    element.installedVehicles === element.totalVehicles
+                }"
+              >
+              </mat-radio-button>
+            </div>
+            <div class="firmware-name-col">
+              <div
+                class="word-wrap"
+                appWordWrapTooltip
+                [tooltipContent]="element.name"
+                [innerHTML]="element.name | searchHighlight: searchStringSoftware"
+              ></div>
+            </div>
+            <div class="cnh-release-notes">
+              <a
+                target="_blank"
+                [href]="element.link"
+                [ngClass]="{
+                  cih: userService.getBrand() === 'Case IH',
+                  nh: userService.getBrand() === 'New Holland AG'
+                }"
+              >
+                {{ 'TROWSER.FOTA.SOFTWARE_SELECTION.RELEASE_NOTES' | translate | uppercase }}
+              </a>
+            </div>
+            <div class="cnh-release-date">
+              {{ element.releaseDate | date: 'MM/dd/yyyy':tzOffset }}
+            </div>
+            <div class="cnh-vehicle-notified">
+              <span class="cnh-bold">
+                {{
+                  element.notifiedVehicles + element.downloadedVehicles + element.installedVehicles
+                }}
+              </span>
+              / {{ element.totalVehicles }}
+            </div>
+            <div
+              class="cnh-vehicle-updated"
+              *ngIf="
+                element.notifiedVehicles +
+                  element.downloadedVehicles +
+                  element.installedVehicles !==
+                  0;
+                else totalVehicles
+              "
+            >
+              <span class="cnh-bold"> {{ element.installedVehicles }} </span>/
+              {{
+                element.notifiedVehicles + element.downloadedVehicles + element.installedVehicles
+              }}
+            </div>
+            <ng-template #totalVehicles>
+              <div class="cnh-vehicle-updated">
+                <span class="cnh-bold"> {{ element.installedVehicles }} </span>
+                /
+                {{ element.totalVehicles }}
+              </div>
+            </ng-template>
+          </div>
+        </div>
+      </perfect-scrollbar>
+    </div>
+    <div class="no-notify" *ngIf="isDataEmpty">
+      <span class="no-data-title">
+        {{ 'TROWSER.FOTA.SOFTWARE_SELECTION.NO_SOFTWARES' | translate }}
+      </span>
+    </div>
+  </div>
+</div>
+
+<ng-template #loading>
+  <div class="data-loader">
+    <app-loader> </app-loader>
+  </div>
+</ng-template>

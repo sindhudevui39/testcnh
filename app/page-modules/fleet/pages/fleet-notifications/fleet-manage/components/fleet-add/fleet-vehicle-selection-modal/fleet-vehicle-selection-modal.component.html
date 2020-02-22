@@ -1,0 +1,31 @@
+<div class="cnh-main-modal">
+  <mat-dialog-content>
+    <div class="cnh-modal">
+      <div class="cnh-header">
+        <span class="cnh-img"><img src="assets/warning.PNG"/></span>
+        <span class="cnh-text"> {{ data.header }}</span>
+      </div>
+      <div class="cnh-content">
+        <div>
+          {{ data.name }}
+        </div>
+      </div>
+      <div class="sub-content"></div>
+    </div>
+  </mat-dialog-content>
+  <mat-dialog-actions class="mat-dialog-actions">
+    <button mat-button (click)="onNoClick(data.id)">
+      <span class="cnh-button-wrapper">Cancel</span>
+    </button>
+    <button
+      mat-raised-button
+      color="primary"
+      matDialogClose
+      [style.background-color]="buttonBGColor"
+    >
+      <span class="cnh-button-delete" (click)="AddVehicleToList(data.model, data.buttonText)">{{
+        data.buttonText
+      }}</span>
+    </button>
+  </mat-dialog-actions>
+</div>

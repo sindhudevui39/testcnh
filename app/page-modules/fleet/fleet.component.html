@@ -1,0 +1,19 @@
+<ng-container *ngIf="!isRouteNotifications" [ngTemplateOutlet]="generalToolbar"> </ng-container>
+<ng-container *ngIf="isRouteNotifications" [ngTemplateOutlet]="notificationToolbar"> </ng-container>
+
+<router-outlet></router-outlet>
+
+<div class="fleet-footer" [ngStyle]="{ bottom: enableRemoteDisplayView ? '0' : '-85px' }">
+  <app-remote-display-view
+    [rdvStatus]="rdvStatus"
+    *ngIf="enableRemoteDisplayView"
+  ></app-remote-display-view>
+</div>
+
+<ng-template #generalToolbar>
+  <app-fleet-toolbar></app-fleet-toolbar>
+</ng-template>
+
+<ng-template #notificationToolbar>
+  <app-fleet-notification-toolbar></app-fleet-notification-toolbar>
+</ng-template>

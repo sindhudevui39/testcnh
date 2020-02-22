@@ -1,0 +1,129 @@
+.status-chart {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 182px;
+  position: relative;
+  border-bottom: 2px solid #e2e2e2;
+}
+.sc-inner {
+  position: relative;
+  left: -30px;
+  width: 350px;
+  height: 175px;
+}
+.sc-inner canvas {
+  cursor: pointer;
+}
+.sc-inner,
+.sc-legend {
+  display: inline-block;
+}
+.total-vehicle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+.vehicle-count {
+  font-weight: 700;
+  font-size: 15pt;
+}
+.total-vehicle small {
+  color: #7d7d7d;
+  font-size: 0.7em;
+}
+.sc-legend {
+  position: relative;
+  left: -70px;
+}
+.highlight-label {
+  border-radius: 2px;
+  background-color: var(--color-white);
+  box-shadow: 0 0.5px 3px 0 rgba(0, 0, 0, 0.63);
+}
+.chart-label {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  width: 131px;
+  padding: 2px 5px;
+}
+.chart-label div:first-child {
+  display: flex;
+  align-items: center;
+}
+.chart-label div:last-child {
+  width: 36px;
+  text-align: right;
+}
+.chart-label .bullet {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+.chart-label .status-name,
+.chart-label .label-quantity {
+  font-size: 0.7em;
+}
+.chart-label .status-name {
+  width: 68px;
+  margin-left: 8px;
+  font-weight: 500;
+}
+.chart-label .label-quantity {
+  font-weight: 500;
+  color: var(--color-main-grey);
+}
+.vehicle-data {
+  border-left-width: 5px;
+  border-left-style: solid;
+}
+.no-vehicle {
+  height: 128px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 0.8em;
+  color: var(--color-grey);
+  margin: auto;
+}
+.vehicle-data:hover {
+  cursor: pointer;
+  background-color: rgb(238, 240, 240);
+}
+@media only screen and (min-width: 1025px) {
+  .sc-inner {
+    left: -15px;
+  }
+  .sc-legend {
+    left: -90px;
+  }
+  .chart-label {
+    width: 100px;
+  }
+}
+@media only screen and (min-width: 1200px) {
+  .sc-inner {
+    left: -20px;
+  }
+  .chart-label {
+    width: 115px;
+  }
+}
+@media only screen and (min-width: 1440px) {
+  .sc-inner {
+    left: -25px;
+  }
+  .sc-legend {
+    left: -70px;
+  }
+  .chart-label {
+    width: 130px;
+  }
+}
+
+.mat-menu-panel {
+  margin-top: 26px;
+}

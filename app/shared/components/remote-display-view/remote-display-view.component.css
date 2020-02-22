@@ -1,0 +1,89 @@
+.remote-display {
+  height: 85px;
+  background-color: #fff;
+  padding: 16px 20px;
+  box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.5);
+  border: 2px solid #262626;
+  font-family: Roboto;
+}
+.remote-display__inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.remote-display__inner .left,
+.remote-display__inner .right {
+  flex-basis: 50%;
+}
+.remote-display__inner .left .info {
+  padding-bottom: 3px;
+  font-size: 14px;
+}
+.remote-display__inner .left .info span {
+  opacity: 0.7;
+}
+.remote-display__inner .left .status {
+  font-weight: 400;
+  font-size: 15px;
+  display: flex;
+  align-items: center;
+}
+.remote-display__inner .left .status .icon {
+  font-size: 20px;
+  position: relative;
+  top: 4px;
+  margin-right: 10px;
+}
+.remote-display__inner .left .status .bold {
+  font-weight: 500;
+  margin-left: 16px;
+}
+.remote-display__inner .right {
+  display: flex;
+  justify-content: flex-end;
+}
+.remote-display__inner .right button {
+  text-transform: uppercase;
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.24), 0 0 2px 0 rgba(0, 0, 0, 0.12);
+  color: #fff;
+  margin-left: 24px;
+}
+.waiting {
+  color: #4a90e2;
+}
+.running {
+  color: #2bba44;
+}
+.failed {
+  color: #d0021b;
+}
+.loader {
+  border-width: 3px;
+  border-style: solid;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+}
+.loader.waiting {
+  border-color: #fff;
+  border-right-color: #4a90e2;
+  border-bottom-color: #4a90e2;
+  border-top-color: #4a90e2;
+  animation: spin 1.5s linear infinite;
+}
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+.loader.complete {
+  border-color: #2bba44;
+}
+.warning {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+}

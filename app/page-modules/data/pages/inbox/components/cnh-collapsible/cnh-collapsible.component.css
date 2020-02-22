@@ -1,0 +1,132 @@
+.cnh-collapsible {
+  width: 100%;
+  margin-bottom: 0;
+}
+.cnh-collapsible--header {
+  background-color: #fff;
+  position: relative;
+  overflow: hidden;
+}
+.cnh-collapsible--header.centered-style {
+  border-bottom: 1px solid #707070;
+  border-top: 1px solid #707070;
+  background-color: #f4f5f5;
+  text-align: center;
+}
+.cnh-collapsible--header.centered-style > div {
+  display: inline-block;
+  width: auto;
+}
+.cnh-collapsible--header.centered-style .cnh-collapsible--toggle {
+  position: relative;
+  top: -6px;
+  left: 5px;
+}
+.cnh-collapsible--header.lined-style {
+  background-color: #f4f5f5;
+  position: relative;
+  cursor: pointer;
+}
+.cnh-collapsible--header.lined-style > div {
+  display: inline-block;
+  width: auto;
+  position: relative;
+  z-index: 2;
+}
+.cnh-collapsible--header.lined-style .cnh-collapsible-header--content {
+  float: left;
+  background-color: #f4f5f5;
+  /* padding: 0 10px 0 0; */
+  font-weight: 500;
+  font-size: 12px;
+}
+.cnh-collapsible--header.lined-style .cnh-collapsible--toggle {
+  position: relative;
+  right: 0;
+  z-index: 2;
+  float: right;
+  top: 13px;
+  background-color: #f4f5f5;
+}
+.cnh-collapsible--header.lined-style:after {
+  content: '';
+  position: absolute;
+  height: 0px;
+  right: 30px;
+  left: 3px;
+  opacity: 0.6;
+  bottom: 48%;
+  z-index: 1;
+  border-bottom: 1px solid #707070;
+}
+.cnh-collapsible-header--content {
+  width: 100%;
+  cursor: pointer;
+}
+.cnh-collapsible--body {
+  margin: 0;
+}
+.cnh-collapsible--toggle {
+  cursor: pointer;
+  width: 40px;
+  position: absolute;
+  right: 13px;
+  top: calc(50% - 11px);
+  text-align: center;
+  width: 20px !important;
+  height: 20px !important;
+}
+.cnh-collapsible--toggle:not(.arrow) span {
+  display: block;
+  width: 10px;
+  height: 1px;
+  background-color: #707070;
+  position: absolute;
+  top: 9px;
+  left: 4px;
+}
+.cnh-collapsible--toggle:not(.arrow) span.plus {
+  -webkit-transition: all 0.25s ease-in;
+  transition: all 0.25s ease-in;
+  -webkit-transform: rotate(90deg);
+  transform: rotate(90deg);
+}
+.cnh-collapsible--toggle.circle {
+  border: 1px solid #707070;
+  border-radius: 20px;
+}
+.cnh-collapsible-toggle--icon {
+  font-size: 14px;
+  -webkit-transition: -webkit-transform 0.35s;
+  transition: -webkit-transform 0.35s;
+  transition: transform 0.35s;
+  transition: transform 0.35s, -webkit-transform 0.35s;
+  display: inline-block;
+  vertical-align: middle;
+}
+.cnh-collapsible.open > .cnh-collapsible--header .cnh-collapsible-toggle--icon {
+  -webkit-transform: rotateX(180deg);
+  transform: rotateX(180deg);
+}
+.cnh-collapsible.open > .cnh-collapsible--header .plus {
+  -webkit-transform: rotate(0deg);
+  transform: rotate(0deg);
+}
+.cnh-fault-list .cnh-collapsible--toggle,
+.cnh-fault-list .cnh-collapsible--toggle {
+  right: 40px;
+}
+
+.cnh-collapsible.open .cnh-collapsible-body--content {
+  display: block !important;
+}
+.cnh-collapsible .cnh-collapsible-body--content {
+  display: none !important;
+}
+
+.cnh-collapsible.closeHeader .cnh-collapsible--header {
+  display: none;
+}
+.cnh-collapsible.closeHeader .cnh-collapsible--body {
+  padding-top: 20px;
+}

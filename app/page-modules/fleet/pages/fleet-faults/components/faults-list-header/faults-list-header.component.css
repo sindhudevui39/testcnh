@@ -1,0 +1,50 @@
+.fault-header {
+  height: 55px;
+}
+.row-1__title {
+  width: 34.88%;
+}
+.row-2__title {
+  align-items: center;
+  display: flex;
+  width: 11.11%;
+}
+.row-1__title__name,
+.row-2__title__name {
+  color: #707070;
+  font-size: 12px;
+  text-transform: uppercase;
+  font-weight: 600;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.sort-icon {
+  height: 16px;
+  width: 16px;
+  margin: 0px 5px;
+  cursor: pointer;
+}
+.row-1__title__name,
+.row-2__title__name {
+  cursor: pointer;
+}
+.active {
+  color: black;
+}
+.display-sort-icon {
+  display: inline-block;
+}
+.desc {
+  -moz-transform: scaleY(1);
+  -o-transform: scaleY(1);
+  -webkit-transform: scaleY(1);
+  transform: scaleY(1);
+}
+.asc {
+  -moz-transform: scaleY(-1);
+  -o-transform: scaleY(-1);
+  -webkit-transform: scaleY(-1);
+  transform: scaleY(-1);
+}

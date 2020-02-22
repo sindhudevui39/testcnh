@@ -1,0 +1,11 @@
+:host {
+  display: block;
+}
+div {
+  background-color: var(--color-medium-grey);
+  border-radius: 2px;
+  color: var(--color-white);
+  font-family: Roboto;
+  font-size: 10px;
+  padding: 0.3rem 0.8rem;
+}

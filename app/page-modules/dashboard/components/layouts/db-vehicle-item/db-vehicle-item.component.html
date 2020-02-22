@@ -1,0 +1,13 @@
+<div class="vehicle-list-item flex flex-ai-c flex-jc-sb">
+  <p class="flex flex-ai-c name-model">
+    <ng-content select=".vehicle-name"></ng-content>
+    <span class="divider">&nbsp;|&nbsp;</span>
+    <ng-content select=".vehicle-model"></ng-content>
+  </p>
+  <p class="flex flex-ai-c info">
+    <ng-content select=".fuel-display" class="flex flex-ai-c"></ng-content>
+    <ng-content select=".area-info"></ng-content>
+    <!-- <ng-content select=".right-display" class="flex flex-ai-c"></ng-content> -->
+  </p>
+  <p><ng-content select=".right-display" class="flex flex-ai-c"></ng-content></p>
+</div>

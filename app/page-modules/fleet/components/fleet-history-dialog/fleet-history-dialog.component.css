@@ -1,0 +1,152 @@
+.history-main {
+  height: 600px;
+  width: 600px;
+  pointer-events: auto;
+  position: static;
+  max-height: 80vh;
+  font-family: Roboto, sans-serif;
+}
+.history-title {
+  padding: 5px;
+  font-size: 16px;
+  font-weight: 500;
+  padding-top: 8px;
+  color: #fff;
+  background-color: #262626;
+  margin-bottom: 20px;
+  height: 48px;
+  overflow: hidden;
+}
+.history-header {
+  padding: 5px;
+  font-size: 16px;
+  font-weight: 500;
+  padding-left: 15px;
+  padding-top: 12px;
+  color: #fff;
+  background-color: #262626;
+  margin-bottom: 20px;
+  height: 48px;
+  overflow: hidden;
+}
+.history-content {
+  display: block;
+  padding: 0 24px;
+  height: calc(100% - 137px);
+  background-color: white;
+}
+.cnh-modal-occurence-history {
+  width: 100%;
+  max-height: 520px;
+  height: 95%;
+}
+.header {
+  display: flex;
+  justify-content: space-between;
+}
+.list {
+  padding-top: 20px;
+  height: calc(100% - 62px);
+}
+.body {
+  padding-left: 10px;
+  display: flex;
+  background-color: #f4f5f5;
+  width: 100%;
+  height: 37px;
+  border: 1px solid #dcdcdc;
+  border-top-color: transparent;
+  align-items: center;
+}
+.title {
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 0.94;
+  color: #000;
+  padding-bottom: 8px;
+}
+.info {
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 0.83;
+  color: #707070;
+}
+.modal-button {
+  color: #fff;
+  margin-left: 10px;
+  text-transform: uppercase;
+  box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14),
+    0 1px 5px 0 rgba(0, 0, 0, 0.12);
+  font-family: Roboto, Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  padding: 10px 30px;
+}
+.data {
+  font-size: 16px;
+  font-weight: 700;
+  color: #000;
+  text-align: right;
+}
+.dialog-actions {
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: -24px;
+  -webkit-box-pack: end;
+  -ms-flex-pack: end;
+  justify-content: flex-end;
+  padding: 0 24px;
+}
+.close-button {
+  color: white;
+}
+.listNo {
+  width: 16.666667%;
+}
+.listHours {
+  width: 42.33333333%;
+  font-size: 18px;
+  font-weight: 700;
+  color: #000;
+}
+.listData {
+  width: 42.33333333%;
+}
+.left {
+  width: 400px;
+}
+.footerCount {
+  -webkit-box-pack: end;
+  -ms-flex-pack: end;
+  justify-content: flex-end;
+  display: -webkit-box !important;
+  display: -ms-flexbox !important;
+  display: flex !important;
+}
+.footer-button button {
+  border: none;
+  background: white;
+  outline: none;
+}
+.footerContent {
+  font-weight: 700;
+  margin-right: 22px;
+}
+.cih {
+  background-color: #a21c22;
+}
+.nh {
+  background-color: #003e85;
+}
+.active {
+  cursor: pointer;
+}
+.active :hover {
+  opacity: 0.5;
+}
+.disable {
+  opacity: 0.1;
+}
+.disable :hover {
+  cursor: default;
+}

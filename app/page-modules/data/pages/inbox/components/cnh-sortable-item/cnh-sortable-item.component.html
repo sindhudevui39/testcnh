@@ -1,0 +1,6 @@
+<div class="label" [style.text-align]="align" [class.active]="isActive" [class.unsortable]="isSortable === false" >
+  <div class="cursonClickable" (click)="onClick()">
+    <span>{{ label }}&nbsp;&nbsp;</span>
+    <span class="cnh-evo-iconfont" [ngClass]="'cnh-evo-icon-' + icon"></span>
+  </div>
+</div>

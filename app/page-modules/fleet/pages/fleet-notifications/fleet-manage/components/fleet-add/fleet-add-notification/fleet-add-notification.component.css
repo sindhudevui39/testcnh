@@ -1,0 +1,127 @@
+.cnh-trowser {
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
+  font-family: Roboto, sans-serif;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+.cnh-head {
+  display: flex;
+  justify-content: space-between;
+  min-width: 1024px;
+  height: 60px;
+  width: 100%;
+  background-color: #262626;
+}
+.cnh-head-title {
+  color: #fff;
+  display: flex;
+  align-content: center;
+  align-items: center;
+  justify-content: flex-start;
+  font-size: 18px;
+  font-weight: 500;
+  height: 100%;
+  padding-left: 20px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.cnh-close {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  padding-right: 20px;
+}
+.cnh-notification-name {
+  height: 70px;
+  width: 100%;
+  padding-left: 20px;
+  background-color: #fff;
+  border-bottom: 1px solid #f3f6f9;
+  min-width: 1024px;
+}
+.cnh-content {
+  display: flex;
+  justify-content: center;
+  flex: 1;
+  width: 100%;
+  background-color: white;
+  min-width: 1024px;
+}
+.mat-stepper-horizontal {
+  height: 100%;
+  width: 100%;
+  min-width: 1024px;
+}
+.vehicle-search {
+  padding: 0 24px;
+  height: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  overflow: hidden;
+}
+.confirmation-summary {
+  height: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding-bottom: 80px;
+}
+.step-title {
+  font-size: 18px;
+  font-weight: 500;
+  color: #000;
+  padding-bottom: 20px;
+  margin-bottom: 10px;
+}
+.vehicle-list {
+  display: flex;
+  flex-direction: column;
+  height: calc(100% - 104px);
+}
+.cnh-footer {
+  height: 84px;
+  width: 100%;
+  min-width: 1024px;
+  display: flex;
+  align-items: center;
+  border-top: 0.5px solid black;
+  z-index: 1;
+  position: relative;
+}
+.cnh-footer button {
+  position: absolute;
+}
+.cnh-footer .cnh-evo-icon-chevron-left {
+  font-size: 12px;
+  top: -1px;
+  position: relative;
+  padding-right: 5px;
+}
+.cnh-footer .notif-prev-step-btn {
+  left: 24px;
+}
+.cnh-footer .notif-next-step-btn {
+  right: 24px;
+  color: #fff;
+}
+::ng-deep .mat-horizontal-content-container {
+  overflow: hidden !important;
+}
+::ng-deep .mat-horizontal-stepper-header .mat-step-icon,
+.mat-horizontal-stepper-header .mat-step-icon-not-touched {
+  margin-right: 0px !important;
+}
+::ng-deep .mat-step-header.cdk-program-focused {
+  background-color: rgba(0, 0, 0, 0) !important;
+}
+::ng-deep mat-horizontal-stepper .mat-horizontal-content-container {
+  height: calc(100% - 40px);
+}

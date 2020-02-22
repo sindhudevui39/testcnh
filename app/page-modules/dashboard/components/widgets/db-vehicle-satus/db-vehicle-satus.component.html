@@ -1,0 +1,63 @@
+<ng-template #loading> <app-loader></app-loader> </ng-template>
+
+<div class="item-content">
+  <div class="card">
+    <db-widget-header>
+      <span class="card-title">Current Vehicle Status</span> <span class="card-date">TODAY</span>
+      <db-widget-menu (click)="removeWidget()"></db-widget-menu>
+    </db-widget-header>
+
+    <div *ngIf="dataLoaded; else: loading">
+      <div class="status-chart">
+        <div class="sc-inner">
+          <canvas
+            baseChart
+            style="width: 350px; height: 175px;"
+            [data]="chartData"
+            [chartType]="'doughnut'"
+            [colors]="chartColors"
+            [options]="chartOptions"
+            (chartClick)="chartClicked($event)"
+          ></canvas>
+          <div class="total-vehicle">
+            <p class="vehicle-count">{{ totalVehicles }}</p>
+            <p><small>Vehicles</small></p>
+          </div>
+        </div>
+        <div class="sc-legend">
+          <div
+            class="chart-label"
+            *ngFor="let item of chartLabels; let i = index"
+            [ngClass]="{ 'highlight-label': highlightIndex == i }"
+            (click)="changeLabel(i, item)"
+          >
+            <div>
+              <div class="bullet" [ngStyle]="{ 'background-color': item.color }"></div>
+              <span class="status-name" [ngStyle]="{ color: item.color }">{{ item.label }}</span>
+            </div>
+            <div>
+              <span class="label-quantity">{{ item.data }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="no-vehicle" *ngIf="showNoVehicleMsg">No vehicles have the selected status</div>
+
+      <perfect-scrollbar style="max-width: 1024px; max-height: 128px;">
+        <div
+          *ngFor="let vehicle of vehicleList"
+          class="vehicle-data"
+          [ngStyle]="{ 'border-left-color': currentStatusColor }"
+          (click)="goToVehicleDetailPage(vehicle)"
+        >
+          <db-vehicle-item>
+            <span class="vehicle-name">{{ vehicle.name }}</span>
+            <span class="vehicle-model">{{ vehicle.model }}</span>
+            <span class="right-display">TODAY</span>
+          </db-vehicle-item>
+        </div>
+      </perfect-scrollbar>
+    </div>
+  </div>
+</div>

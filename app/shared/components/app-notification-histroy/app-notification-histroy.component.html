@@ -1,0 +1,127 @@
+<div class="alerts-dropdown">
+  <div class="alerts-dropdown--title">
+    <div class="title">
+      {{ translatedWords.NOTIFICATIONS }}
+    </div>
+  </div>
+  <div class="cnh-tabs">
+    <div class="cnh-tabs--headers">
+      <div
+        class="cnh-tab-header"
+        [class.active]="i === selectedTab"
+        *ngFor="let tab of ['ALERTS', 'CUSTOM']; let i = index"
+        (click)="tabchange(i)"
+      >
+        <div class="cnh-tab-sub-header ">
+          <span>{{ translatedWords[tab] }}</span>
+        </div>
+      </div>
+    </div>
+    <div class="cnh-tabs--contents" [class.scrollBottom]="1 === selectedTab" data-simplebar>
+      <div class="cnh-tab-content active" *ngIf="selectedTab === 0; else customElement">
+        <div class="tc-content-box" *ngIf="historiesFaultKey.length > 0; else emptyState">
+          <div class="cnh-list-group" *ngFor="let item of historiesFaultKey">
+            <div class="header">
+              {{ item }}
+            </div>
+            <div class="list" *ngFor="let listOfhistory of historyAlertList[item]">
+              <div
+                class="cnh-notification-card"
+                [ngClass]="{
+                  new: listOfhistory.unreadCount > 0
+                }"
+              >
+                <div class="content">
+                  <div class="top">
+                    <div class="title">
+                      {{ listOfhistory.vechicleName }}
+                    </div>
+                    <div class="time">
+                      {{ listOfhistory.dateTimeFormat }}
+                    </div>
+                  </div>
+                  <div class="bottom">
+                    <span class="severity severity-high"></span>
+                    <span class="txt ">
+                      {{ checkhighFaluts(listOfhistory.readCount) }}
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="alerts-dropdown--footer" [ngClass]="{ cih: brand === brands.CIH }">
+      <button
+        class="uppercase"
+        mat-button
+        color="primary"
+        routerLink="/fleet/overview"
+        *ngIf="selectedTab === 0"
+      >
+        {{ translatedWords.VEHICLE_OVERVIEW }}
+      </button>
+      <button
+        mat-button
+        class="uppercase"
+        color="primary"
+        routerLink="/fleet/notifications/history"
+        *ngIf="selectedTab === 1"
+      >
+        {{ translatedWords.CUSTOM_NOTIFICATION }}
+      </button>
+    </div>
+  </div>
+
+  <ng-template #customElement>
+    <div
+      class="tc-content-box"
+      data-simplebar
+      *ngIf="historiesCustomKey.length > 0; else emptyState"
+    >
+      <div class="cnh-list-group" *ngFor="let item of historiesCustomKey">
+        <div class="header">
+          {{ item }}
+        </div>
+        <div class="list" *ngFor="let listOfhistory of historyCustomList[item]">
+          <div
+            class="cnh-notification-card"
+            [ngClass]="{
+              new: listOfhistory.unreadCount > 0
+            }"
+          >
+            <div class="content">
+              <div class="top">
+                <div class="title">
+                  {{ listOfhistory.vechicleName }}
+                </div>
+                <div class="time">
+                  {{ listOfhistory.dateTimeFormat }}
+                </div>
+              </div>
+              <div class="bottom">
+                <span class="txt ">
+                  {{ listOfhistory.readCount }}
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-template>
+  <ng-template #emptyState>
+    <div class="cnh-empty-state cnh-empty-state--large">
+      <div class="cnh-empty-state--inner">
+        <div class="cnh-empty-state--title"></div>
+        <div class="cnh-empty-state--text">
+          <span *ngIf="selectedTab === 0">{{ translatedWords.NO_ALERTS }}</span>
+          <span *ngIf="selectedTab === 1">{{ translatedWords.NO_CUSTOM }}</span>
+        </div>
+        <div class="cnh-empty-state--button"></div>
+      </div>
+    </div>
+  </ng-template>
+</div>

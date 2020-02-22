@@ -1,0 +1,115 @@
+<app-loader *ngIf="isLoading"></app-loader>
+<div class="cnh-page-integrations" data-simplebar>
+  <div class="cnh-loader cnh-loader-default">
+    <div class="tc-content-box">
+      <div class="cnh-page-integrations--inner" *ngIf="!isLoading && userService.hasClimateAccess">
+        <p>
+          <b>Integrated Applications</b>
+        </p>
+        <p>
+          Information about integrated applications. Should cover main features and benefits of use
+          for the user
+        </p>
+        <div class="grid">
+          <div *ngFor="let app of integratedClients">
+            <div class="cnh-card-app">
+              <span
+                mat-icon-button
+                class="cnh-evo-iconfont cnh-evo-icon-more2 menu "
+                *ngIf="app.isConnected"
+                [matMenuTriggerFor]="partnerMenu"
+              ></span>
+              <mat-menu
+                class="partner-menu disconnectModel "
+                #partnerMenu="matMenu"
+                [backdropClass]="'full-width'"
+              >
+                <button
+                  mat-menu-item
+                  class="themeTextColor"
+                  (click)="openDisconnectedModal(app)"
+                  [ngClass]="{ cih: brand === 'CSAG', nh: brand === 'NHAG' }"
+                >
+                  {{ 'INTEGRATION.DISCONNECT' | translate }}
+                </button>
+              </mat-menu>
+              <div class="image">
+                <img [src]="app.logo_uri" [alt]="app?.name" />
+              </div>
+              <div class="title">{{ app.name }}</div>
+              <div class="txt">{{ app.description }}</div>
+              <div class="info">
+                <button
+                  *ngIf="!app.isConnected"
+                  mat-raised-button
+                  class="uppercase"
+                  color="primary"
+                  (click)="openConnectModal(app)"
+                >
+                  {{ 'INTEGRATION.CONNECT' | translate }}
+                </button>
+                <div class="connected" *ngIf="app.isConnected">
+                  <span class="cnh-evo-iconfont cnh-evo-icon-check icon"> </span>
+                  <div class="text uppercase">
+                    {{ 'INTEGRATION.CONNECTED' | translate }}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="cnh-page-integrations--inner" *ngIf="!isLoading">
+        <p>{{ 'INTEGRATION.TITLE_PAGE' | translate }}</p>
+        <div class="grid">
+          <div *ngFor="let app of clients">
+            <div class="cnh-card-app">
+              <span
+                mat-icon-button
+                class="cnh-evo-iconfont cnh-evo-icon-more2 menu "
+                *ngIf="app.isConnected"
+                [matMenuTriggerFor]="partnerMenu"
+              ></span>
+              <mat-menu
+                class="partner-menu disconnectModel "
+                #partnerMenu="matMenu"
+                [backdropClass]="'full-width'"
+              >
+                <button
+                  mat-menu-item
+                  class="themeTextColor"
+                  (click)="openDisconnectModal(app)"
+                  [ngClass]="{ cih: brand === 'CSAG', nh: brand === 'NHAG' }"
+                >
+                  {{ 'INTEGRATION.DISCONNECT' | translate }}
+                </button>
+              </mat-menu>
+              <div class="image">
+                <img [src]="app.logo_uri" [alt]="app?.name" />
+              </div>
+              <div class="title">{{ app.name }}</div>
+              <div class="txt">{{ app.description }}</div>
+              <div class="info">
+                <button
+                  *ngIf="!app.isConnected"
+                  mat-raised-button
+                  class="uppercase"
+                  color="primary"
+                  (click)="openConnectModal(app)"
+                >
+                  {{ 'INTEGRATION.CONNECT' | translate }}
+                </button>
+                <div class="connected" *ngIf="app.isConnected">
+                  <span class="cnh-evo-iconfont cnh-evo-icon-check icon"> </span>
+                  <div class="text uppercase">
+                    {{ 'INTEGRATION.CONNECTED' | translate }}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

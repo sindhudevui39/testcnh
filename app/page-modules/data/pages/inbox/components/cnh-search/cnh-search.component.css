@@ -1,0 +1,10 @@
+.cnh-search--input {
+  border: 0;
+  outline: none !important;
+  background-color: transparent;
+  height:56px;
+  width:100%;
+}
+::ng-deep .field-selection--table .cnh-search--input{
+  height: auto;
+}

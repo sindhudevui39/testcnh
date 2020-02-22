@@ -1,0 +1,298 @@
+header {
+  width: 100%;
+  position: absolute;
+  top: 0;
+  z-index: 200;
+  min-width: 1024px;
+}
+img {
+  object-fit: contain;
+}
+.header-brand {
+  background-color: #fff;
+  display: flex;
+  align-items: center;
+}
+.header-brand.cih {
+  justify-content: space-between;
+}
+.header-brand.nh {
+  justify-content: flex-end;
+  padding: 14px 0;
+  min-height: 65px;
+}
+.header-brand .logo {
+  padding-left: 30px;
+}
+.header-brand .logo .cih {
+  width: 265px;
+  height: 60px;
+}
+.header-icons {
+  display: flex;
+}
+.header-icons img {
+  width: 32px;
+  height: 32px;
+  margin-right: 22px;
+  cursor: pointer;
+}
+.dropdown-toggle {
+  position: relative;
+}
+.users {
+  color: #fff;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  font-weight: 500;
+  font-size: 11pt;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  margin-right: 22px;
+}
+.applicationList .users {
+  background-color: transparent !important;
+  margin-right: 10px;
+}
+.applicationList .dropdown-content {
+  min-width: 250px;
+  left: -10px;
+}
+.applicationList .cnh-evo-iconfont.cnh-evo-icon-topbar-apps-drawer {
+  font-size: 26px;
+}
+.applicationList .dropdown-content::after {
+  left: 82%;
+}
+.applicationList .dropdown-content .logout-action {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  padding: 16px;
+  cursor: pointer;
+}
+.users.cih {
+  background-color: #a21c22;
+  background-color: var(--color-primary-caseih);
+}
+.users.nh {
+  background-color: #003e85;
+  background-color: var(--color-primary-nh);
+}
+.dropdown-content {
+  position: absolute;
+  box-shadow: 2px 0 12px 0 rgba(0, 0, 0, 0.4);
+  background-color: #fff;
+  width: auto;
+  left: 50%;
+  border-radius: 2px;
+  margin-top: 13px;
+  visibility: hidden;
+  pointer-events: none;
+  opacity: 0;
+  transform: translate(-80%, -70%);
+  transition: 0.2s all linear;
+}
+.dropdown-content::before,
+.dropdown-content::after {
+  content: '';
+  position: absolute;
+  bottom: 100%;
+  left: 69%;
+  width: 0;
+  height: 0;
+  border-style: solid;
+}
+.notification-histroy-dropdown-open::after {
+  content: '';
+  position: absolute;
+  bottom: 100%;
+  left: 73%;
+  width: 0;
+  height: 0;
+  border-style: solid;
+}
+.dropdown-content::before {
+  border: 15px;
+  border-color: transparent transparent #000 transparent;
+}
+.dropdown-content::after {
+  border-width: 12px;
+  border-color: transparent transparent #fff transparent;
+  filter: drop-shadow(0 -1px 1px rgba(0, 0, 0, 0.4));
+}
+.users-information {
+  padding: 10px 24px;
+}
+.users-information .name {
+  font-weight: 700;
+}
+.users-information .email {
+  margin-top: 6px;
+  color: #707070;
+  font-size: 12px;
+}
+.logout-action {
+  border-top: 1px solid #dcdcdc;
+  padding: 16px 24px;
+  font-size: 14px;
+  cursor: pointer;
+}
+.logout-action:hover {
+  background-color: hsla(0, 0%, 73%, 0.15);
+}
+.users-dropdown-open {
+  visibility: visible;
+  pointer-events: inherit;
+  opacity: 1;
+  z-index: 1;
+  transform: translate(-80%, 0);
+  transition: 0.2s all ease-in-out;
+}
+.sub-header.nh {
+  border-bottom-left-radius: 16px;
+  border-bottom-right-radius: 16px;
+  background-image: linear-gradient(312deg, #1866a4, #244997);
+}
+.sub-header.cih {
+  display: flex;
+  align-items: center;
+  height: 40px;
+  border-bottom-left-radius: 16px;
+  border-bottom-right-radius: 16px;
+  background-color: var(--color-primary-caseih);
+  min-height: 50px;
+}
+.sub-header .logo {
+  padding: 13px 0 3px 24px;
+}
+.sub-header .drawer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 2px 0 0 24px;
+}
+.sub-header.cih .drawer {
+  padding: 0 24px;
+}
+.menu {
+  width: 16px;
+  height: 16px;
+  object-fit: contain;
+  cursor: pointer;
+  vertical-align: -3px;
+}
+.menu-name {
+  width: 124px;
+  height: 20px;
+  font-size: 14px;
+  font-weight: bold;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 1.43;
+  letter-spacing: normal;
+  color: var(--color-white);
+  color: #fff;
+  padding-left: 16px;
+  cursor: pointer;
+  text-transform: uppercase;
+}
+.main-menu {
+  height: 40px;
+  width: calc(100% - 178px);
+  float: left;
+  text-transform: uppercase;
+  line-height: 40px;
+  min-width: calc(1024px - 178px);
+}
+.main-menu--item {
+  height: 40px;
+  width: 270px;
+  display: inline-block;
+  text-align: center;
+}
+.main-menu--item.cih {
+  height: 45px;
+  width: 270px;
+  display: inline-block;
+  text-align: center;
+}
+.main-menu--item:after {
+  content: '';
+  position: absolute;
+  height: 6px;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  width: 208px;
+}
+.main-menu--item.active,
+.main-menu--item:hover {
+  position: relative;
+  font-weight: 700;
+}
+.main-menu--item.active:after,
+.main-menu--item:hover:after {
+  background-color: #f1b514;
+}
+::ng-deep .cih .main-menu--item.active:after,
+::ng-deep .cih .main-menu--item:hover:after {
+  background-color: #3d3d3d;
+}
+.main-menu .main-menu--item a {
+  color: white;
+  display: block;
+  text-decoration: none;
+  font-size: 14px;
+}
+.main-menu .main-menu--item:hover {
+  position: relative;
+}
+.notification-histroy-dropdown-open {
+  visibility: visible;
+  pointer-events: inherit;
+  opacity: 1;
+  z-index: 1;
+  transform: translate(-80%, 0);
+  transition: 0.2s all ease;
+}
+.applicationList .dropdown-content {
+  min-width: 250px;
+  left: -10px;
+}
+.icon-badge {
+  top: -7px;
+  width: 18px;
+  height: 18px;
+  border-radius: 100%;
+  color: #fff;
+  font-size: 10px;
+  line-height: 18px;
+  font-size: 11px;
+  position: absolute;
+  right: 17px;
+  background-color: #707070;
+  font-weight: 600;
+}
+.file-upload-dropdown-open {
+  visibility: visible;
+  pointer-events: inherit;
+  opacity: 1;
+  z-index: 1;
+  transform: translate(-80%, 0);
+  transition: 0.2s all ease;
+}

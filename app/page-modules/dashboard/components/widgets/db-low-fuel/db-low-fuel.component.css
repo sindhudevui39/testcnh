@@ -1,0 +1,23 @@
+.no-data-message {
+  min-height: 184px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: Roboto;
+  font-size: 14px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: #bbbbbb;
+  color: var(--color-grey);
+}
+.lf-list {
+  height: 184px;
+  overflow-y: auto;
+}
+.vehicle-data:hover {
+  cursor: pointer;
+  background-color: rgb(238, 240, 240);
+}

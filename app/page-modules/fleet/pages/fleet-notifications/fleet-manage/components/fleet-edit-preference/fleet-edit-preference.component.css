@@ -1,0 +1,54 @@
+.mat-dialog-content {
+  overflow: hidden !important;
+}
+.cnh-main-modal {
+  height: 100%;
+  width: 100%;
+}
+.cnh-header {
+  display: flex;
+  padding: 5px;
+  font-size: 16px;
+  font-weight: 500;
+  padding-left: 15px;
+  padding-top: 8px;
+  color: #fff;
+  background-color: #262626;
+  margin: -24px;
+  margin-bottom: 20px;
+  height: 48px;
+  overflow: hidden;
+}
+.cnh-text {
+  padding-top: 5.5px;
+}
+.text-reduced {
+  margin-top: 7px;
+  line-height: 1.67;
+  font-size: 12px;
+  color: #707070;
+}
+.sub-content {
+  height: 19px;
+  color: #707070;
+}
+.text-email-checkbox {
+  display: flex;
+  margin-bottom: 0.5em;
+}
+.phone-display {
+  padding-left: 10px;
+}
+.cnh-button-wrapper {
+  text-transform: uppercase;
+}
+.cnh-button-delete {
+  text-transform: uppercase;
+}
+.mat-dialog-actions {
+  padding: 12px 0;
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: -24px;
+  justify-content: flex-end;
+}

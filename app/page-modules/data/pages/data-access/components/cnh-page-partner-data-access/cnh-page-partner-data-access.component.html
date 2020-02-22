@@ -1,0 +1,57 @@
+<div
+  class="cnh-page-partner-data-access"
+  *ngIf="!(partnersLoading$ | async)"
+  data-simplebar
+>
+  <div class="empty-state" *ngIf="!activePartner || isDataShareDisabled">
+    <div class="cnh-empty-state cnh-empty-state--large" *ngIf="!activePartner">
+      <div class="cnh-empty-state--inner">
+        <div class="cnh-empty-state--title">
+          {{ 'DATA_ACCESS.SELECT_PARTNER' | translate }}
+        </div>
+      </div>
+    </div>
+    <div
+      class="cnh-empty-state cnh-empty-state--large"
+      *ngIf="activePartner && isDataShareDisabled"
+    >
+      <div class="cnh-empty-state--inner">
+        <div class="cnh-empty-state--title">
+          {{ 'DATA_ACCESS.PARTNER_NOT_SHARED' | translate }}
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="content" *ngIf="!!(activeShare$ | async)">
+    <div class="partner-sub-Title">
+      {{ 'DATA_ACCESS.PARTNER_HAS_ACCESS_TO' | translate }}
+    </div>
+    <div class="cnh-expansion-panel" [class.close]="close">
+      <ng-container>
+        <div class="header">
+          <!--
+            <span class="cnh-evo-iconfont cnh-evo-icon-field icon"></span>
+          -->
+          <div class="cnh-evo-icon-field-icon-header">
+            <img
+              class="cnh-evo-icon-field-icon"
+              src="./assets/svg/field-new.svg"
+            />
+          </div>
+          <div class="data">
+            <div class="title uppercase">
+              {{ 'DATA_ACCESS.DATA_TYPE_CARD_TITLE' | translate }}
+            </div>
+            <div class="description">{{ activeFieldDataCreatedAt }}</div>
+          </div>
+        </div>
+        <div class="">
+          <cnh-share-field-summary
+            [share]="activeShare$ | async"
+            [isPartner]="true"
+          ></cnh-share-field-summary>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+</div>

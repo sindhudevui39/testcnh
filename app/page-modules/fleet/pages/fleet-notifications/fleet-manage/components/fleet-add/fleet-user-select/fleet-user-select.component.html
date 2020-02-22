@@ -1,0 +1,131 @@
+<div class="cnh-list">
+  <div class="cnh-search">
+    <div
+      class="util-bar"
+      style="display: flex;
+    justify-content: space-between;"
+    >
+      <app-search
+        style="width: 100%;"
+        [placeholder]="'GLOBAL.PLACEHOLDER.SEARCH' | translate"
+        (changeEvent)="searchUsers($event)"
+        [backgroundColor]="'white'"
+      ></app-search>
+    </div>
+  </div>
+  <div
+    class="cnh-desclaimer"
+    [innerHTML]="
+      'TROWSER.CUSTOM_NOTIFICATION.USER_SELECTION.DISCLAIMER' | translate: { username: userEmail }
+    "
+  ></div>
+  <div class="cnh-main-header">
+    <div class="cnh-filter-bar">
+      <div class="cnh-name" style="padding-left: 2px;">
+        <div
+          style="display: flex;
+        padding-left: 25px;"
+        >
+          <mat-checkbox
+            color="primary"
+            style="margin-right: 20px;"
+            (change)="$event ? masterToggle() : null"
+            [checked]="masterToggleChecked"
+            [indeterminate]="masterIndeterminate"
+          ></mat-checkbox>
+          <app-dropdown
+            [list]="companies"
+            [selectedValue]="selectedCompanyValue"
+            (valueChange)="filterUsers($event, 'COMPANY_DROPDOWN')"
+            [dropdownMinWidth]="150"
+            [dropdownMaxHeight]="300"
+          ></app-dropdown>
+        </div>
+      </div>
+      <div class="cnh-id" style="display: flex;"></div>
+      <div class="cnh-model" style="display: flex;">
+        <app-dropdown
+          [list]="roles"
+          [selectedValue]="selectedRoleValue"
+          (valueChange)="filterUsers($event, 'ROLE_DROPDOWN')"
+          [dropdownMinWidth]="150"
+          [dropdownMaxHeight]="300"
+        ></app-dropdown>
+      </div>
+      <div class="cnh-all">
+        <div
+          [ngClass]="{
+            cih: userService.getBrand() === 'Case IH',
+            nh: userService.getBrand() === 'New Holland AG'
+          }"
+          class="user-collapse"
+          (click)="collapsedAll()"
+        >
+          <span *ngIf="collapse === 'EXPAND ALL'">{{
+            'GLOBAL.CTA.EXPAND_ALL' | translate | uppercase
+          }}</span>
+          <span *ngIf="collapse === 'COLLAPSE ALL'">{{
+            'GLOBAL.CTA.COLLAPSE_ALL' | translate | uppercase
+          }}</span>
+        </div>
+      </div>
+    </div>
+    <div class="cnh-user-list" *ngIf="dataLoaded; else loading">
+      <perfect-scrollbar style="max-height: 1024px; padding-right: 1em;">
+        <div
+          *ngFor="let userCompany of (usersList | keyvalue); let i = index"
+          class="cnh-user-data"
+        >
+          <div class="cnh-itemType-header" *ngIf="checkUserList > 0">
+            <div class="cnh-key">
+              <div style="margin-right:12px;">
+                <mat-checkbox
+                  color="primary"
+                  (change)="$event ? dataToggle(userCompany.key) : null"
+                  [checked]="
+                    dataSelection[userCompany.key].hasValue() && isAllDataSelected(userCompany.key)
+                  "
+                  [indeterminate]="
+                    dataSelection[userCompany.key].hasValue() && !isAllDataSelected(userCompany.key)
+                  "
+                ></mat-checkbox>
+              </div>
+              <p>{{ userCompany.key }}</p>
+            </div>
+            <div class="cnh-id"></div>
+            <div class="cnh-model"></div>
+            <div class="cnh-collapse">
+              <div
+                class="circle plus flex flex-center"
+                [ngClass]="{ rotate: !(isCollapsed[i] || isCollapsedAll) }"
+                (click)="collapsedAll(i)"
+              >
+                <span></span><span></span>
+              </div>
+            </div>
+          </div>
+          <div
+            class="cnh-userList"
+            [@hideNotification]="isCollapsed[i] || isCollapsedAll ? 'collapsed' : 'expanded'"
+          >
+            <div class="cnh-collapsable" *ngFor="let element of userCompany.value">
+              <div class="cnh-user cnh-name">
+                <mat-checkbox
+                  style="display: flex;"
+                  (click)="$event.stopPropagation()"
+                  (change)="toggleData($event, userCompany.key, element)"
+                  [checked]="dataSelection[userCompany.key].isSelected(element)"
+                ></mat-checkbox>
+                <p style="padding-left: 15px;">{{ element.fullName }}</p>
+              </div>
+              <div class="cnh-user cnh-id">{{ element.email }}</div>
+              <div class="cnh-user cnh-model">{{ element.role }}</div>
+              <div class="cnh-collapse"></div>
+            </div>
+          </div>
+        </div>
+      </perfect-scrollbar>
+    </div>
+  </div>
+</div>
+<ng-template #loading> <app-loader></app-loader> </ng-template>

@@ -1,0 +1,14 @@
+<div class="cnh-search">
+  <input
+    id="searchInput"
+    #searchInput
+    class="cnh-search--input"
+    [value]="value"
+    type="text"
+    name="search"
+    placeholder="{{placeholder}}"
+    (keyup)="emitSearchValue(searchInput.value)"
+    (focus)="blurEvent(false)"
+    (blur)="blurEvent(true)"
+  />
+</div>

@@ -1,0 +1,25 @@
+.utility-element-search {
+  display: flex;
+}
+.utility-element-search .icon {
+  border: 0;
+  width: 56px;
+  height: 55px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+.utility-element-search .box {
+  width: calc(100% - 56px);
+}
+.utility-element-search input {
+  border: 0;
+  width: 100%;
+  outline: none !important;
+}
+
+.utility-element-search:hover .cnh-evo-icon-search,
+.box:hover .cnh-evo-iconfont {
+  color: black;
+}

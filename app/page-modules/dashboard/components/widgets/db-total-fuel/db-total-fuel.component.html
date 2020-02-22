@@ -1,0 +1,58 @@
+<div class="item-content">
+  <div class="card">
+    <div class="card-item">
+      <db-widget-header
+        ><span class="card-title">Total Fuel Consumption</span>
+        <span class="card-date">Last 7 Days</span>
+        <db-widget-menu (click)="removeWidget()"></db-widget-menu>
+      </db-widget-header>
+
+      <ng-template #loading> <app-loader></app-loader> </ng-template>
+
+      <div
+        class="tfc-content"
+        *ngIf="dataLoaded; else: loading"
+        [ngClass]="{ 'vehicle-data': noData }"
+      >
+        <div class="no-data" *ngIf="noData">
+          <div class="no-data-text">No total fuel consumption data to display</div>
+        </div>
+        <div class="tfc-content-child" *ngIf="!noData">
+          <div
+            class="bar-graph"
+            [ngStyle]="{ width: vehicle.width * 5.5 + '%' }"
+            *ngFor="let vehicle of fuelData; let i = index"
+          >
+            <div class="box">
+              <div class="date">{{ vehicle.date }}</div>
+              <div
+                class="bar"
+                [ngStyle]="{
+                  width: vehicle.totalFuel === 0 ? 10 + 'px' : 60 + '%',
+                  'background-color': vehicle.color
+                }"
+              ></div>
+              <div class="totalFuel">{{ vehicle.totalFuel }}</div>
+            </div>
+          </div>
+        </div>
+        <div class="chart-labels flex flex-col flex-ai-s flex-jc-sa" *ngIf="!noData">
+          <div>
+            <div class="label-title">Total Fuel</div>
+            <div class="label-value">
+              <span class="text-style-2">{{ totalFuelConsumed }}</span>
+              <span class="text-style-1"> {{ measurementUnit | lowercase }} </span>
+            </div>
+          </div>
+          <div>
+            <div class="label-title">Avg Fuel Rate</div>
+            <div class="label-value">
+              <span class="text-style-2">{{ averageFuelRate }}</span>
+              <span class="text-style-1"> {{ measurementUnit | lowercase }}/hr</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

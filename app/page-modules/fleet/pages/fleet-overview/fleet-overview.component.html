@@ -1,0 +1,62 @@
+<div class="content">
+  <app-fleet-overview-list-header
+    (customParamsChange)="onCustomParamsChange($event)"
+  ></app-fleet-overview-list-header>
+  <div *ngIf="!dataLoaded">
+    <app-loader></app-loader>
+  </div>
+
+  <ng-container *ngIf="showNoDataText" [ngTemplateOutlet]="noVehicles"></ng-container>
+
+  <perfect-scrollbar
+    *ngIf="dataLoaded && overviewData"
+    [ngClass]="{
+      'height-opened': filtersBarOpen,
+      'height-closed': !filtersBarOpen
+    }"
+  >
+    <div *ngFor="let item of overviewData | keyvalue">
+      <div *ngFor="let company of item.value | keyvalue" [ngStyle]="{ 'background-Color': '#fff' }">
+        <div class="list-header flex flex-ai-c flex-jc-sb">
+          <div>{{ company.key }}</div>
+          <div class="hand-cursor">
+            <mat-icon *ngIf="collapseState[company.key]" (click)="changeCollapseState(company.key)"
+              >add</mat-icon
+            >
+            <mat-icon *ngIf="!collapseState[company.key]" (click)="changeCollapseState(company.key)"
+              >remove</mat-icon
+            >
+          </div>
+        </div>
+
+        <div
+          class="panel-new"
+          matExpansionPanelContent
+          [@collapseVehicles]="collapseState[company.key] ? 'collapsed' : 'expanded'"
+        >
+          <app-fleet-overview-list-item
+            *ngFor="let vehicle of company.value; let last = last"
+            [disableRemoteDisplay]="disableRemoteDisplay"
+            [displayRDVOption]="displayRDVOption"
+            [highlightValue]="highlightValue"
+            [rdvStatusMsg]="rdvStatusMsg"
+            [item]="vehicle"
+            [isLast]="last"
+          ></app-fleet-overview-list-item>
+        </div>
+      </div>
+    </div>
+  </perfect-scrollbar>
+</div>
+
+<ng-template #noVehicles>
+  <div
+    [ngClass]="{
+      'height-opened': filtersBarOpen,
+      'height-closed': !filtersBarOpen
+    }"
+    class="flex flex-ai-c flex-jc-c no-vehicle"
+  >
+    <span>{{ 'GLOBAL.FLEET.ZERO' | translate | titlecase }}</span>
+  </div>
+</ng-template>

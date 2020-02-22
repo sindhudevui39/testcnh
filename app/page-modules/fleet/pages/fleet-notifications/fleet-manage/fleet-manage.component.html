@@ -1,0 +1,91 @@
+<div
+  [ngClass]="{ 'no-data': isDataEmpty }"
+  style="background-color: #f4f5f5; height: 100%; width: 100%"
+  *ngIf="dataLoaded; else loading"
+>
+  <!-- TODO: if empty custom notifications display message -->
+  <div class="cnh-manage-table" *ngIf="!isDataEmpty; else NoNotifications">
+    <div class="cnh-manage-header">
+      <div class="cnh-manage-row">
+        <div class="cnh-manage-header-value cnh-name-row">
+          <div>
+            {{ 'PAGE_NOTIFICATION.TAB_MANAGE.NOTIFICATION_NAME' | translate | uppercase }}
+          </div>
+        </div>
+        <div class="cnh-manage-header-value cnh-fileType">
+          {{ 'PAGE_NOTIFICATION.TAB_MANAGE.VEHICLE_MODELS' | translate | uppercase }}
+        </div>
+        <div class="cnh-manage-header-value cnh-date">
+          {{ 'GLOBAL.VEHICLE.PLURAL' | translate | uppercase }}
+        </div>
+        <div class="cnh-manage-header-value cnh-date">
+          {{ 'GLOBAL.USER.PLURAL' | translate | uppercase }}
+        </div>
+        <div class="cnh-manage-header-value cnh-fileType">
+          {{ 'PAGE_NOTIFICATION.TAB_MANAGE.PREFERENCE' | translate | uppercase }}
+        </div>
+        <div class="cnh-manage-header-value cnh-button-header">
+          <div class="button-align">
+            <button mat-raised-button color="primary" (click)="AddNotification()">
+              {{ 'PAGE_NOTIFICATION.TAB_MANAGE.ADD_NEW' | translate | uppercase }}
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="cnh-header-bottom"></div>
+
+    <div class="cnh-manage-list">
+      <perfect-scrollbar
+        style="max-height: 1235px; padding-right: 1em;
+      "
+        [ngStyle]="{
+          height: userService.getBrand() === 'New Holland AG' ? 'calc(100% - 20px)' : '100%'
+        }"
+      >
+        <div class="cnh-manage-body">
+          <app-fleet-manage-notification
+            [notificationType]="'DEFAULT'"
+            [notificationList]="notificationsGroups"
+            [notificationCount]="1"
+            [notificationTitle]="'PAGE_NOTIFICATION.TAB_MANAGE.DEFAULT' | translate"
+            (editNotificationGroup)="editNotificationGroup($event)"
+          ></app-fleet-manage-notification>
+          <app-fleet-manage-notification
+            [notificationType]="'Created By Me'"
+            [notificationList]="customNotifications"
+            [notificationCount]="customNotificationCount"
+            [notificationTitle]="
+              'PAGE_NOTIFICATION.TAB_MANAGE.CREATED_BY' | translate: createdByMeData
+            "
+            (editPreference)="editPreference($event, 'ByMe')"
+            (editNotification)="editNotification($event)"
+            (deleteNotification)="deleteNotification($event, 'ByMe')"
+          ></app-fleet-manage-notification>
+          <app-fleet-manage-notification
+            [notificationType]="'Created For Me'"
+            [notificationList]="userNotifications"
+            [notificationCount]="userNotificationCount"
+            [notificationTitle]="
+              'PAGE_NOTIFICATION.TAB_MANAGE.CREATED_FOR' | translate: createdForMeData
+            "
+            (editPreference)="editPreference($event, 'ForMe')"
+            (deleteNotification)="deleteNotification($event, 'ForMe')"
+          ></app-fleet-manage-notification>
+        </div>
+      </perfect-scrollbar>
+    </div>
+  </div>
+</div>
+<ng-template #loading> <app-loader></app-loader> </ng-template>
+<ng-template #NoNotifications>
+  <div class="no-notify">
+    <span class="no-data-title">
+      {{ 'PAGE_NOTIFICATION.TAB_MANAGE.NO_VEHICLES_ADDED' | translate }}
+    </span>
+    <span class="no-data-content">
+      {{ 'PAGE_NOTIFICATION.TAB_MANAGE.NO_VEHICLES' | translate }}
+    </span>
+  </div>
+</ng-template>

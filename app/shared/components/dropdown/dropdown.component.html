@@ -1,0 +1,47 @@
+<div class="dropdown" appClickOutside (clickOutside)="closed = true">
+  <div class="dropdown-label flex flex-ai-c flex-jc-sb" (click)="openOrClose()">
+    <span> {{ selectedValue }} </span>
+    <div class="arrow" [ngClass]="{ down: closed, up: !closed }"></div>
+  </div>
+  <div
+    class="dropdown-list"
+    [ngClass]="{ display: !closed }"
+    [ngStyle]="{
+      minWidth: dropdownMinWidth + 'px'
+    }"
+  >
+    <perfect-scrollbar
+      style="max-width: 250px;"
+      [ngStyle]="{ maxHeight: dropdownMaxHeight + 'px' }"
+    >
+      <div
+        [ngClass]="{
+          cih: userService.getBrand() === 'Case IH',
+          nh: userService.getBrand() === 'New Holland AG'
+        }"
+        class="dropdown-list-item flex flex-ai-c"
+        *ngFor="let item of list"
+      >
+        <div
+          class="flex flex-ai-c dropdown-list-item-content"
+          *ngIf="item.name != disabledContentValue; else disabled"
+          [ngClass]="{ selected: item.name === selectedValue }"
+          (click)="selectItem(item.name, item)"
+        >
+          <p class="word-wrap">
+            {{ item.name }}
+          </p>
+        </div>
+      </div>
+    </perfect-scrollbar>
+  </div>
+</div>
+
+<ng-template #disabled>
+  <button [disabled]="true" class="disabled flex">
+    <p class="word-wrap">
+      {{ disabledContentValue
+      }}<span *ngIf="disabledContentNumber">(custom {{ disabledContentNumber }} )</span>
+    </p>
+  </button>
+</ng-template>

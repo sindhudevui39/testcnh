@@ -1,0 +1,128 @@
+.mat-raised-button.mat-warn.cih {
+  background-color: #a21c22;
+  background-color: var(--color-primary-caseih);
+}
+.mat-raised-button.mat-warn.nh {
+  background-color: #003e85;
+  background-color: var(--color-primary-nh);
+}
+.widget-upload {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.cnh-widget-upload {
+  width: 100%;
+  height: 100%;
+  max-width: 636px;
+  max-height: 343px;
+  overflow: hidden;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+.cnh-widget-upload--inner {
+  width: 100%;
+}
+.cnh-widget-upload .cnh-dnd {
+  width: 100%;
+  background-color: #f4f5f5;
+  border: 1.5px dashed #707070;
+  border-radius: 4px;
+  -webkit-transition: all 0.15s ease-in-out;
+  transition: all 0.15s ease-in-out;
+  text-align: center;
+  padding: 0 24px;
+}
+.cnh-widget-upload .cnh-dnd-input {
+  position: absolute;
+  width: 127px;
+  left: 0px;
+  height: 40px;
+  opacity: 0;
+  cursor: pointer;
+}
+.cnh-widget-upload .cnh-dnd .cnh-dnd-content {
+  pointer-events: none;
+}
+.cnh-widget-upload .cnh-dnd .cnh-evo-iconfont {
+  color: #262626;
+  margin-top: 51px;
+  font-size: 51px;
+}
+.cnh-widget-upload .cnh-dnd .cnh-dnd-content .cnh-dnd-text-wrapper {
+  margin-top: 30px;
+}
+.cnh-widget-upload .cnh-dnd .cnh-dnd-content .cnh-dnd-text-wrapper {
+  margin-top: 30px;
+}
+.cnh-widget-upload .bold {
+  color: #262626;
+  font-weight: 500;
+}
+.cnh-widget-upload .cnh-dnd .cnh-dnd-content .cnh-dnd-text-wrapper div:first-of-type {
+  font-size: 18px;
+}
+.cnh-widget-upload .cnh-dnd .cnh-dnd-content .cnh-dnd-text-wrapper div:last-of-type {
+  font-size: 14px;
+  color: #707070;
+  font-weight: 400;
+}
+.cnh-widget-upload .cnh-dnd .cnh-dnd-content .cnh-dnd-text-bottom {
+  margin-top: 36px;
+  margin-bottom: 10px;
+  font-size: 10px;
+  color: #707070;
+  text-align: left;
+  font-weight: 400;
+}
+.cnh-widget-upload .cnh-dnd-divider {
+  width: 100%;
+  margin-top: 17px;
+}
+.cnh-widget-upload .cnh-dnd-divider .cnh-dnd-divider-or {
+  margin: 0 auto;
+  text-align: center;
+  text-transform: uppercase;
+}
+.cnh-widget-upload .cnh-dnd-button {
+  margin: 0 auto;
+  display: block;
+  text-align: center;
+}
+.cnh-widget-upload .button-confirm {
+  margin-top: 16px;
+}
+.cih .cnh-widget-upload .button-confirm {
+  background-color: #a21c22;
+}
+.cnh-widget-upload .button-confirm:hover {
+  opacity: 0.6;
+}
+.close-icon {
+  background: none;
+  border: 0;
+  color: #262626;
+  font: inherit;
+  line-height: normal;
+  overflow: visible;
+  -webkit-appearance: button;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  font-size: 16px;
+  padding: 5px;
+  cursor: pointer;
+}
+.upload-dialog-container {
+  position: relative;
+}

@@ -1,0 +1,69 @@
+<div class="cnh-form-modal-with-header-background" [className]="brand === 'NHAG' ? 'nh' : 'cih'">
+  <h2 class="mat-dialog-title dialog-title" mat-dialog-title>
+    {{ 'MODAL.CUSTOM_PARAMETERS.HEADER' | translate }}
+  </h2>
+  <h2 mat-dialog-title>{{ 'MODAL.CUSTOM_PARAMETERS.TITLE' | translate }}</h2>
+  <mat-dialog-content>
+    <div class=" flex tab-title">
+      <div class="col-heading ">{{ 'PAGE_VEHICLE_DETAILS.TYPE' | translate }}</div>
+      <div class="col-heading">{{ 'GLOBAL.LABEL.CUSTOM' | translate: param }}</div>
+    </div>
+    <div class="box">
+      <div class="flex box-row" *ngFor="let item of dialogueParamsData">
+        <div class="box-col">
+          <div class="box-col1 ">
+            <div class="content-type-image"><img [src]="item.image" /></div>
+            <div class="content-type-text">{{ item.name }}</div>
+          </div>
+        </div>
+        <div class=" box-col">
+          <div class="box-col-content">
+            <mat-select
+              class="custom-select"
+              disableOptionCentering
+              [panelClass]="panelClass"
+              [(value)]="
+                this.customd === 'CUSTOM 1'
+                  ? item.custom1SelectedParamCode
+                  : item.custom2SelectedParamCode
+              "
+              (selectionChange)="valueChange($event, item)"
+            >
+              <mat-option
+                *ngFor="let option of item.allowedParameters"
+                [value]="option.code"
+                [disabled]="disableOption(option.name, item)"
+                >{{ option.name }} {{ optionLabel(option.name, item) }}
+              </mat-option>
+            </mat-select>
+          </div>
+        </div>
+      </div>
+    </div>
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <button
+      mat-button
+      tabindex="1"
+      type="button"
+      role="button"
+      class="modal-button modal-button-cancel"
+      (click)="onCancel()"
+    >
+      {{ 'GLOBAL.CTA.CANCEL' | translate | uppercase }}
+    </button>
+    <button
+      mat-raised-button
+      tabindex="0"
+      class=""
+      [type]="'button'"
+      [attr.role]="'button'"
+      class="modal-button modal-button-accept"
+      [style.color]="'white'"
+      [style.background-color]="getBrandColor()"
+      (click)="onSubmit()"
+    >
+      {{ 'GLOBAL.CTA.APPLY' | translate | uppercase }}
+    </button>
+  </mat-dialog-actions>
+</div>

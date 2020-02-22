@@ -1,0 +1,37 @@
+<div class="item-content">
+  <div class="card">
+    <div class="card-item">
+      <db-widget-header>
+        <span class="card-title">Low Fuel</span> <span class="card-date">Today</span>
+        <db-widget-menu (click)="removeWidget()"></db-widget-menu>
+      </db-widget-header>
+
+      <ng-template #loading> <app-loader></app-loader> </ng-template>
+
+      <div
+        style="display:flex;flex-direction:column;flex:1;min-height:0"
+        *ngIf="dataLoaded; else: loading"
+      >
+        <div class="no-data-message" *ngIf="noData"><div>No vehicles have low fuel</div></div>
+        <perfect-scrollbar style="max-width: 1024px; max-height: 184px;" *ngIf="!noData">
+          <div
+            class="vehicle-data"
+            *ngFor="let vehicle of vehicleList"
+            (click)="goToVehicleDetailPage(vehicle)"
+          >
+            <db-vehicle-item>
+              <span class="vehicle-name">{{ vehicle.name }}</span>
+              <span class="vehicle-model">{{ vehicle.model }}</span>
+              <p class="fuel-display">
+                <img alt="Fuel" src=".\assets\icon-fuel.svg" />
+                <span class="value danger">{{ vehicle.value | number: '1.0-0' }}</span>
+                <span class="unit">%</span>
+              </p>
+              <span class="right-display">TODAY</span>
+            </db-vehicle-item>
+          </div>
+        </perfect-scrollbar>
+      </div>
+    </div>
+  </div>
+</div>

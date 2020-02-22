@@ -1,0 +1,41 @@
+<div
+  class="nav-drawer"
+  [ngClass]="{ open: open, cih: brand === brands.CIH, nh: brand === brands.NH }"
+>
+  <ul>
+    <li *ngIf="hasDashboardAccess && !userService.getUser().isDealer">
+      <a routerLink="/dashboard" routerLinkActive="active">
+        <img src="assets/header-images/icon-dashboard-app.svg" class="app-icon" />
+        <span>{{ 'PAGE_DASHBOARD.SINGULAR' | translate }}</span>
+      </a>
+    </li>
+    <li *ngIf="!userService.getUser().isDealer">
+      <a href="{{ appSettingsService.appSettings.farmRedirect }}">
+        <img src="assets/header-images/icon-farm-app.svg" class="app-icon" />
+        <span>{{ 'PAGE_FARM.SINGULAR' | translate }}</span>
+      </a>
+    </li>
+    <li>
+      <a
+        [ngClass]="{
+          active: currentRoute === 'FLEET'
+        }"
+        (click)="redirect('FLEET')"
+      >
+        <img src="assets/header-images/icon-fleet-app.svg" class="app-icon" />
+        <span>{{ 'PAGE_FLEET.SINGULAR' | translate }}</span>
+      </a>
+    </li>
+    <li *ngIf="!userService.getUser().isDealer">
+      <a
+        [ngClass]="{
+          active: currentRoute === 'DATA'
+        }"
+        (click)="redirect('DATA')"
+      >
+        <img src="assets/header-images/icon-data-app.svg" class="app-icon" />
+        <span>{{ 'PAGE_DATA.SINGULAR' | translate }}</span>
+      </a>
+    </li>
+  </ul>
+</div>

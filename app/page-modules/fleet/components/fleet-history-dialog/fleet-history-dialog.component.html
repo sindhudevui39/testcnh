@@ -1,0 +1,101 @@
+<div class="history-main">
+  <div class="history-header">
+    <span class="history-title">{{ 'MODAL.OCCURRENCE.HISTORY' | translate }}</span>
+  </div>
+  <div class="history-content">
+    <div class="cnh-modal-occurence-history">
+      <div class="header">
+        <div class="left">
+          <div class="title">
+            <span>{{ fName }} </span>
+          </div>
+          <div class="info">
+            <span>{{ vName }} | {{ vId }} </span>
+          </div>
+        </div>
+        <div class="right">
+          <div class="label">{{ 'PAGE_FAULTS.ID' | translate }}</div>
+          <div class="data">{{ fCode }}</div>
+        </div>
+      </div>
+
+      <div class="list">
+        <app-history-dialog-header></app-history-dialog-header>
+        <div class="loader" *ngIf="showLoader"><app-loader></app-loader></div>
+
+        <perfect-scrollbar
+          style="max-height: calc(100% - 30px);
+        "
+          *ngIf="!showLoader"
+        >
+          <div *ngIf="historyData.length > 0"></div>
+          <div class="body" *ngFor="let data of historyData; let i = index">
+            <div class="listNo">
+              <span>{{ data.index }}</span>
+            </div>
+            <div class="listHours">
+              <p *ngIf="data.engineHours !== 'NaN'; else notANumber">
+                <span>{{ data.engineHours.value | number: '1.1-2' }}</span>
+                <span
+                  style="font-size: 12px;
+                  font-weight: 400;
+                  color: #707070;
+                  padding-left: 4px;"
+                  >{{ data.engineHours.unit }}</span
+                >
+              </p>
+            </div>
+            <div class="listData">
+              <span>{{ data.created | date: dateTimeFormat:tzOffset }}</span>
+            </div>
+          </div>
+        </perfect-scrollbar>
+      </div>
+    </div>
+    <div class="footerCount" *ngIf="!showLoader">
+      <span class="footerContent">
+        {{ 'GLOBAL.PAGINATOR.PAGINATION' | translate: paginationOpts }}
+      </span>
+      <div class="footer-button">
+        <button
+          [disabled]="disableLeftArrow"
+          (click)="onLeftArrowClick()"
+          [ngClass]="{ disable: disableLeftArrow, active: !disableLeftArrow }"
+        >
+          <i class="material-icons">
+            keyboard_arrow_left
+          </i>
+        </button>
+        <button
+          [disabled]="disableRightArrow"
+          (click)="onRightArrowClick()"
+          [ngClass]="{ disable: disableRightArrow, active: !disableRightArrow }"
+        >
+          <i class="material-icons">
+            keyboard_arrow_right
+          </i>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="dialog-actions">
+    <mat-dialog-actions align="end">
+      <button
+        class="close-button"
+        [ngClass]="{
+          cih: userService.getBrand() === brands.CIH,
+          nh: userService.getBrand() === brands.NH
+        }"
+        mat-button
+        mat-dialog-close
+      >
+        {{ 'GLOBAL.CTA.OK' | translate | uppercase }}
+      </button>
+    </mat-dialog-actions>
+  </div>
+</div>
+
+<ng-template #notANumber>
+  <span>NaN</span>
+</ng-template>

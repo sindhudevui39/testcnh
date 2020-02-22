@@ -1,0 +1,19 @@
+<div class="utility-element-search">
+  <div class="icon" [ngClass]="{ searchBlack: !searchIconColor }">
+    <span class="cnh-evo-iconfont cnh-evo-icon-search"></span>
+  </div>
+  <div class="box flex flex-ai-c">
+    <input
+      id="searchInput"
+      #searchInput
+      [ngStyle]="{ 'background-color': backgroundColor }"
+      [(ngModel)]="value"
+      type="text"
+      name="search"
+      placeholder="{{ placeholder }}"
+      (keyup)="onSearch(searchInput.value, $event)"
+      (focus)="searchIconColor = false"
+      (blur)="searchIconColor = true"
+    />
+  </div>
+</div>

@@ -1,0 +1,126 @@
+<div class="filter-toolbar flex flex-col">
+  <div
+    class="utility-bar flex flex-ai-c border-bottom"
+    [ngClass]="{ 'box-shadow border-bottom': !displayFilter }"
+  >
+    <ng-container [ngTemplateOutlet]="filterSearch"></ng-container>
+
+    <div
+      class="additional-display flex flex-ai-c flex-jc-sb"
+      [ngClass]="{ 'border-bottom': displayFilter }"
+    >
+      <app-fleet-toolbar-display-info></app-fleet-toolbar-display-info>
+
+      <ng-container *ngIf="navMapService.showMap" [ngTemplateOutlet]="listMapIcons"> </ng-container>
+      <ng-container *ngIf="fleetService.showCanFeature" [ngTemplateOutlet]="canData">
+      </ng-container>
+    </div>
+  </div>
+  <ng-container *ngIf="displayFilter" [ngTemplateOutlet]="filterDropdowns"> </ng-container>
+</div>
+
+<ng-template #filterSearch>
+  <div class="flex flex-ai-c search" [ngClass]="{ 'border-bottom': displayFilter }">
+    <app-search
+      [value]="searchValue"
+      [placeholder]="'GLOBAL.PLACEHOLDER.SEARCH' | translate"
+      (valueChange)="onseachValueChange($event)"
+      [backgroundColor]="'white'"
+    ></app-search>
+  </div>
+  <div
+    class="icon-div filter-icon flex flex-aic flex-ai-c flex-jc-c"
+    [ngClass]="{ 'grey-bg': displayFilter }"
+    (click)="toggleFilter()"
+  >
+    <img
+      *ngIf="filtersAppliedCount > 0; else noFilterApplied"
+      class="filtImg"
+      src="assets/filter-applied.png"
+    />
+    <div
+      *ngIf="filtersAppliedCount > 0"
+      class="numberBubble"
+      [ngClass]="{
+        cihbg: userService.getBrand() === brands.CIH,
+        nhbg: userService.getBrand() === brands.NH
+      }"
+    >
+      {{ filtersAppliedCount }}
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #listMapIcons>
+  <div class="toolbar-button flex">
+    <div class="firmware-button flex" *ngIf="isDealer">
+      <button mat-raised-button color="primary" (click)="FOTADeviceNotification()">
+        {{ 'GLOBAL.CTA.SOFTWARE' | translate | uppercase }}
+      </button>
+    </div>
+    <div>
+      <mat-button-toggle-group
+        class="mat-but-group"
+        #group="matButtonToggleGroup"
+        [(ngModel)]="navMapService.selectedOption"
+        (change)="toggleChange($event)"
+      >
+        <mat-button-toggle value="list" class="mat-map-icons">
+          <mat-icon class="mat-map-icons">list</mat-icon>
+          <span class="padding-left" *ngIf="navMapService.selectedOption == 'list'">
+            {{ 'PAGE_MAIN.TABS.LIST' | translate | uppercase }}</span
+          >
+        </mat-button-toggle>
+        <mat-button-toggle value="map" class="mat-map-icons">
+          <mat-icon class="mat-map-icons mat-font">location_on</mat-icon>
+          <span class="padding-left" *ngIf="navMapService.selectedOption == 'map'">
+            {{ 'PAGE_MAIN.TABS.MAP' | translate | uppercase }}</span
+          >
+        </mat-button-toggle>
+      </mat-button-toggle-group>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #canData>
+  <div>
+    <mat-button-toggle-group
+      class="mat-but-group"
+      #group="matButtonToggleGroup"
+      [(ngModel)]="fleetService.selectedOption"
+      (change)="toggleChangeCanFeature($event)"
+    >
+      <mat-button-toggle value="details" class="mat-map-icons">
+        <span class="padding-left"> {{ 'PAGE_MAIN.TABS.DETAILS' | translate | uppercase }}</span>
+      </mat-button-toggle>
+      <mat-button-toggle value="canData" class="mat-map-icons">
+        <span class="padding-left"> {{ 'PAGE_MAIN.TABS.CANDATA' | translate | uppercase }}</span>
+      </mat-button-toggle>
+    </mat-button-toggle-group>
+  </div>
+</ng-template>
+
+<ng-template #filterDropdowns>
+  <div id="filter-bar" class="border-bottom">
+    <div class="flex flex-ai-c">
+      <app-fleet-filter-bar></app-fleet-filter-bar>
+      <div class="flex flex-ai-c" *ngIf="showFaultsBar()">
+        <app-fault-filter-bar></app-fault-filter-bar>
+      </div>
+    </div>
+    <div
+      class="reset"
+      [ngClass]="{
+        cih: userService.getBrand() === 'Case IH',
+        nh: userService.getBrand() === 'New Holland AG'
+      }"
+    >
+      <span (click)="resetFilters()" value="Reset">{{
+        'GLOBAL.CTA.RESET' | translate | uppercase
+      }}</span>
+    </div>
+  </div>
+</ng-template>
+<ng-template #noFilterApplied>
+  <img class="filtImg" src="assets/filter-none.png" />
+</ng-template>

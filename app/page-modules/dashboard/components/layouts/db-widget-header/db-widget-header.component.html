@@ -1,0 +1,29 @@
+<div class="card-header flex flex-ai-c">
+  <div class="card-header-item flex flex-ai-c flex-jc-sb">
+    <ng-content select=".card-title"></ng-content>
+
+    <div class="flex flex-ai-c">
+      <ng-content select=".card-date"></ng-content>
+      <ng-content select=".text-active"></ng-content>
+      <div class="right-opt-menu flex">
+        <img
+          class="card-more"
+          (click)="onClick()"
+          [matMenuTriggerFor]="menu"
+          src="assets/header-images/more.svg"
+        />
+        <div class="oval" *ngIf="!hideOval"><span class="oval-inner"> </span></div>
+      </div>
+
+      <mat-menu
+        (closed)="onClose()"
+        xPosition="before"
+        yPosition="below"
+        #menu="matMenu"
+        class="header-menu"
+      >
+        <ng-content select="db-widget-menu"></ng-content>
+      </mat-menu>
+    </div>
+  </div>
+</div>

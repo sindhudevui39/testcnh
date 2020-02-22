@@ -1,0 +1,16 @@
+<ng-template #loading> <div class="loading-bg"></div> </ng-template>
+
+<div class="app-container" *ngIf="loadApp; else loading">
+  <app-header [activeRoute]="activeRoute"></app-header>
+
+  <div
+    class="content nopaddingForData"
+    [ngClass]="{
+      cih: _userService.getBrand() === brands.CIH,
+      nh: _userService.getBrand() === brands.NH
+    }"
+  >
+    <router-outlet></router-outlet>
+  </div>
+</div>
+<app-auto-logout></app-auto-logout>

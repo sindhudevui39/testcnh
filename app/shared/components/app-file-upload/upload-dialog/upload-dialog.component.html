@@ -1,0 +1,69 @@
+<div
+  class="upload-dialog-container"
+  [ngClass]="{
+    cih: brand === brands.CIH,
+    nh: brand === brands.NH
+  }"
+>
+  <h2 mat-dialog-title>
+    {{ 'FILE_NOTIFICATION.UPLOAD_FILE.TITLE' | translate }}
+  </h2>
+  <button class="close-icon" role="button" tabindex="-1" type="button">
+    <span class="cnh-evo-iconfont cnh-evo-icon-close" (click)="onCancel()"></span>
+  </button>
+  <div mat-dialog-content style="padding-bottom:20px">
+    <div class="widget-upload">
+      <div class="cnh-widget-upload">
+        <div class="cnh-widget-upload--inner">
+          <div
+            class="cnh-dnd "
+            appDndDirective
+            (filesChangeEmiter)="onFilesChange($event)"
+            [allowed_extensions]="['zip']"
+          >
+            <div class="cnh-dnd-content">
+              <div class="cnh-evo-iconfont cnh-evo-icon-upload"></div>
+              <div class="cnh-dnd-text-wrapper">
+                <div class="bold">
+                  {{ 'FILE_NOTIFICATION.UPLOAD_FILE.DND' | translate }}
+                </div>
+                <div>
+                  {{ 'FILE_NOTIFICATION.UPLOAD_FILE.ZIP_LIMIT' | translate }}
+                </div>
+              </div>
+              <div class="cnh-dnd-text-bottom">
+                {{ 'FILE_NOTIFICATION.UPLOAD_FILE.FILE_TYPES' | translate }}
+              </div>
+            </div>
+          </div>
+          <div class="cnh-dnd-divider ">
+            <div class="cnh-dnd-divider-or">
+              {{ 'FILE_NOTIFICATION.UPLOAD_FILE.OR' | translate | uppercase }}
+            </div>
+          </div>
+          <label class="cnh-dnd-button ">
+            <button
+              class="button-confirm mat-raised-button mat-primary"
+              color="primary"
+              type="button"
+            >
+              <span class="mat-button-wrapper">{{
+                'FILE_NOTIFICATION.UPLOAD_FILE.BROWSE' | translate | uppercase
+              }}</span>
+              <input
+                type="file"
+                class="cnh-dnd-input"
+                (change)="fileChange($event)"
+                placeholder="Upload file"
+                accept=".zip"
+                multiple
+              />
+              <div class="mat-button-ripple mat-ripple" matripple=""></div>
+              <div class="mat-button-focus-overlay"></div>
+            </button>
+          </label>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

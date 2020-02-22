@@ -1,0 +1,55 @@
+<div class="filter-toolbar flex flex-col">
+  <div class="utility-bar flex flex-ai-c">
+    <div
+      class="additional-display flex flex-jc-sb"
+      [ngClass]="{ cih: brand === brands.CIH, nh: brand === brands.NH }"
+    >
+      <div class="flex flex-col flex-jc-c" *ngIf="currentTab === 'notifications'">
+        <span
+          class="notification-count"
+          *ngIf="notificationCount > 0 && notificationCount !== 1; else oneNotification"
+          >{{ notificationCount }} {{ 'GLOBAL.NOTIFICATION.PLURAL' | translate }}</span
+        >
+        <ng-template #oneNotification>
+          <span
+            class="notification-count"
+            *ngIf="notificationCount > 0 && notificationCount === 1; else noNotification"
+            >{{ notificationCount }} {{ 'GLOBAL.NOTIFICATION.SINGULAR' | translate }}</span
+          >
+        </ng-template>
+
+        <ng-template #noNotification>
+          <span class="notification-count">{{ 'GLOBAL.NOTIFICATION.ZERO' | translate }}</span>
+        </ng-template>
+        <span class="notification-label" *ngIf="subTab === 'manage'"
+          >{{ 'PAGE_NOTIFICATION.TAB_MANAGE.CREATED_BY' | translate: createdByMeData }}
+          |
+          {{ 'PAGE_NOTIFICATION.TAB_MANAGE.CREATED_FOR' | translate: createdForMeData }}</span
+        >
+      </div>
+      <div class="routes flex flex-row flex-ai-c flex-jc-c"></div>
+    </div>
+    <div class="notification-tabs" *ngIf="currentTab === 'notifications'">
+      <ul class="nav-tabs" [ngClass]="{ cih: brand === brands.CIH, nh: brand === brands.NH }">
+        <li
+          class="tab-item"
+          routerLinkActive="active"
+          [ngClass]="{ cih: brand === brands.CIH, nh: brand === brands.NH }"
+        >
+          <a routerLink="notifications/manage" [ngClass]="{ myclass: manageTab }">
+            {{ 'PAGE_NOTIFICATION.TAB_MANAGE.TITLE' | translate | uppercase }}</a
+          >
+        </li>
+        <li
+          class="tab-item"
+          [ngClass]="{ cih: brand === brands.CIH, nh: brand === brands.NH }"
+          routerLinkActive="active"
+        >
+          <a routerLink="notifications/history" [ngClass]="{ myclass: historyTab }">
+            {{ 'PAGE_NOTIFICATION.TAB_HISTORY.TITLE' | translate | uppercase }}</a
+          >
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

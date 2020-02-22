@@ -1,0 +1,38 @@
+<div id="index" class="list-header">
+  <div class="head" (click)="onTitleClick('index')" style="width: 16.66666667%">
+    <span class="text">#</span>
+    <img
+      *ngIf="selectedTitle === 'index'"
+      class="sort-button"
+      [ngClass]="{
+        desc: isDesc,
+        asc: isAsc
+      }"
+      src="assets/svg/vectorpaint.svg"
+    />
+  </div>
+  <div id="hours" class="head" (click)="onTitleClick('hours')" style="width: 41.66666667%">
+    <span class="text">{{ 'PAGE_FAULTS.ENGINE_HOURS' | translate }}</span>
+    <img
+      *ngIf="selectedTitle === 'hours'"
+      class="sort-button"
+      [ngClass]="{
+        desc: isDesc,
+        asc: isAsc
+      }"
+      src="assets/svg/vectorpaint.svg"
+    />
+  </div>
+  <div class="head" (click)="onTitleClick('created')" style="width: 41.66666667%">
+    <span class="text">{{ 'GLOBAL.DATE' | translate }}</span>
+    <img
+      *ngIf="selectedTitle === 'created'"
+      class="sort-button"
+      [ngClass]="{
+        desc: isDesc,
+        asc: isAsc
+      }"
+      src="assets/svg/vectorpaint.svg"
+    />
+  </div>
+</div>

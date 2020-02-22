@@ -1,0 +1,51 @@
+<div class="cnh-trowser">
+  <div class="cnh-head">
+    <div class="cnh-head-title">
+      {{ 'PAGE_MAIN.ALERTS.HIGH_FAULTS' | translate }}
+      {{ 'PAGE_NOTIFICATION.TAB_MANAGE.PREFERENCE' | translate }}
+    </div>
+    <div class="cnh-close">
+      <img src="assets/svg/24-light.svg" (click)="onNoClick()" />
+    </div>
+  </div>
+  <div class="cnh-content">
+    <div class="cnh-notification-text">
+      <div class="text-title">
+        {{ 'MODAL.EDIT_NOTIFICATION.TITLE' | translate }}
+      </div>
+      <p class="text-content">
+        {{ 'MODAL.EDIT_NOTIFICATION.CONTENT' | translate }}
+      </p>
+      <div class="text-extra">
+        <mat-checkbox
+          [checked]="phoneNumberChecked"
+          (change)="phoneNumberChecked = !phoneNumberChecked"
+          >Text ( ***-***-{{ data.phone }} )
+        </mat-checkbox>
+        <div class="extra-description">
+          {{ 'TROWSER.CUSTOM_NOTIFICATION.VEHICLES_SELECTION.SELECT_VEHICLES' | translate }}
+        </div>
+      </div>
+    </div>
+    <div class="cnh-vehicle">
+      <app-fleet-edit-vehicle-selection
+        class="vehicle-list"
+        [phoneNumberStatus]="phoneNumberChecked"
+        (checkPhoneNumber)="checkPhoneNumber($event)"
+        (disableConfirmBtn)="disableConfirmBtn($event)"
+      >
+      </app-fleet-edit-vehicle-selection>
+      <div class="cnh-footer" style="justify-content: flex-end;">
+        <button
+          [ngClass]="!disableConfirm ? 'add-color' : 'disable-button'"
+          [style.background-color]="!disableConfirm ? buttonBGColor : 'rgba(0,0,0,.12)'"
+          mat-raised-button
+          [disabled]="disableConfirm"
+          (click)="updateVehiclesNotification()"
+        >
+          {{ 'GLOBAL.CTA.CONFIRM' | translate | uppercase }}
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

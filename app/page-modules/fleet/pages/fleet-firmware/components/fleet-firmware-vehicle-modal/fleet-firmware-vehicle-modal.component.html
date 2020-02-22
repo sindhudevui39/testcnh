@@ -1,0 +1,26 @@
+<div class="cnh-main-modal">
+  <mat-dialog-content>
+    <div class="cnh-modal">
+      <div class="cnh-header">
+        <span class="cnh-img"><img src="assets/warning.PNG"/></span>
+        <span class="cnh-text"> {{ 'TROWSER.FOTA.MODAL.VEHICLES_LIMIT.TITLE' | translate }}</span>
+      </div>
+      <div
+        class="cnh-content"
+        [translate]="'TROWSER.FOTA.MODAL.VEHICLES_LIMIT.DESCRIPTION'"
+        [translateParams]="{ limit: 500 }"
+      ></div>
+      <div class="sub-content"></div>
+    </div>
+  </mat-dialog-content>
+  <mat-dialog-actions class="mat-dialog-actions">
+    <button
+      mat-raised-button
+      color="primary"
+      (click)="onNoClick()"
+      [style.background-color]="buttonBGColor"
+    >
+      <span class="cnh-button-delete">{{ 'GLOBAL.CTA.OK' | translate }}</span>
+    </button>
+  </mat-dialog-actions>
+</div>

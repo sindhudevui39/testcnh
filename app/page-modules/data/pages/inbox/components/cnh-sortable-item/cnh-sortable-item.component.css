@@ -1,0 +1,47 @@
+.label {
+  color: #707070;
+  font-size: 12px;
+  text-transform: uppercase;
+  font-weight: 500;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.label.active {
+  color: #000;
+}
+.label.active cnh-action-icon,
+.label.unsortable cnh-action-icon {
+  display: inline-block;
+}
+.label.unsortable {
+  cursor: default;
+}
+cnh-action-icon {
+  display: none;
+  width: 24px;
+  height: 24px;
+  top: 4px;
+  padding: 10px 0;
+}
+
+.label .cnh-evo-iconfont.cnh-evo-icon-sort-asc,
+.label .cnh-evo-iconfont.cnh-evo-icon-sort-desc {
+  display: none;
+}
+
+.label.active .cnh-evo-iconfont.cnh-evo-icon-sort-asc,
+.label.active .cnh-evo-iconfont.cnh-evo-icon-sort-desc {
+  width: 24px;
+  height: 24px;
+  display: inline-block;
+  font-size: 16px;
+  top: 3px;
+  position: relative;
+}
+
+.cursonClickable {
+  width: 94px;
+  cursor: pointer;
+}

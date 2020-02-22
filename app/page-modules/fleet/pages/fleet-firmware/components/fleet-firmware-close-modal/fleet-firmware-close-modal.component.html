@@ -1,0 +1,27 @@
+<div class="cnh-main-modal">
+  <mat-dialog-content>
+    <div class="cnh-modal">
+      <div class="cnh-header">
+        <span class="cnh-img"><img src="assets/warning.PNG"/></span>
+        <span class="cnh-text">{{ 'TROWSER.FOTA.MODAL.EXIT.TITLE' | translate }}</span>
+      </div>
+      <div class="cnh-content">
+        {{ 'TROWSER.FOTA.MODAL.EXIT.DESCRIPTION' | translate }}
+      </div>
+      <div class="sub-content"></div>
+    </div>
+  </mat-dialog-content>
+  <mat-dialog-actions class="mat-dialog-actions">
+    <button mat-button (click)="onNoClick()">
+      <span class="cnh-button-wrapper">{{ 'GLOBAL.CTA.GO_BACK' | translate }}</span>
+    </button>
+    <button
+      mat-raised-button
+      color="primary"
+      (click)="exitButton()"
+      [style.background-color]="buttonBGColor"
+    >
+      <span class="cnh-button-delete">{{ 'GLOBAL.CTA.EXIT' | translate }}</span>
+    </button>
+  </mat-dialog-actions>
+</div>

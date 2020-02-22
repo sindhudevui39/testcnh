@@ -1,0 +1,41 @@
+<div class="filter-dropdown" appClickOutside (clickOutside)="closed = true">
+  <app-filter-dropdown-label
+    [dropdownName]="dropdownName"
+    [closed]="closed"
+    [selectCount]="selectCount"
+    (clicked)="closed = !closed"
+  >
+  </app-filter-dropdown-label>
+
+  <div class="dropdown-content" [ngClass]="{ display: !closed }">
+    <perfect-scrollbar style="max-width: 225px; max-height: 300px;">
+      <label
+        *ngFor="let item of dropdownList"
+        class="dropdown-item flex flex-ai-c"
+        [ngClass]="{ disabled: item.disabled }"
+      >
+        <input
+          type="checkbox"
+          [checked]="item.checked"
+          (click)="checkboxClicked(item, $event)"
+          [disabled]="item.disabled"
+        />
+        <span
+          class="checkmark"
+          [ngClass]="{
+            cih: userService.getBrand() === brands.CIH,
+            nh: userService.getBrand() === brands.NH
+          }"
+        ></span>
+        <span
+          class="item-name"
+          [ngClass]="{
+            cih: userService.getBrand() === brands.CIH,
+            nh: userService.getBrand() === brands.NH
+          }"
+          >{{ item.name }}</span
+        >
+      </label>
+    </perfect-scrollbar>
+  </div>
+</div>

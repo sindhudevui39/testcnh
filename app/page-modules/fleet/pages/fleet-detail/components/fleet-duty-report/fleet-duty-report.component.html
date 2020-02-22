@@ -1,0 +1,138 @@
+<mat-card class="fleet-duty-report">
+  <mat-card-content class="fleet-duty__content" [ngStyle]="{ height: loaded ? '100%' : '' }">
+    <div>
+      <div class="fleet-duty__title">
+        <div class="fleet-duty__title__main">
+          {{ 'PAGE_VEHICLE_DETAILS.TOTAL_HOURS_TITLE' | translate | uppercase }}
+        </div>
+        <div class="fleet-duty__title__sub">
+          {{ 'PAGE_VEHICLE_DETAILS.CHART_TITLE' | translate | uppercase }}
+        </div>
+      </div>
+
+      <div class="fleet-duty__label">
+        {{ 'PAGE_VEHICLE_DETAILS.TOTAL_HOURS_TITLE' | translate }}
+      </div>
+
+      <div class="fleet-duty__value">
+        <span class="number" *ngIf="totalDuration === 'N/A'">{{
+          'GLOBAL.NO_DATA' | translate
+        }}</span>
+        <span class="number" *ngIf="totalDuration !== 'N/A'">{{ totalDuration }}</span>
+      </div>
+
+      <div class="fleet-duty__status">
+        <div class="status-container">
+          <ng-container [ngTemplateOutlet]="inWork"></ng-container>
+          <ng-container [ngTemplateOutlet]="keyOn"></ng-container>
+          <ng-container [ngTemplateOutlet]="idle"></ng-container>
+        </div>
+
+        <div class="status-container">
+          <ng-container [ngTemplateOutlet]="moving"></ng-container>
+          <ng-container [ngTemplateOutlet]="travelling"></ng-container>
+        </div>
+      </div>
+    </div>
+
+    <div class="fleet-duty__chart">
+      <div *ngIf="!loaded" class="fleet-duty__chart__loader">
+        <app-loading-ring></app-loading-ring>
+      </div>
+      <canvas [ngStyle]="{ display: loaded ? 'block' : 'none' }" #dutyChart></canvas>
+    </div>
+  </mat-card-content>
+</mat-card>
+
+<ng-template #inWork>
+  <div class="status-container__row">
+    <div class="label">
+      <div class="status vehicle-status__working--bg"></div>
+      <span class="vehicle-status__working--text">{{
+        'GLOBAL.VEHICLE.STATUS.WORKING' | translate
+      }}</span>
+    </div>
+    <div class="value">
+      <span class="number" *ngIf="statusDuration.get('WORKING') !== 'N/A'">{{
+        statusDuration.get('WORKING')
+      }}</span>
+      <span class="number" *ngIf="statusDuration.get('WORKING') === 'N/A'">{{
+        'GLOBAL.NO_DATA' | translate
+      }}</span>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #keyOn>
+  <div class="status-container__row">
+    <div class="label">
+      <div class="status vehicle-status__keyon--bg"></div>
+      <span class="vehicle-status__keyon--text">{{
+        'GLOBAL.VEHICLE.STATUS.KEYON' | translate
+      }}</span>
+    </div>
+    <div class="value">
+      <span class="number" *ngIf="statusDuration.get('KEYON') !== 'N/A'">{{
+        statusDuration.get('KEYON')
+      }}</span>
+      <span class="number" *ngIf="statusDuration.get('KEYON') === 'N/A'">{{
+        'GLOBAL.NO_DATA' | translate
+      }}</span>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #idle>
+  <div class="status-container__row">
+    <div class="label">
+      <div class="status vehicle-status__idle--bg"></div>
+      <span class="vehicle-status__idle--text">{{ 'GLOBAL.VEHICLE.STATUS.IDLE' | translate }}</span>
+    </div>
+    <div class="value">
+      <span class="number" *ngIf="statusDuration.get('IDLE') !== 'N/A'">{{
+        statusDuration.get('IDLE')
+      }}</span>
+      <span class="number" *ngIf="statusDuration.get('IDLE') === 'N/A'">{{
+        'GLOBAL.NO_DATA' | translate
+      }}</span>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #moving>
+  <div class="status-container__row">
+    <div class="label">
+      <div class="status vehicle-status__moving--bg"></div>
+      <span class="vehicle-status__moving--text">{{
+        'GLOBAL.VEHICLE.STATUS.MOVING' | translate
+      }}</span>
+    </div>
+    <div class="value">
+      <span class="number" *ngIf="statusDuration.get('MOVING') !== 'N/A'">{{
+        statusDuration.get('MOVING')
+      }}</span>
+      <span class="number" *ngIf="statusDuration.get('MOVING') === 'N/A'">{{
+        'GLOBAL.NO_DATA' | translate
+      }}</span>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #travelling>
+  <div class="status-container__row">
+    <div class="label">
+      <div class="status vehicle-status__travelling--bg"></div>
+      <span class="vehicle-status__travelling--text">{{
+        'GLOBAL.VEHICLE.STATUS.TRAVELING' | translate
+      }}</span>
+    </div>
+    <div class="value">
+      <span class="number" *ngIf="statusDuration.get('TRAVELING') !== 'N/A'">{{
+        statusDuration.get('TRAVELING')
+      }}</span>
+      <span class="number" *ngIf="statusDuration.get('TRAVELING') === 'N/A'">{{
+        'GLOBAL.NO_DATA' | translate
+      }}</span>
+    </div>
+  </div>
+</ng-template>

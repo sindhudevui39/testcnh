@@ -1,0 +1,110 @@
+<div class="custom-dialog">
+  <div class="custom-dialog__header">
+    <div class="custom-dialog__header__title" [ngSwitch]="data.type">
+      <ng-container
+        [ngTemplateOutlet]="installTvTitle"
+        *ngSwitchCase="rdvDialogTypes.INSTALL"
+      ></ng-container>
+      <ng-container
+        [ngTemplateOutlet]="unsupportedVerTitle"
+        *ngSwitchCase="rdvDialogTypes.UNSUPPORTED_VERSION"
+      ></ng-container>
+      <ng-container
+        [ngTemplateOutlet]="inactiveSubTitle"
+        *ngSwitchCase="rdvDialogTypes.INACTIVE_SUBSCRIPTION"
+      ></ng-container>
+      <ng-container
+        [ngTemplateOutlet]="endSessionTitle"
+        *ngSwitchCase="rdvDialogTypes.END_SESSION"
+      ></ng-container>
+    </div>
+    <img class="close" src="assets/close-icon.svg" (click)="onNoClick()" />
+  </div>
+
+  <div class="custom-dialog__body" [ngSwitch]="data.type">
+    <ng-container
+      [ngTemplateOutlet]="installTvBody"
+      *ngSwitchCase="rdvDialogTypes.INSTALL"
+    ></ng-container>
+    <ng-container
+      [ngTemplateOutlet]="unsupportedVerBody"
+      *ngSwitchCase="rdvDialogTypes.UNSUPPORTED_VERSION"
+    ></ng-container>
+    <ng-container
+      [ngTemplateOutlet]="inactiveSubBody"
+      *ngSwitchCase="rdvDialogTypes.INACTIVE_SUBSCRIPTION"
+    ></ng-container>
+    <ng-container
+      [ngTemplateOutlet]="endSessionBody"
+      *ngSwitchCase="rdvDialogTypes.END_SESSION"
+    ></ng-container>
+  </div>
+
+  <div class="custom-dialog__footer">
+    <button mat-button *ngIf="data.showCancel" (click)="onNoClick()">
+      {{ 'GLOBAL.CTA.CANCEL' | translate | uppercase }}
+    </button>
+    <button
+      mat-button
+      mat-raised-buttons
+      [ngStyle]="{
+        'background-color': brandColor,
+        color: '#fff',
+        'box-shadow': '0 2px 2px 0 rgba(0, 0, 0, 0.24), 0 0 2px 0 rgba(0, 0, 0, 0.12)'
+      }"
+      (click)="endSession()"
+    >
+      <ng-container
+        *ngIf="data.type === 'END_SESSION'"
+        [ngTemplateOutlet]="endSessionString"
+      ></ng-container>
+      <ng-container *ngIf="data.showOk" [ngTemplateOutlet]="okString"></ng-container>
+    </button>
+  </div>
+</div>
+
+<ng-template #installTvTitle>
+  {{ 'PAGE_RDV.TW_NOT_INSTALLED' | translate }}
+</ng-template>
+
+<ng-template #unsupportedVerTitle>
+  Unsupported Version
+</ng-template>
+
+<ng-template #inactiveSubTitle>
+  {{ 'PAGE_RDV.SUB_INACTIVE' | translate }}
+</ng-template>
+
+<ng-template #endSessionTitle>
+  {{ 'PAGE_RDV.END' | translate }}
+</ng-template>
+
+<ng-template #installTvBody>
+  <p class="main-text">{{ 'PAGE_RDV.TW_HOWTO' | translate }}</p>
+  <p>Click <a [href]="tvInstallUrl" target="_blank">here</a> to download.</p>
+</ng-template>
+
+<ng-template #unsupportedVerBody>
+  <p class="main-text">
+    You're running an older version of TeamViewer than is recommended.
+  </p>
+  <p>Please update your TeamViewer client before continuing with the Remote Display session.</p>
+  <p>Click <a [href]="tvInstallUrl" target="_blank">here</a> to download.</p>
+</ng-template>
+
+<ng-template #inactiveSubBody>
+  <p class="main-text">{{ 'PAGE_RDV.SUB_INACTIVE_TITLE' | translate }}</p>
+  <p>Please contact your dealer to activate your subscription.</p>
+</ng-template>
+
+<ng-template #endSessionBody>
+  <p>{{ 'PAGE_RDV.END_TXT' | translate }}</p>
+</ng-template>
+
+<ng-template #okString>
+  {{ 'GLOBAL.CTA.OK' | translate | uppercase }}
+</ng-template>
+
+<ng-template #endSessionString>
+  {{ 'PAGE_RDV.CTA.END_SESSION' | translate | uppercase }}
+</ng-template>

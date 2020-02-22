@@ -1,0 +1,149 @@
+<div class="cnh-list">
+  <div class="rule-creation-step">
+    <div class="step-header">
+      <div
+        class="step-header-item"
+        [ngClass]="{
+          'prev-bg-color': isPreviousSelection(index),
+          'prev-right-border': isPreviousSelection(index),
+          'current-bg-color': _currSelection === index,
+          'next-text-color': _currSelection !== index
+        }"
+        *ngFor="
+          let label of [
+            'TROWSER.CUSTOM_NOTIFICATION.RULE_CREATION.START_CONDITION',
+            'TROWSER.CUSTOM_NOTIFICATION.RULE_CREATION.PARAMETER',
+            'TROWSER.CUSTOM_NOTIFICATION.RULE_CREATION.IS_ABOVE_OR_BELOW',
+            'TROWSER.CUSTOM_NOTIFICATION.RULE_CREATION.THIS_VALUE',
+            'TROWSER.CUSTOM_NOTIFICATION.RULE_CREATION.FOR_THIS_AMOUNT_OF_TIME'
+          ];
+          let index = index
+        "
+      >
+        <span style="text-transform: uppercase" *ngIf="!isNextSelection(index)"
+          >{{ index + 1 }}:&nbsp;{{ label | translate: param }}</span
+        >
+        <span *ngIf="isNextSelection(index)" style="color:#707070">{{
+          'GLOBAL.CTA.NEXT_STEP' | translate | uppercase
+        }}</span>
+      </div>
+    </div>
+    <div class="step-content">
+      <div *ngIf="_selection.step1; then step1"></div>
+      <div *ngIf="_selection.step2; then step2"></div>
+      <div *ngIf="_selection.step3; then step3"></div>
+      <div *ngIf="_selection.step4; then step4"></div>
+      <div *ngIf="_selection.step5; then step5"></div>
+    </div>
+  </div>
+</div>
+
+<ng-template #step1>
+  <div
+    class="step-content-item"
+    [ngClass]="{
+      disabled: editNotification
+    }"
+  >
+    <app-dropdown
+      style="width: 180px;"
+      [list]="_step1Dropdown"
+      [selectedValue]="selectedValueinStepper.step1"
+      (valueChange)="changeStep($event, 1)"
+      [dropdownMinWidth]="155"
+      [dropdownMaxHeight]="80"
+      [disabledDropDown]="editNotification"
+    ></app-dropdown>
+  </div>
+</ng-template>
+
+<ng-template #step2>
+  <div
+    class="step-content-item"
+    [ngClass]="{
+      disabled: editNotification
+    }"
+  >
+    <app-dropdown
+      style="width: 200px;"
+      [list]="_step2Dropdown"
+      [selectedValue]="selectedValueinStepper.step2"
+      (valueChange)="changeStep($event, 2)"
+      [hidden]="hiddenparameter"
+      [dropdownMinWidth]="180"
+      [dropdownMaxHeight]="300"
+      [disabledDropDown]="editNotification"
+      [disabledContent]="{ value: 'No options available' }"
+    ></app-dropdown>
+  </div>
+</ng-template>
+
+<ng-template #step3>
+  <div class="step-content-item">
+    <app-dropdown
+      style="width: 180px;"
+      [list]="_step3Dropdown"
+      [selectedValue]="selectedValueinStepper.step3"
+      (valueChange)="changeStep($event, 3)"
+      [dropdownMinWidth]="155"
+      [dropdownMaxHeight]="120"
+    ></app-dropdown>
+  </div>
+</ng-template>
+
+<ng-template #step4>
+  <div class="step-content-item" style="color: black;">
+    <mat-form-field style="width: 90px;">
+      <input
+        type="number"
+        #unitValue
+        matInput
+        max="100"
+        [placeholder]="'TROWSER.CUSTOM_NOTIFICATION.RULE_CREATION.VALUE' | translate"
+        [formControl]="_unitValue"
+        (change)="changeStep($event, 4)"
+      />
+      <mat-error *ngIf="_unitValue.invalid && getUnitErrorMessage() === 'No Key'">{{
+        'TROWSER.CUSTOM_NOTIFICATION.ERRORS.ENTER_A_NUMBER' | translate
+      }}</mat-error>
+      <mat-error
+        *ngIf="
+          _unitValue.invalid &&
+          getUnitErrorMessage() === 'Value below 0' &&
+          _ruleCreationData.step2.unit === '%'
+        "
+        >{{ 'TROWSER.CUSTOM_NOTIFICATION.ERRORS.VALUE_BELOW_0' | translate }}</mat-error
+      >
+      <mat-error
+        *ngIf="
+          _unitValue.invalid && _unitValue.hasError('max') && _ruleCreationData.step2.unit === '%'
+        "
+        >Value Above 100</mat-error
+      >
+    </mat-form-field>
+    <span style="font-weight: 500;">{{ _ruleCreationData.step2.unit }}</span>
+  </div>
+</ng-template>
+
+<ng-template #step5>
+  <div class="step-content-item" style="color: black;">
+    <mat-form-field style="width: 90px;">
+      <input
+        type="number"
+        #secondsValue
+        min="0"
+        matInput
+        [placeholder]="'TROWSER.CUSTOM_NOTIFICATION.RULE_CREATION.VALUE' | translate"
+        [formControl]="_secondsValue"
+        (change)="changeStep($event, 5)"
+      />
+      <mat-error *ngIf="_secondsValue.invalid && getErrorMessage() === 'Not a Number'">{{
+        'TROWSER.CUSTOM_NOTIFICATION.ERRORS.NOT_A_NUMBER' | translate
+      }}</mat-error>
+      <mat-error *ngIf="_secondsValue.invalid && getErrorMessage() === 'Value below 0'">{{
+        'TROWSER.CUSTOM_NOTIFICATION.ERRORS.VALUE_BELOW_0' | translate
+      }}</mat-error>
+    </mat-form-field>
+    <span class="percent-value" [hidden]="hiddenSeconds">seconds</span>
+  </div>
+</ng-template>

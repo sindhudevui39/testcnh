@@ -1,0 +1,220 @@
+<div
+  class="cnh-data-sharing-trowser "
+  [ngClass]="{
+    widthFull: checkStep(),
+    nh: brand === 'NHAG',
+    cih: brand !== 'NHAG',
+    stepFour: stepType === 1,
+    stepOne: stepType !== 1,
+    editAccess: data.shareData
+  }"
+>
+  <!-- <div class="checkingforLabel"></div> -->
+  <mat-horizontal-stepper [linear]="true" [selectedIndex]="selectedIndex" #stepper>
+    <ng-template matStepperIcon="edit">
+      <div class="cnh-action-icon">
+        <div class="cnh-action-icon--symbol tick-size">
+          <div class="cnh-evo-iconfont" [ngClass]="'cnh-evo-icon-check'"></div>
+        </div>
+      </div>
+      <!-- <cnh-action-icon iconName="check" ></cnh-action-icon> -->
+    </ng-template>
+
+    <mat-step label="{{ 'DATA_ACCESS.STEPPER_DATA_TYPE' | translate }}">
+      <div class="step-content">
+        <div class="data-share-title">
+          <p class="data-type--title">{{ 'DATA_ACCESS.DATA_TYPE_TITLE' | translate }}</p>
+          <p class="data-type-sub-title">
+            <span *ngIf="makeSelection">{{ 'DATA_ACCESS.DATA_SELECTION_TEXT' | translate }}</span>
+          </p>
+          <mat-card class="data-type-box">
+            <mat-card-content>
+              <div class="data-type-box--header">
+                <div class="data-type-box--title">
+                  {{ 'GLOBAL.FIELDS.FIELD_DATA' | translate }}
+                </div>
+                <div class="data-type-box--subtitle">
+                  {{ 'DATA_ACCESS.DATA_TYPE_CARD_SUBTITLE' | translate }}
+                </div>
+                <div class="data-type-box--icon">
+                  <img src="./assets/svg/icon-data-access-field-new.svg" alt="Field" />
+                </div>
+                <div class="divider"></div>
+              </div>
+              <form [formGroup]="form">
+                <mat-radio-group formControlName="dataType">
+                  <mat-radio-button [value]="0" [checked]="allOrSelectedField && anyoneSelect">
+                    <div class="icon">
+                      <span class="cnh-evo-iconfont cnh-evo-icon-data-access-full"></span>
+                    </div>
+                    <div class="txt">
+                      <div class="title">{{ 'DATA_ACCESS.DATA_TYPE_ALL_TITLE' | translate }}</div>
+                      <div class="subtitle">
+                        {{ 'DATA_ACCESS.DATA_TYPE_ALL_SUBTITLE' | translate }}
+                      </div>
+                    </div>
+                  </mat-radio-button>
+                  <mat-radio-button [value]="1" [checked]="!allOrSelectedField && anyoneSelect">
+                    <div class="icon">
+                      <span class="cnh-evo-iconfont cnh-evo-icon-data-access-select"></span>
+                    </div>
+                    <div class="txt">
+                      <div class="title">
+                        {{ 'DATA_ACCESS.DATA_TYPE_SPECIFIC_TITLE' | translate }}
+                      </div>
+                      <div class="subtitle">
+                        {{ 'DATA_ACCESS.DATA_TYPE_SPECIFIC_SUBTITLE' | translate }}
+                      </div>
+                    </div>
+                  </mat-radio-button>
+                </mat-radio-group>
+              </form>
+            </mat-card-content>
+          </mat-card>
+        </div>
+      </div>
+    </mat-step>
+    <mat-step
+      label="{{ 'DATA_ACCESS.STEPPER_FIELDS_SELECTION' | translate }}"
+      *ngIf="stepType === 1"
+    >
+      <div class="step-content">
+        <cnh-fields-selection-widget
+          (selectedFields)="handleFieldsSelection($event)"
+        ></cnh-fields-selection-widget>
+      </div>
+    </mat-step>
+    <!--
+      NOTE: please leave this code lines commented for future developments
+    -->
+    <mat-step label="{{ 'DATA_ACCESS.STEPPER_DATA_SELECTION' | translate }}" *ngIf="stepType === 1">
+      <div class="step-content">
+        <cnh-operations-selection-widget
+          (selectedOperations)="handleOperationsSelection($event)"
+          (selectedSetupData)="handleMapOperationsSelection($event)"
+        >
+        </cnh-operations-selection-widget>
+      </div>
+    </mat-step>
+    <mat-step label="{{ 'DATA_ACCESS.STEPPER_CONFIRMATION' | translate }}">
+      <div class="step-content">
+        <div class="cnh-summary-widget">
+          <div class="cnh-summary-widget--inner">
+            <div class="icon"><img src="./assets/svg/dialog.svg" /></div>
+            <div class="title">{{ title }}</div>
+            <div class="custom">
+              <ul *ngIf="values?.length > 0">
+                <li class="flex flex-ai-c" *ngFor="let value of values">
+                  <img src="./assets/svg/checkmark.svg" />
+                  <!--
+                    <span class="cnh-evo-iconfont cnh-evo-icon-check"></span>
+                  -->
+                  <span class="value">{{ value }}</span>
+                </li>
+              </ul>
+              <div class="smalltext notes" *ngIf="notes">{{ notes }}</div>
+              <div class="smalltext info" *ngIf="info">{{ info }}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </mat-step>
+  </mat-horizontal-stepper>
+  <div class="footer">
+    <div>
+      <!-- @NOTE: no color attribute to show black -->
+      <button *ngIf="showBackButton()" mat-button class="uppercase" (click)="goToStepBack()">
+        <span class="cnh-evo-iconfont cnh-evo-icon-chevron-left"></span> {{ backButtonText }}
+      </button>
+    </div>
+    <button
+      mat-raised-button
+      color="primary"
+      class="uppercase"
+      [disabled]="isButtonNextDisable()"
+      (click)="goToStepNext()"
+      [class.disabled]="!this.anyoneSelect"
+    >
+      {{ buttonText }}
+    </button>
+  </div>
+</div>
+<div
+  class="cnh-data-summary-part"
+  [ngClass]="{
+    displayNone: checkStep(),
+    cih: brand !== 'NHAG',
+    nh: brand === 'NHAG'
+  }"
+>
+  <div class="summary-header uppercase">
+    <h5>{{ 'GLOBAL.SUMMARY' | translate }}</h5>
+  </div>
+  <div class="partner-name">
+    <label class="uppercase">{{ 'DATA_ACCESS.PARTNER' | translate }} </label>
+    <p>{{ data.partner.title }}</p>
+  </div>
+  <div
+    class="fields-name"
+    *ngIf="
+      (selectedFields.length > 0 || selectedOperations.length > 0 || hasAllOperation()) &&
+      anyoneSelect
+    "
+  >
+    <label class="uppercase flex flex-ai-c"
+      ><img src="./assets/svg/field-new.svg" alt="Field" /><span
+        >&nbsp;&nbsp;&nbsp;{{ 'DATA_ACCESS.SHARE_CARD.FIELDS.TEXT' | translate }}</span
+      ></label
+    >
+  </div>
+  <div
+    class="body-content"
+    [ngClass]="{
+      backgroundClassWhite: !(
+        (selectedFields.length > 0 || selectedOperations.length > 0 || hasAllOperation()) &&
+        anyoneSelect
+      )
+    }"
+    data-simplebar
+  >
+    <div *ngIf="anyoneSelect">
+      <div class="operation-data" *ngIf="selectedOperations.length > 0 || hasAllOperation()">
+        <label class="uppercase">{{ 'DATA_ACCESS.OPERATIONS_CARD_TITLE' | translate }} *</label>
+        <li *ngFor="let value of selectedOperations">
+          <div>
+            <img
+              src="./assets/images/{{ value?.styles?.iconField }}"
+              alt="Operation icon"
+            />&nbsp;&nbsp;{{ 'GLOBAL.OPERATIONS.' + value.name | translate }}
+          </div>
+        </li>
+      </div>
+
+      <div class="setup-data" *ngIf="hasSetupData">
+        <label class="uppercase">{{ 'DATA_ACCESS.SHARE_CARD.SETUP_DATA' | translate }} *</label>
+        <div>{{ 'DATA_ACCESS.SETUP_DATA_ALL' | translate }}</div>
+      </div>
+      <app-loader *ngIf="!loadedFieldValue"></app-loader>
+      <div class="fields" *ngIf="selectedFields.length > 0 && !hasAllOperation()">
+        <label class="uppercase">{{ 'DATA_ACCESS.SHARE_CARD.FIELDS.TEXT' | translate }} *</label>
+        <li *ngFor="let value of selectedFields">
+          <img src="./assets/svg/generic-field.svg" alt="Field" />
+          <span class="selectedFieldsName">{{ value.Name }}</span>
+          <span
+            class="cnh-evo-iconfont cnh-evo-icon-close"
+            (click)="removeItemFromField(value)"
+            [ngClass]="{
+              disableLastIcon: selectedFields.length === 1
+            }"
+          ></span>
+        </li>
+      </div>
+      <div
+        class="setup-data"
+        *ngIf="(selectedFields.length > 0 || hasAllOperation()) && anyoneSelect"
+      >
+        <label>* {{ 'DATA_ACCESS.SUMMARY_DATA_TEXT' | translate }}</label>
+      </div>
+    </div>
+  </div>
+</div>

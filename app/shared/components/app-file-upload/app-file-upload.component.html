@@ -1,0 +1,203 @@
+<div
+  class="dropdown-container"
+  content=""
+  [ngClass]="{
+    cih: brand === brands.CIH,
+    nh: brand === brands.NH
+  }"
+>
+  <div class="process-header">
+    <div class="title">
+      {{ 'FILE_NOTIFICATION.FILE_TRANSFERS_TITLE' | translate }}
+    </div>
+    <div class="cnh-tabs--headers">
+      <div
+        class="cnh-tab-header"
+        [class.active]="i === selectedTab"
+        *ngFor="let tab of ['INBOX', 'OUTBOX']; let i = index"
+        (click)="tabchange(i)"
+      >
+        <div class="cnh-tab-sub-header ">
+          <div>{{ 'FILE_NOTIFICATION.' + tab | translate }}</div>
+        </div>
+      </div>
+    </div>
+    <!-- <div class="button">
+      <button
+        class="upload-button mat-raised-button mat-primary"
+        mat-raised-button=""
+        type="button"
+        (click)="redirectToConflicts()"
+      >
+        <span class="mat-button-wrapper">
+          {{ 'FILE_NOTIFICATION.RESOLVE_ALL' | translate | uppercase }}
+        </span>
+        <div class="mat-button-ripple mat-ripple" matripple=""></div>
+        <div class="mat-button-focus-overlay"></div>
+      </button>
+    </div> -->
+    <div class="file-resolve-parent" *ngIf="selectedTab === 0">
+      <div class="file-resolve" (click)="redirectToConflicts()">
+        {{ 'FILE_NOTIFICATION.RESOLVE_ALL' | translate }}
+      </div>
+    </div>
+  </div>
+
+  <div class="process" data-simplebar>
+    <!-- <div class="process-container" *ngFor="let fileKey of fileUploadGroupKey"> -->
+    <!-- <div class="fileGroup">
+        <div class="fileGroup-text">{{ fileKey }}</div>
+      </div> -->
+
+    <div *ngFor="let fileUpload of fileUploadGroupKey">
+      <div class="cnh-card-process notification-theme primary">
+        <div class="progress-container">
+          <!-- <div class="file-time">
+              <div *ngIf="fileUpload.timeFormatReference === 'TODAY'">
+                {{ fileUpload.timeFormat | date: 'hh:mm a':tzOffset }}
+              </div>
+              <div *ngIf="fileUpload.timeFormatReference !== 'TODAY'">
+                {{ fileUpload.timeFormat | date: userTimeFormat:tzOffset }}
+              </div>
+            </div> -->
+          <div class="left">
+            <div class="image">
+              <img alt="File" src="assets/svg/file-center.svg" />
+            </div>
+            <div class="progress-status">
+              <h3 class="process-name" style="margin-bottom: 0px;">
+                <span *ngIf="fileUpload.Name">{{ fileUpload.Name }}</span>
+                <span *ngIf="!fileUpload.Name">{{
+                  'FILE_NOTIFICATION.TYPE.FILE_TRANSFER' | translate
+                }}</span>
+              </h3>
+              <mat-progress-bar
+                class="mat-progress-bar mat-primary"
+                [color]="color"
+                [mode]="'determinate'"
+                [value]="fileUpload.PercentComplete"
+                *ngIf="
+                  ('FileTransfer' !== fileUpload.Type &&
+                    (fileUpload.StatusCode === 5 ||
+                      fileUpload.StatusCode === 20 ||
+                      fileUpload.StatusCode === 2 ||
+                      fileUpload.StatusCode === 8)) ||
+                  ('FileTransfer' === fileUpload.Type &&
+                    (fileUpload.TransferStatus === 'COMPLETED' ||
+                      fileUpload.TransferStatus === 'SUCCESS - FILE TRANSFERRED' ||
+                      fileUpload.TransferStatus === 'SUCCESS - FILE TRANSFERRED TO DEVICE'))
+                "
+              >
+              </mat-progress-bar>
+
+              <div
+                class="process-desc"
+                style="margin-top: 0px;"
+                *ngIf="'FileTransfer' === fileUpload.Type"
+              >
+                <div
+                  *ngIf="
+                    fileUpload.TransferStatus === 'COMPLETED' ||
+                    fileUpload.TransferStatus === 'SUCCESS - FILE TRANSFERRED' ||
+                    fileUpload.TransferStatus === 'SUCCESS - FILE TRANSFERRED TO DEVICE'
+                  "
+                >
+                  <span class="cnh-evo-iconfont cnh-evo-icon-check success"></span>
+                  {{ 'FILE_NOTIFICATION.STATUS.SUCCESS' | translate }}
+                </div>
+
+                <div
+                  *ngIf="
+                    fileUpload.TransferStatus === 'SEND REQUESTED' ||
+                    fileUpload.TransferStatus === 'SCHEDULED' ||
+                    fileUpload.TransferStatus === 'AGI PROCESSING FILE'
+                  "
+                  style="margin-top: 2px;"
+                >
+                  {{ 'FILE_NOTIFICATION.STATUS.PREPARING' | translate }}
+                </div>
+                <div
+                  *ngIf="
+                    fileUpload.TransferStatus === 'SEND ACCEPTED' ||
+                    fileUpload.TransferStatus === 'IN_PROGRESS' ||
+                    fileUpload.TransferStatus === 'PENDING - DEVICE NOTIFIED' ||
+                    fileUpload.TransferStatus ===
+                      'SUCCESS – FILE TRANSFER ACKNOWLEDGED BY DEVICE' ||
+                    fileUpload.TransferStatus === 'FILE TRANSFER ACKNOWLEDGED' ||
+                    fileUpload.TransferStatus === 'SUCCESS - DEVICE ACKNOWLEDGED'
+                  "
+                  style="margin-top: 2px;"
+                >
+                  {{ 'FILE_NOTIFICATION.STATUS.TRANSFERRING' | translate }}
+                </div>
+                <div
+                  *ngIf="
+                    fileUpload.TransferStatus === 'ERROR' || fileUpload.TransferStatus === 'FAILED'
+                  "
+                >
+                  <span class="cnh-evo-iconfont  cnh-evo-icon-warning-full warn"></span>
+                  {{ 'FILE_NOTIFICATION.STATUS.FAILED' | translate }}
+                </div>
+              </div>
+              <div
+                class="process-desc"
+                style="margin-top: 0px;"
+                *ngIf="'FileTransfer' !== fileUpload.Type"
+              >
+                <div *ngIf="fileUpload.StatusCode === 5">
+                  <span class="cnh-evo-iconfont cnh-evo-icon-check success"></span>
+                  {{ 'FILE_NOTIFICATION.STATUS.SUCCESS' | translate }}
+                </div>
+                <div *ngIf="fileUpload.StatusCode === 7">
+                  <span class="cnh-evo-iconfont  cnh-evo-icon-warning-full warn"></span>
+                  {{ 'FILE_NOTIFICATION.STATUS.INVALID_FILE' | translate }}
+                </div>
+                <div *ngIf="fileUpload.StatusCode === 3" style="margin-top: 2px;">
+                  {{ 'FILE_NOTIFICATION.STATUS.PREPARING' | translate }}
+                </div>
+                <div *ngIf="fileUpload.StatusCode === 4" style="margin-top: 2px;">
+                  {{ 'FILE_NOTIFICATION.STATUS.TRANSFERRING' | translate }}
+                </div>
+                <div *ngIf="fileUpload.StatusCode === 2" style="margin-top: 2px;">
+                  {{ 'FILE_NOTIFICATION.STATUS.PROCESSING' | translate }}
+                </div>
+                <div *ngIf="fileUpload.StatusCode === 6">
+                  <span class="cnh-evo-iconfont  cnh-evo-icon-warning-full warn"></span>
+                  {{ 'FILE_NOTIFICATION.STATUS.FAILED' | translate }}
+                </div>
+                <div *ngIf="fileUpload.StatusCode === 8" style="margin-top: 2px;">
+                  {{ 'FILE_NOTIFICATION.STATUS.VISUALIZING' | translate }}
+                </div>
+                <div *ngIf="fileUpload.StatusCode === 20">
+                  {{ 'FILE_NOTIFICATION.STATUS.UPLOADING' | translate }}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- </div> -->
+    <div class="process-container" *ngIf="fileUploadGroupKey.length === 0">
+      <div class="empty-state">
+        {{ 'FILE_NOTIFICATION.EMPTY_LIST' | translate }}
+      </div>
+    </div>
+  </div>
+  <div class="button">
+    <button
+      class="upload-button mat-raised-button mat-primary"
+      color="primary"
+      mat-raised-button=""
+      type="button"
+      (click)="openDialog()"
+    >
+      <span class="mat-button-wrapper">
+        <span class="cnh-evo-iconfont cnh-evo-icon-upload"></span>
+        {{ 'FILE_NOTIFICATION.UPLOAD' | translate | uppercase }}
+      </span>
+      <div class="mat-button-ripple mat-ripple" matripple=""></div>
+      <div class="mat-button-focus-overlay"></div>
+    </button>
+  </div>
+</div>

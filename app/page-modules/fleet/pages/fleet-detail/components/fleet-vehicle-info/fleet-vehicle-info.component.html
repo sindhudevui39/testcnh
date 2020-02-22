@@ -1,0 +1,140 @@
+<mat-card>
+  <mat-card-content>
+    <h2 class="vehicle-info__title">
+      {{ 'PAGE_VEHICLE_DETAILS.INFO_TITLE' | translate | uppercase }}
+    </h2>
+
+    <div class="vehicle-info__container">
+      <div class="vehicle-info__container__left">
+        <div class="vehicle-info__container__row">
+          <div class="label">{{ 'PAGE_VEHICLE_DETAILS.NAME' | translate }}</div>
+          <div class="value">{{ vehicleInfo.name }}</div>
+        </div>
+        <div class="vehicle-info__container__row">
+          <div class="label">{{ 'PAGE_VEHICLE_DETAILS.BRAND' | translate }}</div>
+          <div class="value">{{ vehicleInfo.brand }}</div>
+        </div>
+        <div class="vehicle-info__container__row">
+          <div class="label">{{ 'PAGE_VEHICLE_DETAILS.MODEL' | translate }}</div>
+          <div class="value">{{ vehicleInfo.model }}</div>
+        </div>
+      </div>
+
+      <div class="vehicle-info__container__middle">
+        <div class="vehicle-info__container__row">
+          <div class="label">{{ 'PAGE_VEHICLE_DETAILS.TYPE' | translate }}</div>
+          <div class="value">{{ vehicleInfo.type }}</div>
+        </div>
+        <div class="vehicle-info__container__row">
+          <div class="label">{{ 'PAGE_VEHICLE_DETAILS.PIN' | translate | uppercase }}</div>
+          <div class="value">{{ vehicleInfo.pin }}</div>
+        </div>
+        <div class="vehicle-info__container__row">
+          <div class="label">{{ 'PAGE_VEHICLE_DETAILS.COMPANY' | translate }}</div>
+          <div class="value">{{ vehicleInfo.company ? vehicleInfo.company : '' }}</div>
+        </div>
+      </div>
+
+      <div class="vehicle-info__container__right">
+        <div class="vehicle-info__container__row">
+          <div class="label placeholder"></div>
+          <div class="value neutral">{{ vehicleInfo.lastUpdate | date: 'MM/dd/yyyy' }}</div>
+        </div>
+        <div
+          class="vehicle-info__container__row"
+          *ngIf="!vehicleInfo.isStatusClimateDisconnected; else status_disconnected"
+        >
+          <div class="label placeholder"></div>
+          <div class="value neutral">
+            <ng-container
+              [ngTemplateOutlet]="working"
+              *ngIf="vehicleInfo.status.toUpperCase() === 'WORKING'"
+            ></ng-container>
+            <ng-container
+              [ngTemplateOutlet]="keyOn"
+              *ngIf="vehicleInfo.status.toUpperCase() === 'KEYON'"
+            ></ng-container>
+            <ng-container
+              [ngTemplateOutlet]="idle"
+              *ngIf="vehicleInfo.status.toUpperCase() === 'IDLE'"
+            ></ng-container>
+            <ng-container
+              [ngTemplateOutlet]="moving"
+              *ngIf="vehicleInfo.status.toUpperCase() === 'MOVING'"
+            ></ng-container>
+            <ng-container
+              [ngTemplateOutlet]="travelling"
+              *ngIf="vehicleInfo.status.toUpperCase() === 'TRAVELING'"
+            ></ng-container>
+            <ng-container
+              [ngTemplateOutlet]="engineOff"
+              *ngIf="vehicleInfo.status.toUpperCase() === 'OFF'"
+            ></ng-container>
+            <ng-container
+              [ngTemplateOutlet]="unknown"
+              *ngIf="vehicleInfo.status.toUpperCase() === 'UNKNOWN'"
+            ></ng-container>
+          </div>
+        </div>
+      </div>
+    </div>
+  </mat-card-content>
+</mat-card>
+
+<ng-template #working>
+  <div class="vehicle-status-icon vehicle-status__working--bg"></div>
+  <span class="vehicle-status__working--text">
+    {{ 'GLOBAL.VEHICLE.STATUS.WORKING' | translate }}
+  </span>
+</ng-template>
+
+<ng-template #keyOn>
+  <div class="vehicle-status-icon vehicle-status__keyon--bg"></div>
+  <span class="vehicle-status__keyon--text">
+    {{ 'GLOBAL.VEHICLE.STATUS.KEYON' | translate }}
+  </span>
+</ng-template>
+
+<ng-template #idle>
+  <div class="vehicle-status-icon vehicle-status__idle--bg"></div>
+  <span class="vehicle-status__idle--text">
+    {{ 'GLOBAL.VEHICLE.STATUS.IDLE' | translate }}
+  </span>
+</ng-template>
+
+<ng-template #moving>
+  <div class="vehicle-status-icon vehicle-status__moving--bg"></div>
+  <span class="vehicle-status__moving--text">
+    {{ 'GLOBAL.VEHICLE.STATUS.MOVING' | translate }}
+  </span>
+</ng-template>
+
+<ng-template #travelling>
+  <div class="vehicle-status-icon vehicle-status__travelling--bg"></div>
+  <span class="vehicle-status__travelling--text">
+    {{ 'GLOBAL.VEHICLE.STATUS.TRAVELING' | translate }}
+  </span>
+</ng-template>
+
+<ng-template #engineOff>
+  <div class="vehicle-status-icon vehicle-status__off--bg"></div>
+  <span class="vehicle-status__off--text">
+    {{ 'GLOBAL.VEHICLE.STATUS.OFF' | translate }}
+  </span>
+</ng-template>
+
+<ng-template #unknown>
+  <span class="vehicle-status__unknown--text">
+    {{ 'GLOBAL.VEHICLE.STATUS.UNKNOWN' | translate }}
+  </span>
+</ng-template>
+
+<ng-template #status_disconnected>
+  <div class="vehicle-info__container__row">
+    <div class="label placeholder"></div>
+    <div class="flex vehicle-status__disconnected ">
+      <img src="assets/climate-disconnected/disconnected-status.svg" alt="" />
+      <span>{{ 'GLOBAL.DISCONNECTED' | translate }}</span>
+    </div>
+  </div>
+</ng-template>

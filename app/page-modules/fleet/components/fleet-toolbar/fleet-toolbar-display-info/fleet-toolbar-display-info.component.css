@@ -1,0 +1,19 @@
+.selected-data span:first-child,
+.line-1 {
+  font-weight: 700;
+  font-size: 14px;
+}
+.selected-data span:last-child,
+.line-2 {
+  font-weight: 500;
+  font-size: 12px;
+  color: var(--color-med-grey);
+}
+.line-1 span,
+.line-2 span {
+  padding-right: 5px;
+}
+.loader {
+  position: relative;
+  left: 50px;
+}

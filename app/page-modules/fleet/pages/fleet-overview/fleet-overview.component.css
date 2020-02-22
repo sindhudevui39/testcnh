@@ -1,0 +1,29 @@
+.content {
+  height: 100%;
+}
+.height-opened {
+  height: calc(100% - 80px);
+}
+.height-closed {
+  height: calc(100% - 60px);
+}
+.list-header {
+  background-color: #f4f5f5;
+  border-bottom: 2px solid var(--color-grey);
+  color: var(--color-black);
+  font-family: Roboto;
+  font-size: 14px;
+  font-weight: bold;
+  height: 40px;
+  padding: 10px;
+  padding-right: 30px;
+}
+.hand-cursor {
+  cursor: pointer;
+}
+.no-vehicle {
+  font-family: Roboto;
+  font-size: 18px;
+  color: var(--color-med-grey);
+  background-color: #fff;
+}

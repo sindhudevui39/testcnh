@@ -1,0 +1,181 @@
+<div class="cnh-list flex">
+  <div class="cnh-header">
+    <div class="cnh-firmware-title">
+      {{ 'TROWSER.FOTA.VEHICLE_SELECTION.TITLE' | translate }}
+    </div>
+    <div class="cnh-firmware-subtitle">
+      {{ 'TROWSER.FOTA.VEHICLE_SELECTION.SUBTITLE' | translate }}
+    </div>
+  </div>
+
+  <div class="search">
+    <app-search
+      style="width: 100%;"
+      [placeholder]="'GLOBAL.PLACEHOLDER.SEARCH' | translate"
+      [backgroundColor]="'white'"
+      (changeEvent)="searchVehicle($event)"
+    ></app-search>
+  </div>
+
+  <div class="cnh-filter-bar">
+    <div style="padding-left:20px;">
+      <mat-checkbox
+        color="primary"
+        (change)="$event ? masterToggle() : null"
+        [checked]="dataSelection.hasValue() && isAllSelected()"
+        [indeterminate]="dataSelection.hasValue() && !isAllSelected()"
+      ></mat-checkbox>
+    </div>
+    <div class="cnh-campaign-title">
+      <mat-select
+        #companySelect
+        disableOptionCentering
+        class="custom-select"
+        [panelClass]="panelClass"
+        [value]="selectedCompanyValue"
+        (selectionChange)="filterVehicles($event, 'COMPANY_DROPDOWN')"
+      >
+        <mat-option value="all_companies">{{
+          'TROWSER.FOTA.DROPDOWNS.ALL_COMPANIES' | translate
+        }}</mat-option>
+        <mat-option *ngFor="let company of companies" [value]="company.name">{{
+          company.name
+        }}</mat-option>
+      </mat-select>
+    </div>
+    <div class="cnh-model-header">
+      <mat-select
+        #vehicleSelect
+        disableOptionCentering
+        class="custom-select"
+        [panelClass]="panelClass"
+        [value]="selectedVehicleValue"
+        (selectionChange)="filterVehicles($event, 'VEHICLE_DROPDOWN')"
+      >
+        <mat-option value="all_vehicles">{{
+          'TROWSER.FOTA.DROPDOWNS.ALL_VEHICLES' | translate
+        }}</mat-option>
+        <mat-option *ngFor="let vehicle of vehicles" [value]="vehicle.name">{{
+          vehicle.name
+        }}</mat-option>
+      </mat-select>
+    </div>
+    <div class="cnh-model-header">
+      <mat-select
+        #modelSelect
+        disableOptionCentering
+        class="custom-select"
+        [panelClass]="panelClass"
+        [value]="selectedModelValue"
+        (selectionChange)="filterVehicles($event, 'MODEL_DROPDOWN')"
+      >
+        <mat-option value="all_models">{{
+          'TROWSER.FOTA.DROPDOWNS.ALL_MODELS' | translate
+        }}</mat-option>
+        <mat-option *ngFor="let model of models" [value]="model.name">{{ model.name }}</mat-option>
+      </mat-select>
+    </div>
+    <div
+      class="cnh-notified"
+      *ngFor="let item of titlesList"
+      (click)="onTitleCLick(item.id)"
+      style="display: flex; font-size: 12px;"
+    >
+      <p class="sort-span" [ngClass]="{ active: item.id == selectedTitle }">
+        <span *ngIf="item.id === 'notified'">{{
+          'TROWSER.FOTA.VEHICLE_SELECTION.NOTIFIED.NOTIFIED' | translate | uppercase
+        }}</span>
+        <span *ngIf="item.id === 'downloaded'">{{
+          'TROWSER.FOTA.VEHICLE_SELECTION.DOWNLOADED.DOWNLOADED' | translate | uppercase
+        }}</span>
+        <span *ngIf="item.id === 'installed'">{{
+          'TROWSER.FOTA.VEHICLE_SELECTION.INSTALLED.INSTALLED' | translate | uppercase
+        }}</span>
+      </p>
+
+      <img
+        *ngIf="item.id === selectedTitle"
+        class="sort-icon"
+        [ngClass]="{
+          desc: isDesc,
+          asc: isAsc
+        }"
+        src="assets/svg/sort-button.svg"
+      />
+    </div>
+  </div>
+
+  <div class="cnh-campaign-header" *ngIf="dataLoaded; else loading">
+    <div class="cnh-campaign-list" *ngIf="!isDataEmpty; else noVehicles">
+      <perfect-scrollbar style="max-height: 658px;">
+        <div *ngFor="let element of vehicleList" class="list-border">
+          <div
+            class="list-campaign"
+            [ngClass]="{
+              'disable-vehicles': element.status !== 'PENDING' || !element.active
+            }"
+          >
+            <div class="cnh-title">
+              <mat-checkbox
+                color="primary"
+                (change)="toggleData($event, element)"
+                [checked]="dataSelection.isSelected(element)"
+                [ngClass]="{
+                  'hide-button': element.status !== 'PENDING || !element.active'
+                }"
+              ></mat-checkbox>
+            </div>
+
+            <div class="cnh-campaign-title">
+              <div
+                class="name-overflow"
+                [innerHTML]="element.companyName | searchHighlight: searchString"
+              ></div>
+            </div>
+            <div
+              class="cnh-release-notes"
+              [innerHTML]="element.vehicleName | searchHighlight: searchString"
+            ></div>
+
+            <div
+              class="cnh-model"
+              [innerHTML]="element.model | searchHighlight: searchString"
+            ></div>
+
+            <div class="cnh-notified">
+              <span>
+                <img [src]="element.statusImgUrls.notified" />
+              </span>
+            </div>
+
+            <div class="cnh-downloaded">
+              <span>
+                <img [src]="element.statusImgUrls.downloaded" />
+              </span>
+            </div>
+
+            <div class="cnh-installed">
+              <span>
+                <img [src]="element.statusImgUrls.installed" />
+              </span>
+            </div>
+          </div>
+        </div>
+      </perfect-scrollbar>
+    </div>
+  </div>
+</div>
+
+<ng-template #noVehicles>
+  <div class="no-notify">
+    <span class="no-data-title">
+      {{ 'TROWSER.FOTA.VEHICLE_SELECTION.NO_VEHICLES' | translate }}
+    </span>
+  </div>
+</ng-template>
+
+<ng-template #loading>
+  <div class="data-loader">
+    <app-loader> </app-loader>
+  </div>
+</ng-template>

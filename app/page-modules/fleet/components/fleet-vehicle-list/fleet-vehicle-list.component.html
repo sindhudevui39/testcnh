@@ -1,0 +1,29 @@
+<div
+  class="vehicleData"
+  [ngClass]="activeListValue == vehicle.id ? 'list-active' : ''"
+  [ngStyle]="{
+    'border-left-color': !vehicle.isDisconnected ? getBorderColor(vehicle) : 'white'
+  }"
+>
+  <div class="vehicleContentt">
+    <img
+      [src]="vehicle.image"
+      [ngClass]="{ 'disconnected-img': 'vehicle.isClimateDisconnected' }"
+    />
+
+    <div class="vehicleText">
+      <div class="flex flex-ai-c" appWordWrapTooltip [tooltipContent]="vehicle.name">
+        <div class="vehicleName" [innerHTML]="vehicle.name | searchHighlight: highlightValue"></div>
+        <div *ngIf="vehicle.climateIcon"><img [src]="vehicle.climateIcon" alt="" /></div>
+      </div>
+
+      <div
+        class="brandModel"
+        appWordWrapTooltip
+        [tooltipContent]="vehicle.brand + ' ' + vehicle.model + ' | ' + vehicle.serialNumber"
+      >
+        {{ vehicle.brand }} {{ vehicle.model }} | {{ vehicle.serialNumber }}
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,87 @@
+<div class="cnh-form-modal-with-header-background" [className]="brand === 'NHAG' ? 'nh' : 'cih'">
+  <h2 mat-dialog-title>{{ 'INVITE.INVITE_PARTNER' | translate }}</h2>
+  <mat-dialog-content *ngIf="loading">
+    <div class="loader"><app-loader></app-loader></div>
+  </mat-dialog-content>
+  <form #modalForm="ngForm" novalidate *ngIf="!loading">
+    <mat-dialog-content>
+      <div class="cnh-modal-content">
+        <div class="step-1" *ngIf="!dataSent">
+          <p>{{ 'INVITE.EMAIL_INVITATION' | translate }}</p>
+          <div class="form">
+            <div class="fake-input" [ngClass]="{ emailerror: emailError || linkedUser }">
+              <mat-form-field floatPlaceholder="always">
+                <input
+                  matInput
+                  type="email"
+                  name="email"
+                  [placeholder]="translate.instant('INVITE.PARTNER_EMAIL')"
+                  (keyup)="onValueChange($event)"
+                  [pattern]="emailRegex"
+                  [value]="email"
+                />
+                <img
+                  src="../../../../../../../assets/svg/checkmark.svg"
+                  width="25"
+                  [ngClass]="{ show: sendReady, hide: !sendReady }"
+                />
+              </mat-form-field>
+              <p class="email-exists-error" *ngIf="emailError">
+                {{ 'INVITE.EMAIL_DUPLICATE' | translate }}
+              </p>
+              <p class="email-linked-error" *ngIf="linkedUser">
+                {{ 'INVITE.EMAIL_LINKEDUSER' | translate }}
+              </p>
+            </div>
+            <!-- <textarea
+              name="message"
+              [placeholder]="translate.instant('INVITE.ADD_MESSAGE')"
+              (keyup)="onValueChange($event)"
+              [value]="message"
+            ></textarea> -->
+          </div>
+        </div>
+        <div class="step-2" *ngIf="dataSent">
+          <div class="icon">
+            <span class="cnh-evo-iconfont cnh-evo-icon-circle-check" *ngIf="success"></span>
+            <span class="cnh-evo-iconfont cnh-evo-icon-circle-cancel" *ngIf="!success"></span>
+          </div>
+          <div class="label" *ngIf="success">
+            {{ 'INVITE.SEND_SUCCESS_BEFORE' | translate }}
+            <span class="bold">&nbsp;{{ email }}&nbsp;</span>
+            {{ 'INVITE.SEND_SUCCESS_AFTER' | translate }}
+          </div>
+          <div class="label" *ngIf="!success">{{ 'INVITE.LOADING' | translate }}</div>
+        </div>
+      </div>
+    </mat-dialog-content>
+
+    <mat-dialog-actions>
+      <button
+        mat-button
+        tabindex="1"
+        type="button"
+        role="button"
+        class="modal-button modal-button-cancel uppercase"
+        (click)="onCancel($event)"
+      >
+        {{ cancelText }}
+      </button>
+      <button
+        mat-raised-button
+        tabindex="0"
+        [type]="hasForm ? 'submit' : 'button'"
+        [attr.role]="hasForm ? 'submit' : 'button'"
+        class="modal-button modal-button-accept uppercase"
+        [color]="'primary'"
+        [disabled]="!sendReady"
+        (click)="onSubmit()"
+      >
+        {{ buttonText
+        }}<span *ngIf="showSetupAccessIcon"
+          >&nbsp;&nbsp;&nbsp;<span class="cnh-evo-iconfont cnh-evo-icon-chevron-right arrow"></span
+        ></span>
+      </button>
+    </mat-dialog-actions>
+  </form>
+</div>

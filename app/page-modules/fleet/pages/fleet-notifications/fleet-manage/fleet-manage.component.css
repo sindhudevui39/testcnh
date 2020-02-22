@@ -1,0 +1,192 @@
+.cnh-manage-table {
+  font-family: Roboto, Helvetica, Arial, sans-serif;
+  display: flex;
+  max-width: 1440px;
+  flex-direction: column;
+  height: 100%;
+  margin: auto;
+}
+.cnh-manage-body {
+  margin-top: 5px;
+  margin-bottom: 0.5em;
+}
+.cnh-manage-header {
+  height: 56px;
+}
+.cnh-manage-body {
+  margin-bottom: 0.5em;
+}
+.cnh-manage-row {
+  display: flex;
+  width: 100%;
+  padding: 2em 2em;
+  height: 56px;
+}
+.cnh-manage-header-value {
+  width: 100%;
+  font-size: 12px;
+  color: #707070;
+  justify-content: flex-start;
+  font-weight: 500;
+}
+.cnh-header-bottom {
+  height: 1px;
+  background-color: var(--color-med-grey);
+  margin-left: 24px;
+  margin-right: 26px;
+}
+.can-rule {
+  font-size: 12px;
+  color: #707070;
+}
+.cnh-manage-data {
+  width: 100%;
+  height: 64px;
+  display: flex;
+  flex-direction: column;
+  padding: 1em 1em;
+}
+.cnh-manage-list {
+  display: flex;
+  padding: 0 24px;
+  width: 100%;
+  height: calc(100vh - 225px);
+  flex-direction: column;
+}
+.cnh-collapsable {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  color: #000;
+  background-color: white;
+  border-bottom: 1px solid #4c4c51;
+}
+.cnh-border {
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.24), 0 0 2px 0 rgba(0, 0, 0, 0.12);
+}
+.cnh-itemType-header {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 47px;
+}
+.cnh-name-row {
+  width: 30%;
+}
+.cnh-fileType {
+  width: 20%;
+}
+.cnh-date {
+  width: 10%;
+}
+.cnh-button-header {
+  width: 10%;
+  bottom: 20px;
+  left: 2%;
+}
+.button-align {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-end;
+  align-content: center;
+  margin: -20px;
+  padding: 0 24px;
+}
+.cnh-icon {
+  width: 10%;
+  justify-content: flex-end;
+  flex-direction: row;
+  cursor: pointer;
+}
+.manage-icon {
+  display: flex;
+  width: 23px;
+  height: 23px;
+}
+.cnh-name {
+  font-weight: bold;
+}
+.mat-icon {
+  padding-right: 12px;
+  cursor: pointer;
+}
+.circle-div {
+  width: 2%;
+}
+.circle {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 1.5px solid black;
+  position: relative;
+  cursor: pointer;
+  display: flex;
+}
+.circle span {
+  position: absolute;
+  transition: 0.3s;
+  background: black;
+}
+.circle span:first-of-type {
+  top: 25%;
+  bottom: 25%;
+  width: 10%;
+  left: 45%;
+}
+.circle span:last-of-type {
+  left: 25%;
+  right: 25%;
+  height: 10%;
+  top: 45%;
+}
+.circle.rotate span:first-of-type,
+.circle.rotate span:last-of-type {
+  transform: rotate(90deg);
+}
+.circle.rotate span:last-of-type {
+  left: 50%;
+  right: 50%;
+}
+.edit-action-menu {
+  font-family: Roboto, Helvetica, Arial, sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+}
+.cnh-key {
+  font-size: 12px;
+  font-weight: bold;
+  color: black;
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.cnh-line {
+  border-top: 1px solid grey;
+  flex-grow: 1;
+  margin: 0 10px;
+}
+
+.no-data {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.no-notify {
+  display: flex;
+  flex-direction: column;
+  max-width: 370px;
+}
+.no-data-title {
+  text-align: center;
+  font-size: 24px;
+  margin-top: 20px;
+}
+.no-data-content {
+  font-size: 16px;
+  text-align: center;
+}
+::ng-deep .cnh-notification-name .mat-form-field-subscript-wrapper {
+  z-index: 1;
+}

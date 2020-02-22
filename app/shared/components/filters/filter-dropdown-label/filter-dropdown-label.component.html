@@ -1,0 +1,4 @@
+<div class="dropdown-label flex flex-ai-c flex-jc-c" (click)="clicked.emit(true)">
+  <span> {{ dropdownName }}{{ selectCount }} </span>
+  <div class="arrow" [ngClass]="{ down: closed, up: !closed }"></div>
+</div>

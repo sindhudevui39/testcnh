@@ -1,0 +1,42 @@
+.fleet-detail {
+  background-color: var(--color-extra-light-grey);
+  display: flex;
+  height: calc(100% - 56px);
+}
+.fleet-detail-loader {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.fleet-detail-content {
+  width: 100%;
+  height: 100%;
+  padding: 20px;
+  display: grid;
+  grid-gap: 20px;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: max-content minmax(min-content, 1fr);
+  grid-template-areas: 'vehicle-information vehicle-information' 'duty-report fuel-report';
+}
+.vehicle-information {
+  grid-area: vehicle-information;
+}
+.duty-report {
+  grid-area: duty-report;
+}
+.fuel-report {
+  grid-area: fuel-report;
+}
+@media screen and (max-width: 1280px) {
+  .fleet-detail-content {
+    grid-template-columns: 1fr;
+    grid-template-rows: max-content 500px 500px;
+    grid-template-areas: 'vehicle-information' 'duty-report' 'fuel-report';
+    overflow-y: auto;
+  }
+}
+
+.canFeature {
+  width: 204%;
+}

@@ -1,0 +1,167 @@
+<div class="cnh-list">
+  <div class="cnh-search">
+    <div
+      class="util-bar"
+      style="display: flex;
+    justify-content: space-between;background-color: #f4f5f5;"
+    >
+      <div class="search">
+        <app-search
+          style="width: 100%;"
+          [placeholder]="'GLOBAL.PLACEHOLDER.SEARCH' | translate"
+          [backgroundColor]="'#f4f5f5'"
+          (changeEvent)="searchVehicles($event)"
+        ></app-search>
+      </div>
+
+      <button
+        [style.cursor]="!disabled ? 'pointer' : 'not-allowed'"
+        [ngClass]="{
+          cih: userService.getBrand() === 'Case IH',
+          nh: userService.getBrand() === 'New Holland AG'
+        }"
+        class="select-all-vehicle"
+        (click)="afterSelectAll()"
+        [disabled]="disabled"
+      >
+        <div class="select-all">
+          {{ 'TROWSER.CUSTOM_NOTIFICATION.VEHICLE_ALL' | translate | uppercase }}
+          <div class="sub-select-text">
+            {{ 'TROWSER.CUSTOM_NOTIFICATION.CURRENT_FUTURE' | translate }}
+          </div>
+        </div>
+      </button>
+    </div>
+  </div>
+  <div class="cnh-main-header">
+    <div class="cnh-filter-bar">
+      <div class="cnh-name" style="padding-left: 2px;">
+        <div
+          style="display: flex; width: 200px;
+      padding-left: 25px;"
+        >
+          <mat-checkbox
+            color="primary"
+            style="margin-right: 20px;"
+            (change)="$event ? masterToggle() : null"
+            [checked]="masterToggleChecked"
+            [indeterminate]="masterIndeterminate"
+            [disabled]="disabled"
+          ></mat-checkbox>
+          <app-dropdown
+            style="min-width: 180px;"
+            [list]="companies"
+            [selectedValue]="selectedFleetValue"
+            (valueChange)="filterVehicles($event, 'FLEET_DROPDOWN')"
+            [dropdownMinWidth]="200"
+            [dropdownMaxHeight]="300"
+          ></app-dropdown>
+        </div>
+      </div>
+      <div class="cnh-id">
+        {{ 'PAGE_VEHICLE_DETAILS.PIN' | translate | uppercase }}
+      </div>
+      <div class="cnh-model" style="display: flex;">
+        <app-dropdown
+          style="min-width: 180px;"
+          [list]="models"
+          [selectedValue]="selectedModelValue"
+          (valueChange)="filterVehicles($event, 'MODEL_DROPDOWN')"
+          [dropdownMinWidth]="180"
+          [dropdownMaxHeight]="300"
+        ></app-dropdown>
+      </div>
+      <div class="cnh-all">
+        <div
+          [ngClass]="{
+            cih: userService.getBrand() === 'Case IH',
+            nh: userService.getBrand() === 'New Holland AG'
+          }"
+          class="vehicle-collapse"
+          (click)="collapsedAll()"
+        >
+          <span *ngIf="collapse === 'EXPAND ALL'">{{
+            'GLOBAL.CTA.EXPAND_ALL' | translate | uppercase
+          }}</span>
+          <span *ngIf="collapse === 'COLLAPSE ALL'">{{
+            'GLOBAL.CTA.COLLAPSE_ALL' | translate | uppercase
+          }}</span>
+        </div>
+      </div>
+    </div>
+    <div
+      class="cnh-vehicle-list"
+      *ngIf="dataLoaded; else loading"
+      style="background-color: #f4f5f5;"
+    >
+      <perfect-scrollbar style="max-height: 1024px; padding-right: 1em;">
+        <div
+          *ngFor="let vehicleCompany of vehiclesList | keyvalue; let i = index"
+          class="cnh-vehicle-data"
+        >
+          <div class="cnh-itemType-header" *ngIf="checkVehicleList > 0">
+            <div class="cnh-key">
+              <div style="margin-right:12px;">
+                <mat-checkbox
+                  color="primary"
+                  (change)="$event ? dataToggle(vehicleCompany.key) : null"
+                  [checked]="
+                    dataSelection[vehicleCompany.key].hasValue() &&
+                    isAllDataSelected(vehicleCompany.key)
+                  "
+                  [indeterminate]="
+                    dataSelection[vehicleCompany.key].hasValue() &&
+                    !isAllDataSelected(vehicleCompany.key)
+                  "
+                  [disabled]="disabled"
+                ></mat-checkbox>
+              </div>
+              <p>{{ vehicleCompany.key }}</p>
+            </div>
+            <div class="cnh-id"></div>
+            <div class="cnh-model"></div>
+            <div class="cnh-collapse">
+              <div
+                class="circle plus flex flex-center"
+                [ngClass]="{ rotate: !(isCollapsed[i] || isCollapsedAll) }"
+                (click)="collapsedAll(i)"
+              >
+                <span></span><span></span>
+              </div>
+            </div>
+          </div>
+          <div
+            class="cnh-vehicleList"
+            [@hideNotification]="isCollapsed[i] || isCollapsedAll ? 'collapsed' : 'expanded'"
+          >
+            <div class="cnh-collapsable" *ngFor="let element of vehicleCompany.value">
+              <div class="cnh-vehicle cnh-name">
+                <mat-checkbox
+                  style="display: flex;"
+                  (click)="$event.stopPropagation()"
+                  (change)="toggleData($event, vehicleCompany.key, element)"
+                  [checked]="dataSelection[vehicleCompany.key].isSelected(element)"
+                  [disabled]="disabled"
+                ></mat-checkbox>
+                <p
+                  style="padding-left: 15px;"
+                  [innerHTML]="element.name | searchHighlight: searchStringVechicle"
+                ></p>
+              </div>
+              <div
+                class="cnh-vehicle cnh-id"
+                [innerHTML]="element.id | searchHighlight: searchStringVechicle"
+              ></div>
+              <div
+                class="cnh-vehicle cnh-model"
+                [innerHTML]="element.model | searchHighlight: searchStringVechicle"
+              ></div>
+              <div class="cnh-collapse"></div>
+            </div>
+          </div>
+        </div>
+      </perfect-scrollbar>
+    </div>
+  </div>
+</div>
+<ng-template #loading> <app-loader></app-loader> </ng-template>

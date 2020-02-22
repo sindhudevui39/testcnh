@@ -1,0 +1,78 @@
+.cnh-trowser {
+  width: 100vw;
+  height: 100vh;
+  min-width: 1024px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 999;
+  background-color: #fff;
+}
+.cnh-trowser .head {
+  height: 60px;
+  width: 100%;
+  background-color: #262626;
+  position: relative;
+}
+.cnh-trowser .head-title {
+  width: calc(100% - 70px);
+  height: 100%;
+  padding-left: 24px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 18px;
+  font-weight: 500;
+  -webkit-box-pack: start;
+  -ms-flex-pack: start;
+  justify-content: flex-start;
+  -ms-flex-line-pack: center;
+  -ms-flex-align: center;
+}
+.cnh-trowser .head-cta,
+.cnh-trowser .head-title {
+  color: #fff;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  align-content: center;
+  -webkit-box-align: center;
+  align-items: center;
+}
+.cnh-trowser .head-cta {
+  position: absolute;
+  top: 0;
+  right: 24px;
+  bottom: 0;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -ms-flex-line-pack: center;
+  -ms-flex-align: center;
+  font-size: 22px;
+  cursor: pointer;
+}
+.cnh-trowser .content {
+  height: calc(100% - 60px);
+  width: 100%;
+  background-color: #f4f5f5;
+}
+.cnh-trowser .content-placeholder {
+  display: none;
+}
+.cnh-trowser .footer {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  height: 80px;
+  border-top: 1px solid #f3f6f9;
+  background-color: #fff;
+}
+.cnh-trowser .footer tc-button {
+  width: 140px;
+  display: block;
+  margin: 20px 20px 0 auto;
+}

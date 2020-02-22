@@ -1,0 +1,53 @@
+<ng-container
+  *ngIf="dataLoaded && showCounts"
+  [ngTemplateOutlet]="displayVehicleCount"
+></ng-container>
+
+<ng-container
+  *ngIf="dataLoaded && !showCounts"
+  [ngTemplateOutlet]="displayVehicleInfo"
+></ng-container>
+
+<ng-template #displayVehicleCount>
+  <div class="selected-data flex flex-col flex-jc-c">
+    <span *ngIf="!displayData.fleetCount">{{ 'GLOBAL.FLEET.ZERO' | translate | titlecase }}</span>
+    <span *ngIf="displayData.fleetCount">
+      {{ displayData.fleetCount }}
+      {{
+        displayData.fleetCount > 1
+          ? ('GLOBAL.FLEET.PLURAL' | translate)
+          : ('GLOBAL.FLEET.SINGULAR' | translate)
+      }}
+    </span>
+    <span *ngIf="!displayData.vehicleCount">{{
+      'GLOBAL.VEHICLE.ZERO' | translate | titlecase
+    }}</span>
+    <span *ngIf="displayData.vehicleCount">
+      {{ displayData.vehicleCount }}
+      {{
+        displayData.vehicleCount > 1
+          ? ('GLOBAL.VEHICLE.PLURAL' | translate)
+          : ('GLOBAL.VEHICLE.SINGULAR' | translate)
+      }}
+    </span>
+  </div>
+</ng-template>
+
+<ng-template #displayVehicleInfo>
+  <div class="flex flex-col flex-jc-c">
+    <div class="flex flex-ai-c line-1">
+      <span>{{ displayData.vehicleName }} </span>
+      <img *ngIf="displayData.showClimateIcon" src="assets/climate/climate-fav.png" />
+    </div>
+    <div class="flex flex-ai-c line-2">
+      <p>
+        {{ displayData.vehicleBrand }}
+        {{ displayData.vehicleModel }} &nbsp; &nbsp;l &nbsp;&nbsp; {{ displayData.pin }}
+      </p>
+    </div>
+  </div>
+</ng-template>
+
+<div *ngIf="!dataLoaded" class="loader">
+  <app-loader></app-loader>
+</div>

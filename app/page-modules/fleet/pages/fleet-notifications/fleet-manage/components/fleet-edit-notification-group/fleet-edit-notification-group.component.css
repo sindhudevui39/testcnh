@@ -1,0 +1,110 @@
+.cnh-trowser {
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #fff;
+  font-family: Roboto, Helvetica, Arial, sans-serif;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+.cnh-head {
+  display: flex;
+  min-width: 1024px;
+  height: 60px;
+  width: 100%;
+  background-color: #262626;
+  position: absolute;
+}
+.cnh-head-title {
+  color: #fff;
+  display: flex;
+  align-content: center;
+  align-items: center;
+  justify-content: flex-start;
+  font-size: 18px;
+  font-weight: 500;
+  height: 100%;
+  padding-left: 20px;
+  white-space: nowrap;
+  width: calc(100% - 70px);
+  text-overflow: ellipsis;
+  min-width: 1024px;
+}
+.cnh-close {
+  min-width: 1024px;
+  justify-content: flex-end;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  width: 70px;
+  height: 60px;
+  top: 0;
+  right: 20px;
+  bottom: 0;
+  position: absolute;
+}
+.cnh-content {
+  top: 60px;
+  position: absolute;
+  width: 100%;
+  height: calc(100% - 60px);
+  padding: 0 24px;
+  background-color: #f4f5f5;
+  min-width: 1024px;
+}
+.cnh-notification-text {
+  width: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
+  height: 209px;
+}
+.add-color {
+  color: white;
+  cursor: pointer;
+}
+.disable-button {
+  background-color: none;
+  cursor: not-allowed;
+  color: black;
+}
+
+.text-title {
+  padding-top: 20px;
+  padding-bottom: 20px;
+  font-size: 18px;
+  font-weight: 500;
+}
+.text-content {
+  font-size: 14px;
+  color: rgba(0, 0, 0, 0.87);
+}
+.text-extra {
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+.extra-description {
+  padding-top: 20px;
+}
+.cnh-vehicle {
+  max-width: 1440px;
+  margin: 0 auto;
+  height: calc(100% - 220px);
+}
+.vehicle-list {
+  display: flex;
+  flex-direction: column;
+  height: calc(100% - 50px);
+}
+.cnh-footer {
+  padding: 0 20px;
+  border-top: 1px solid #f3f6f9;
+  display: flex;
+  width: 100%;
+  justify-content: flex-end;
+  max-width: 1440px;
+}

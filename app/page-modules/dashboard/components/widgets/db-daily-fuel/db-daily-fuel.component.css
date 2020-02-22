@@ -1,0 +1,18 @@
+.fuel-card-data {
+  overflow-y: auto;
+}
+.vehicle-data {
+  height: 188px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.no-data {
+  display: flex;
+  flex: 1;
+}
+.no-data-text {
+  font-size: 0.8em;
+  color: var(--color-grey);
+  margin: auto;
+}

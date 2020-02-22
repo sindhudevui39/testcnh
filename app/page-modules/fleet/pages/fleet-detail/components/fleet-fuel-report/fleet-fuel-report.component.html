@@ -1,0 +1,68 @@
+<mat-card class="fleet-fuel-report">
+  <mat-card-content class="fleet-fuel__content">
+    <div class="fleet-fuel__title">
+      <div class="fleet-fuel__title__main">
+        {{ 'PAGE_VEHICLE_DETAILS.TOTAL_FUEL_TITLE' | translate | uppercase }}
+      </div>
+      <div class="fleet-fuel__title__sub">
+        {{ 'PAGE_VEHICLE_DETAILS.CHART_TITLE' | translate | uppercase }}
+      </div>
+    </div>
+
+    <div class="fleet-fuel__total">
+      <div class="fleet-fuel__total--left">
+        <div class="title">{{ 'PAGE_VEHICLE_DETAILS.TOTAL_FUEL' | translate }}</div>
+        <div>
+          <span class="number">{{ totalFuel }}</span>
+          <span class="uom">{{ fuelBurnedUom }}</span>
+        </div>
+      </div>
+      <div class="fleet-fuel__total--right">
+        <div class="title">
+          {{ 'PAGE_VEHICLE_DETAILS.AVERAGE_FUEL' | translate }}
+        </div>
+        <div>
+          <span class="number">{{ averageFuel }}</span>
+          <span class="uom">{{ fuelRateUom }}</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="fleet-fuel__selector">
+      <div class="fleet-fuel__selector__info">
+        <span>{{ 'PAGE_VEHICLE_DETAILS.SEE_GRAPH_FOR' | translate }}</span>
+        <mat-select
+          class="select"
+          disableOptionCentering
+          [panelClass]="panelClass"
+          [(value)]="selectedOption"
+          (selectionChange)="updateChart()"
+        >
+          <mat-option value="total">{{ 'PAGE_VEHICLE_DETAILS.TOTAL' | translate }}</mat-option>
+          <mat-option value="average">{{ 'PAGE_VEHICLE_DETAILS.AVERAGE' | translate }}</mat-option>
+        </mat-select>
+        <span>{{ 'PAGE_VEHICLE_DETAILS.FUEL_CONSUMPTION' | translate }}</span>
+      </div>
+
+      <div class="fleet-fuel__selector__values">
+        <div>
+          <span class="label">{{ 'PAGE_VEHICLE_DETAILS.HIGHEST_FUEL_CONS' | translate }}</span>
+          <span class="value">{{ maxFuel }}</span>
+          <span class="uom">{{ fuelBurnedUom }}</span>
+        </div>
+        <div>
+          <span class="label">{{ 'PAGE_VEHICLE_DETAILS.LOWEST_FUEL_CONS' | translate }}</span>
+          <span class="value">{{ minFuel }}</span>
+          <span class="uom">{{ fuelBurnedUom }}</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="fleet-fuel__chart">
+      <div *ngIf="!loaded" class="fleet-fuel__chart__loader">
+        <app-loading-ring></app-loading-ring>
+      </div>
+      <canvas [ngStyle]="{ display: loaded ? 'block' : 'none' }" #fuelChart></canvas>
+    </div>
+  </mat-card-content>
+</mat-card>

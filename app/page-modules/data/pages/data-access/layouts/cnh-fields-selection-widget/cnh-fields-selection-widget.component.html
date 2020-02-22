@@ -1,0 +1,134 @@
+<div class="cnh-fields-selection-widget-with-loader" *ngIf="isLoading">
+  <app-loader></app-loader>
+</div>
+<div class="cnh-fields-selection-widget" [class.displayNone]="isLoading">
+  <div class="selected-fields-counter" *ngIf="selection.selected.length > 0">
+    {{ this.selection.selected.length + ' ' }}{{ 'DATA_ACCESS.FIELDS_SELECTED' | translate }}
+  </div>
+  <div class="selected-fields-counter" *ngIf="selection.selected.length === 0">
+    {{ 'DATA_ACCESS.FIELDS_SELECT_S' | translate }}
+  </div>
+  <div class="field-selection--table">
+    <div class="cnh-table--header">
+      <div class="search-header-table-top">
+        <div
+          class="search-area--col search-box"
+          (click)="focusInput()"
+          [ngClass]="{ searchBlack: !searchIconColor }"
+        >
+          <div class="search-icon"><span class="cnh-evo-iconfont cnh-evo-icon-search"></span></div>
+          &nbsp;&nbsp;
+          <cnh-search
+            [placeholder]="translate.instant('GLOBAL.SEARCH_PLACEHOLDER')"
+            [(value)]="searchValue"
+            (valueChange)="applyFilter(1)"
+            (onblurAndFocus)="blurFocusChange($event)"
+            role="search"
+          ></cnh-search>
+        </div>
+        <div class="search-area--col select-button grower-select">
+          <cnh-advanced-select
+            class="fleet-selection"
+            [allOption]="growerAllOptions"
+            [noOptionsPlaceholder]="translate.instant('GLOBAL.NO_OPTIONS')"
+            [options]="growerOptions"
+            [searchbar]="false"
+            [searchPlaceholder]="translate.instant('DATA_ACCESS.FIELDS_GROWER')"
+            [(ngModel)]="selectedGrower"
+            (change)="applyFilter(2)"
+          ></cnh-advanced-select>
+        </div>
+        <div class="search-area--col select-button farm-select">
+          <cnh-advanced-select
+            class="fleet-selection"
+            [allOption]="farmAllOptions"
+            [noOptionsPlaceholder]="translate.instant('GLOBAL.NO_OPTIONS')"
+            [options]="farmOptions"
+            [searchbar]="false"
+            [searchPlaceholder]="translate.instant('DATA_ACCESS.FIELDS_FARM')"
+            [(ngModel)]="selectedFarm"
+            (change)="applyFilter(3)"
+          ></cnh-advanced-select>
+        </div>
+      </div>
+    </div>
+    <div class="cnh-table--body">
+      <div class="field-selection--body">
+        <table
+          mat-table
+          [dataSource]="dataSource"
+          matSort
+          matSortDirection="asc"
+          matSortDisableClear
+        >
+          <ng-container matColumnDef="select">
+            <th mat-header-cell *matHeaderCellDef>
+              <mat-checkbox
+                (change)="changeMasterCheckbox()"
+                [checked]="selection.hasValue() && isAllSelected()"
+                [indeterminate]="selection.hasValue() && !isAllSelected()"
+              >
+              </mat-checkbox>
+            </th>
+          </ng-container>
+          <ng-container matColumnDef="Name">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header class="uppercase">
+              {{ 'DATA_ACCESS.FIELDS_NAME' | translate }}
+            </th>
+          </ng-container>
+          <ng-container matColumnDef="FIELD_SIZE">
+            <th mat-header-cell *matHeaderCellDef class="uppercase">
+              {{ 'DATA_ACCESS.FIELDS_SIZE' | translate }}
+            </th>
+          </ng-container>
+          <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+        </table>
+      </div>
+      <div data-simplebar class="field-selection--body tbody">
+        <table
+          mat-table
+          [dataSource]="dataSource"
+          matSort
+          matSortDirection="asc"
+          matSortDisableClear
+        >
+          <ng-container matColumnDef="select">
+            <td mat-cell *matCellDef="let row">
+              <mat-checkbox
+                (click)="$event.stopPropagation()"
+                (change)="changeEachCheckbox(row)"
+                [checked]="selection.isSelected(row)"
+              >
+              </mat-checkbox>
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="Name">
+            <td mat-cell *matCellDef="let field">
+              <div><b [innerHTML]="field?.Name | cnhHighlight: searchValue"></b></div>
+              <span>{{ field?.GrowerName }}</span> <span>&nbsp;|&nbsp;</span>
+              <span>{{ field?.FarmName }}</span>
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="FIELD_SIZE">
+            <td mat-cell *matCellDef="let field">
+              <div *ngIf="field.Area">
+                {{ field.Area.Value | number: '1.0-0' }}&nbsp;{{
+                  'DATA_ACCESS.SHARE_CARD.TOTAL' | translate
+                }}&nbsp;{{ field.Area.Uom }}
+              </div>
+              <div *ngIf="!field.Area">
+                -- {{ 'DATA_ACCESS.SHARE_CARD.TOTAL' | translate }} {{ formatforArea }}
+              </div>
+            </td>
+          </ng-container>
+          <tr
+            mat-row
+            *matRowDef="let row; columns: displayedColumns"
+            [ngClass]="{ selected: selection.isSelected(row) }"
+            (click)="changeEachCheckbox(row)"
+          ></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

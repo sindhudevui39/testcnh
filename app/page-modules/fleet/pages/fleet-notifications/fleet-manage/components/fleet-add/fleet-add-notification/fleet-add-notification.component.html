@@ -1,0 +1,111 @@
+<div class="cnh-trowser">
+  <div class="cnh-head">
+    <span class="cnh-head-title">
+      {{ 'TROWSER.CUSTOM_NOTIFICATION.TITLE' | translate }}
+    </span>
+
+    <img class="cnh-close" src="assets/svg/24-light.svg" (click)="onNoClick('')" />
+  </div>
+  <div class="cnh-notification-name" *ngIf="!ruleCreated">
+    <mat-form-field>
+      <input
+        matInput
+        [placeholder]="'TROWSER.CUSTOM_NOTIFICATION.NOTIFICATION_NAME' | translate"
+        [formControl]="notificationName"
+        (keyup)="disableButton()"
+        (change)="updateNotificationName()"
+        required
+      />
+      <mat-error *ngIf="notificationName.invalid">{{
+        'TROWSER.CUSTOM_NOTIFICATION.NOTIFICATION_NAME_REQUIRED' | translate
+      }}</mat-error>
+    </mat-form-field>
+  </div>
+
+  <div class="cnh-content">
+    <mat-horizontal-stepper #stepper style="height: 100%;" (selectionChange)="onSelection($event)">
+      <ng-template matStepperIcon="edit" style="height: 116px;">
+        <mat-icon style="margin-top: 2px; margin-left: 2px;">check</mat-icon></ng-template
+      >
+      <mat-step [label]="'TROWSER.CUSTOM_NOTIFICATION.VEHICLES_SELECTION.TITLE' | translate">
+        <div class="vehicle-search">
+          <p class="step-title">
+            {{ 'TROWSER.CUSTOM_NOTIFICATION.VEHICLES_SELECTION.SEARCH_VEHICLES' | translate }}
+          </p>
+          <app-fleet-vehicle-select
+            class="vehicle-list"
+            (vehicleCount)="disableButton($event)"
+            [vehicleSelect]="vehicleSelect"
+          >
+          </app-fleet-vehicle-select>
+        </div>
+      </mat-step>
+      <mat-step [label]="'TROWSER.CUSTOM_NOTIFICATION.RULE_CREATION.TITLE' | translate">
+        <div class="vehicle-search">
+          <p class="step-title">
+            {{ 'TROWSER.CUSTOM_NOTIFICATION.RULE_CREATION.CREATE_RULE' | translate }}
+            ({{ vehicleCount }})
+          </p>
+          <app-fleet-rule-creation
+            class="vehicle-list"
+            (disableRuleCreationBtn)="disableRuleCreationBtn($event)"
+            (_hasVehicleChecked)="hasValueChecked($event)"
+          ></app-fleet-rule-creation>
+        </div>
+      </mat-step>
+      <mat-step [label]="'TROWSER.CUSTOM_NOTIFICATION.USER_SELECTION.TITLE' | translate">
+        <div class="vehicle-search">
+          <p class="step-title">{{ 'MODAL.NOTIFICATION.SELECT_USERS' | translate }} -</p>
+          <app-fleet-user-select class="vehicle-list"></app-fleet-user-select>
+        </div>
+      </mat-step>
+      <mat-step [label]="'TROWSER.CUSTOM_NOTIFICATION.CONFIRMATION' | translate">
+        <div class="confirmation-summary" *ngIf="currentStepIndex === 3">
+          <app-fleet-confirmation-summary
+            [usersCount]="usersCount"
+            [vehicleCount]="vehicleCount"
+            [finalNotificationName]="finalNotificationName"
+            [success]="success"
+            [customParameter]="customParameter"
+            [customDuration]="customDuration"
+            [customCondition]="customCondition"
+            [customThreshold]="customThreshold"
+            [customthresholdValue]="customthresholdValue"
+            [channel]="channel"
+            class="vehicle-list"
+          ></app-fleet-confirmation-summary>
+        </div>
+      </mat-step>
+    </mat-horizontal-stepper>
+  </div>
+  <div class="cnh-footer">
+    <button
+      mat-button
+      class="notif-prev-step-btn"
+      *ngIf="currentStepIndex === 1 || currentStepIndex === 2"
+      (click)="goBack()"
+    >
+      <span class="cnh-evo-iconfont cnh-evo-icon-chevron-left"></span>
+      <span *ngIf="currentStepIndex === 1">
+        {{ 'TROWSER.CUSTOM_NOTIFICATION.VEHICLES_SELECTION.TITLE' | translate | uppercase }}</span
+      >
+      <span *ngIf="currentStepIndex === 2">
+        {{ 'TROWSER.CUSTOM_NOTIFICATION.RULE_CREATION.TITLE' | translate | uppercase }}</span
+      >
+    </button>
+
+    <button
+      mat-raised-button
+      class="notif-next-step-btn"
+      [disabled]="disableNext"
+      [ngStyle]="{
+        'background-color': disableNext ? 'rgba(0,0,0,.12)' : brandColor,
+        color: disableNext ? 'rgba(0,0,0,.26)' : '#fff',
+        cursor: disableNext ? 'not-allowed' : 'pointer'
+      }"
+      (click)="changeStep()"
+    >
+      {{ nextButtonText | translate | uppercase }}
+    </button>
+  </div>
+</div>

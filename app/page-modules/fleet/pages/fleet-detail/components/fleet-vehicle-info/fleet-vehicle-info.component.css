@@ -1,0 +1,51 @@
+.vehicle-info__title {
+  font-weight: 700;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+}
+.vehicle-info__container,
+.vehicle-info__container__row {
+  display: flex;
+}
+.vehicle-info__container__left,
+.vehicle-info__container__middle {
+  flex-basis: 40%;
+}
+.vehicle-info__container__right {
+  flex-basis: 20%;
+}
+.vehicle-info__container__row {
+  margin-top: 10px;
+  font-size: 12px;
+}
+.vehicle-info__container__row .label,
+.vehicle-info__container__row .value {
+  min-width: 95px;
+}
+.vehicle-info__container__row .label {
+  text-transform: uppercase;
+  color: #707070;
+}
+.vehicle-info__container__row .value {
+  font-weight: 700;
+}
+.vehicle-info__container__row .label.placeholder {
+  display: block;
+}
+.vehicle-info__container__row .value.neutral {
+  font-weight: 400;
+  color: #707070;
+}
+.vehicle-status-icon {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+.vehicle-status__disconnected {
+  font-size: 12px;
+  color: var(--color-status-inactive);
+}
+.vehicle-status__disconnected img {
+  margin-right: 4px;
+}

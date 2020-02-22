@@ -1,0 +1,109 @@
+<div
+  class="cnh-page-my-data-access"
+  *ngIf="!(partnersLoading$ | async)"
+  data-simplebar
+>
+  <div class="empty-state" *ngIf="!activePartner || isDataShareDisabled">
+    <div class="cnh-empty-state cnh-empty-state--large" *ngIf="!activePartner">
+      <div class="cnh-empty-state--inner">
+        <div class="cnh-empty-state--title">
+          {{ 'DATA_ACCESS.SELECT_PARTNER' | translate }}
+        </div>
+      </div>
+    </div>
+    <div class="cnh-empty-state cnh-empty-state--large" *ngIf="!!activePartner">
+      <div class="cnh-empty-state--inner">
+        <div class="cnh-empty-state--title">
+          {{ 'DATA_ACCESS.ES_NO_GRANTED' | translate }}
+        </div>
+        <div class="cnh-empty-state--button">
+          <button
+            mat-raised-button
+            color="primary"
+            class="uppercase"
+            (click)="handleSelectData($event)"
+          >
+            {{ 'DATA_ACCESS.SELECT_DATA' | translate }}
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    class="content"
+    *ngIf="
+      !!activePartner &&
+      ((activeShare$ | async).sharedItems.length > 0 ||
+        (activeShare$ | async).shareAll)
+    "
+  >
+    <div class="partner-sub-Title">
+      {{ 'DATA_ACCESS.PARTNER_HAS_ACCESS_TO' | translate }}
+    </div>
+    <div class="cnh-expansion-panel" [class.close]="close">
+      <ng-container
+        *ngTemplateOutlet="close ? closeTemplate : openTemplate"
+      ></ng-container>
+    </div>
+    <ng-template #openTemplate>
+      <div class="header">
+        <div class="cnh-evo-icon-field-icon-header">
+          <img
+            class="cnh-evo-icon-field-icon"
+            src="./assets/svg/field-new.svg"
+          />
+        </div>
+
+        <!-- <span class="cnh-evo-iconfont cnh-evo-icon-field icon"></span> -->
+        <div class="data">
+          <div class="title uppercase">
+            {{ 'DATA_ACCESS.DATA_TYPE_CARD_TITLE' | translate }}
+          </div>
+          <div class="description">{{ activeFieldDataCreatedAt }}</div>
+        </div>
+        <div class="menu">
+          <ng-container>
+            <div class="more">
+              <span
+                class="cnh-evo-iconfont cnh-evo-icon-more2"
+                [matMenuTriggerFor]="actionMenu"
+              ></span>
+            </div>
+            <mat-menu
+              class="action-menu revoke-action-menu data-access-override"
+              #actionMenu="matMenu"
+              [backdropClass]="'full-width'"
+            >
+              <button mat-menu-item class="" (click)="editData()">
+                {{ 'DATA_ACCESS.EDIT_ACCESS' | translate }}
+              </button>
+              <button
+                mat-menu-item
+                class="warningText"
+                (click)="revokeData()"
+                [ngClass]="{ cih: brand === 'CSAG', nh: brand === 'NHAG' }"
+              >
+                {{ 'DATA_ACCESS.REVOKE_ACCESS' | translate }}
+              </button>
+            </mat-menu>
+          </ng-container>
+        </div>
+      </div>
+      <div class="">
+        <cnh-share-field-summary
+          [share]="activeShare$ | async"
+          [isPartner]="false"
+        ></cnh-share-field-summary>
+      </div>
+    </ng-template>
+    <ng-template #closeTemplate>
+      <div class="left">
+        <span class="cnh-evo-iconfont cnh-evo-icon-{{ icon }} icon"></span>
+        <div class="title">{{ closeTitle }}</div>
+      </div>
+      <button mat-button (click)="onCloseAction($event)" class="cta">
+        {{ closeButton }}
+      </button>
+    </ng-template>
+  </div>
+</div>

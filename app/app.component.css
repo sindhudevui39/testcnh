@@ -1,0 +1,26 @@
+.loading-bg {
+  height: 100vh;
+  background-image: none;
+  background: radial-gradient(#40404b, #111118) rgba(34, 34, 40, 0.94);
+  background-size: auto;
+}
+.app-container {
+  height: 100%;
+  /* -webkit-overflow-scrolling: touch; */
+}
+.content {
+  position: relative;
+}
+.content.cih {
+  margin-top: 110px;
+  height: calc(100% - 110px);
+}
+.content.nh {
+  margin-top: 150px;
+  height: calc(100% - 150px);
+}
+@media screen and (max-width: 1024px) {
+  .content {
+    padding-bottom: 12px;
+  }
+}

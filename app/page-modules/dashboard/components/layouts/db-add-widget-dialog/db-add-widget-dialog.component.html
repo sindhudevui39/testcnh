@@ -1,0 +1,47 @@
+<div class="main-container">
+  <div class="title"><span class="add-new-widget">Add New Widget</span></div>
+
+  <div
+    class="img-description"
+    [ngStyle]="{ color: isWidgetSelected ? 'var(--color-main-grey)' : 'var(--color-med-grey)' }"
+  >
+    <span>{{ imageDescription }}</span>
+  </div>
+
+  <mat-dialog-content #dialogContentRef class="widget-container">
+    <div #widgetListContentRef class="widget-list">
+      <div class="widget-list-item" *ngFor="let image of images">
+        <input
+          type="image"
+          class="widget-list-image"
+          [id]="image.id"
+          [src]="image.prop.src"
+          [disabled]="!image.enabled"
+          [ngClass]="{
+            cih: brand === brands.CIH && widgetToAdd === image.id,
+            nh: brand === brands.NH && widgetToAdd === image.id
+          }"
+          [ngStyle]="{ opacity: image.enabled ? 1 : 0.3 }"
+          (click)="selectWidget($event)"
+        />
+      </div>
+    </div>
+  </mat-dialog-content>
+
+  <div class="line" *ngIf="displayContentSeparator"></div>
+
+  <mat-dialog-actions class="dialog-actions">
+    <button mat-button mat-dialog-close>CANCEL</button>
+    <button
+      mat-button
+      mat-raised-button
+      cdkFocusInitial
+      class="mat-warn"
+      [style.background-color]="buttonBGColor"
+      [disabled]="!isWidgetSelected"
+      (click)="onAdd()"
+    >
+      ADD
+    </button>
+  </mat-dialog-actions>
+</div>

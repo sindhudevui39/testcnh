@@ -1,0 +1,119 @@
+<div class="share-field-summary">
+  <div class="data-row">
+    <div class="data-title uppercase">
+      {{ 'DATA_ACCESS.SHARE_CARD.OPERATION_DATA' | translate }}
+    </div>
+    <div class="data-info operational-data">
+      <ng-container *ngIf="operationalData.length">
+        <div class="operation" *ngFor="let operation of operationalData">
+          <img
+            [src]="'/assets/images/' + operation.toLowerCase() + '.svg'"
+            [alt]="operation"
+            class="img"
+          />
+          <label class="label">{{
+            'GLOBAL.OPERATIONS.' + operation | translate
+          }}</label>
+        </div>
+      </ng-container>
+      <ng-container *ngIf="operationalData.length === 0">{{
+        'GLOBAL.NO_DATA' | translate
+      }}</ng-container>
+    </div>
+  </div>
+  <div class="data-row">
+    <div class="data-title uppercase">
+      {{ 'DATA_ACCESS.SHARE_CARD.SETUP_DATA' | translate }}
+    </div>
+    <div class="data-info">{{ setupData }}</div>
+  </div>
+  <div class="data-row">
+    <div class="data-title uppercase">
+      {{ 'DATA_ACCESS.SHARE_CARD.TIMEFRAME' | translate }}
+    </div>
+    <div class="data-info">
+      {{ 'DATA_ACCESS.SHARE_CARD.FIELDS.ALL' | translate }}
+    </div>
+  </div>
+  <!-- <div class="data-row">
+    <div class="data-title uppercase">
+      {{ 'DATA_ACCESS.SHARE_CARD.PERMISSION' | translate }}
+    </div>
+    <div class="data-info">
+      {{ 'DATA_ACCESS.SHARE_CARD.VIEW_ONLY' | translate }}
+    </div>
+  </div> -->
+  <div
+    class="data-row"
+    *ngIf="!this.share.shareAll && !this.isPartner"
+    (click)="openFieldSection(share)"
+  >
+    <div class="data-title uppercase">
+      {{ 'DATA_ACCESS.SHARE_CARD.FIELDS.TEXT' | translate }}
+    </div>
+    <div
+      class="data-info data-fields"
+      *ngIf="!this.share.shareAll && !this.isPartner"
+    >
+      {{ fields }}
+      <span
+        class="cnh-evo-iconfont cnh-evo-icon-chevron-down arrow"
+        *ngIf="!expandField"
+      ></span>
+      <span
+        class="cnh-evo-iconfont cnh-evo-icon-chevron-up arrow"
+        *ngIf="expandField"
+      ></span>
+    </div>
+  </div>
+  <div class="data-row" *ngIf="this.share.shareAll || this.isPartner">
+    <div class="data-title uppercase">
+      {{ 'DATA_ACCESS.SHARE_CARD.FIELDS.TEXT' | translate }}
+    </div>
+    <div class="data-info">{{ fields }}</div>
+  </div>
+</div>
+<div class="share-field-details loader" *ngIf="isLoading">
+  <app-loader></app-loader>
+</div>
+<div
+  class="share-field-details"
+  *ngIf="fieldExpand.length > 0 && expandField && !isLoading"
+>
+  <div *ngFor="let fields of fieldExpand; let first = first">
+    <div
+      class="share-field-details-header"
+      [ngClass]="{
+        'first-element': first
+      }"
+    >
+      <span class="cnh-evo-iconfont cnh-evo-icon-ic-operator"></span> &nbsp;
+      <span>{{ fields[0]?.GrowerName }}</span
+      >&nbsp;
+      <!-- <img src="./assets/svg/home.png" alt="Field"> -->
+      <span>|&nbsp;&nbsp;{{ fields[0]?.FarmName }}</span>
+    </div>
+    <div *ngFor="let field of fields" class="share-field-details-body">
+      <div class="grid-10">
+        <!-- <img src="./assets/svg/field.png" alt="Field">&nbsp;&nbsp; -->
+        <span>{{ field?.Name }}</span>
+      </div>
+      <div class="grid-2">
+        <span class="pull-right">
+          <div *ngIf="field.Area">
+            <span class="fieldValue">
+              {{ field?.Area?.Value | number: '1.0-0' }} </span
+            >&nbsp;{{ 'DATA_ACCESS.SHARE_CARD.TOTAL' | translate }}&nbsp;{{
+              field.Area.Uom
+            }}
+          </div>
+          <div *ngIf="!field.Area">
+            <span class="fieldValue"> -- </span>&nbsp;{{
+              'DATA_ACCESS.SHARE_CARD.TOTAL' | translate
+            }}&nbsp;{{ formatforArea }}
+          </div>
+        </span>
+      </div>
+    </div>
+  </div>
+</div>

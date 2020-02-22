@@ -1,0 +1,66 @@
+.fault {
+  display: flex;
+  justify-content: space-evenly;
+  border-bottom: 1px solid #e2e2e2;
+}
+/* .fault:hover {
+  background-color: rgb(238, 240, 240);
+} */
+.fault-img {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 10%;
+}
+.fault-img img {
+  width: 22px;
+  object-fit: contain;
+}
+.fault-vehicle {
+  width: 80%;
+}
+.fault-name,
+.fault-pin {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  padding-top: 0.15em;
+}
+.fault-name {
+  font-weight: 500;
+  font-size: 0.75em;
+}
+.fault-pin {
+  color: #7d7d7d;
+  font-size: 0.7em;
+}
+.fault-id,
+.fault-time {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.fault-id {
+  font-size: 0.8em;
+  width: 15%;
+}
+.fault-time {
+  text-transform: uppercase;
+  opacity: 0.85;
+  width: 20%;
+  font-size: 0.7em;
+}
+@media only screen and (min-width: 1280px) {
+  .fault-img img {
+    width: 24px;
+  }
+  .fault-name {
+    font-size: 0.8em;
+  }
+  .fault-brand {
+    font-size: 0.75em;
+  }
+  .fault-id {
+    font-size: 0.8em;
+  }
+}

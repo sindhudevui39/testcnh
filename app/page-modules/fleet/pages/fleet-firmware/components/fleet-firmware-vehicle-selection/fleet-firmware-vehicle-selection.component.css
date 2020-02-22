@@ -1,0 +1,194 @@
+.cnh-header {
+  flex-direction: column;
+  height: 70px;
+}
+.cnh-firmware-title {
+  font-size: 18px;
+}
+.cnh-firmware-subtitle {
+  font-size: 12px;
+  color: #4c4c51;
+  margin-bottom: 20px;
+}
+.cnh-list {
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+}
+
+.cnh-firmware-title {
+  font-size: 18px;
+  font-weight: 500;
+  width: 607px;
+}
+.cnh-firmware-subtitle {
+  font-size: 12px;
+  color: #4c4c51;
+  margin-bottom: 20px;
+  width: 400px;
+}
+.search {
+  border: solid 1px var(--color-grey);
+  display: flex;
+  height: 48px;
+}
+.cih {
+  color: #a21c22;
+}
+.nh {
+  color: #003e85;
+}
+.cnh-filter-bar {
+  display: flex;
+  height: 56px;
+  min-height: 56px;
+  max-height: 56px;
+  font-size: 14px;
+  font-weight: 500;
+  text-rendering: geometricPrecision;
+  color: #fff;
+  border-width: 0 0 1px 0;
+  border-style: solid;
+  border-left: solid 1px var(--color-grey);
+  border-right: solid 1px var(--color-grey);
+  border-bottom: solid 1px var(--color-grey);
+  align-items: center;
+}
+.header-title {
+  font-size: 12px;
+}
+.cnh-campaign-header {
+  height: calc(100% - 174px);
+  max-width: 1248px;
+  display: flex;
+  color: #fff;
+  flex-direction: column;
+}
+::ng-deep .dropdown-label {
+  font-size: 12px !important;
+  padding-bottom: 0px !important;
+}
+.cnh-campaign-title {
+  display: flex;
+  padding-left: 20px;
+  font-size: 12px;
+  font-weight: 500;
+  text-rendering: geometricPrecision;
+  color: #262626;
+  width: 20%;
+}
+.name-overflow {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+.cnh-release-notes {
+  font-size: 14px;
+  color: black;
+  width: 16.66666667%;
+  font-weight: 500;
+}
+.cnh-model-header {
+  display: flex;
+  width: 16.66666667%;
+  font-size: 12px;
+}
+.cnh-model {
+  font-size: 14px;
+  color: #707070;
+  width: 16.66666667%;
+  color: black;
+  font-weight: 500;
+}
+.cnh-notified,
+.cnh-downloaded,
+.cnh-installed {
+  display: flex;
+  justify-content: center;
+  color: var(--color-med-grey);
+  font-size: 15px;
+  width: 13%;
+}
+.cnh-notified {
+  font-weight: 500;
+}
+.sort-span {
+  cursor: pointer;
+}
+.active {
+  color: black;
+}
+.sort-icon {
+  height: 16px;
+  width: 16px;
+  margin: 0px 5px;
+  cursor: pointer;
+}
+.desc {
+  transform: scaleY(1);
+}
+.asc {
+  transform: scaleY(-1);
+}
+
+.cnh-campaign-list {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  border-top: 1em;
+  border-bottom: 1em;
+  align-items: center;
+  border-left: solid 1px var(--color-grey);
+  border-right: solid 1px var(--color-grey);
+}
+.list-border {
+  border-bottom: solid 1px var(--color-grey);
+}
+.list-campaign {
+  background-color: white;
+  height: 56px;
+  display: flex;
+  align-items: center;
+}
+.disable-vehicles {
+  background-color: #f9f9f9;
+}
+.hide-button {
+  display: none !important;
+}
+.cnh-title {
+  padding-left: 20px;
+  display: flex;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+.custom-select {
+  max-width: 125px;
+}
+.no-notify {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: calc(100% - 174px);
+  max-width: 1248px;
+  color: #fff;
+}
+.no-data-title {
+  font-size: 20px;
+  color: black;
+  display: flex;
+  justify-content: center;
+}
+.data-loader {
+  position: relative;
+  height: 100%;
+  width: 100%;
+}
+::ng-deep .mat-checkbox-indeterminate.mat-primary .mat-checkbox-background {
+  background-color: #262626 !important;
+}
+::ng-deep .mat-checkbox-checked.mat-primary .mat-checkbox-background {
+  background-color: #262626 !important;
+}

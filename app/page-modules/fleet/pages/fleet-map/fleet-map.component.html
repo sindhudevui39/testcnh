@@ -1,0 +1,312 @@
+<link href="/assets/4.9/esri/css/main.css" rel="stylesheet" />
+
+<style>
+  /* top menu */
+  #top-menu {
+    -webkit-box-shadow: 2px 3px 22px 0px rgba(173, 173, 173, 0.75);
+    -moz-box-shadow: 2px 3px 22px 0px rgba(173, 173, 173, 0.75);
+    box-shadow: 2px 3px 22px 0px rgba(173, 173, 173, 0.75);
+    position: absolute;
+    left: 10px;
+    top: 10px;
+    padding: 0 10px;
+    height: 45px;
+    width: auto;
+    background: rgba(46, 68, 94, 0.8);
+    z-index: 2001;
+    color: #fff;
+  }
+
+  #top-menu .section {
+    display: inline-block;
+    height: 100%;
+    padding: 0 5px;
+  }
+
+  #top-menu .separator {
+    height: 100%;
+    width: 3px;
+    border-right: 1px solid #d0d0d0;
+    padding: 0;
+  }
+
+  #top-menu .button {
+    display: inline-block;
+    height: 100%;
+    color: #fff;
+    margin: 0 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    width: 85px;
+    padding: 0;
+  }
+
+  #top-menu .button.active {
+    font-weight: bold;
+    background: rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  #top-menu .button:focus {
+    outline: none;
+  }
+
+  #top-menu .button:hover {
+    opacity: 0.7;
+    transition: opacity 0.4s;
+  }
+
+  #top-menu select {
+    font-size: 1em;
+    height: 60%;
+    font-family: abel, Arial;
+  }
+
+  @media (min-width: 320px) and (max-width: 639px) {
+    #top-menu #title-text {
+      display: none;
+    }
+
+    #top-menu .button {
+      width: 75px;
+      margin: 0;
+    }
+  }
+
+  #api-link {
+    position: absolute;
+    bottom: 20px;
+    left: 10px;
+    font-weight: bold;
+  }
+
+  /* Set up some css rules to animate things */
+
+  /* Some rules to change the appearance of clusters and it's text when activated */
+
+  /* Scale up the clusters when activated */
+  .cluster-group.activated {
+    transform-origin: center;
+    transform: scale(1.2);
+    transition: transform linear 0.4s;
+  }
+
+  /* Change the appearance of clusters when activated */
+  .cluster-group.activated .cluster {
+    stroke: rgba(255, 255, 255, 1);
+    stroke-width: 2;
+    transition: all ease 1s;
+  }
+
+  .cluster-group.activated .cluster-text {
+    fill: #000;
+    font-weight: bold;
+    transition: all ease 1s;
+  }
+
+  /* hide flares by default */
+  .flare-group {
+    opacity: 0;
+  }
+
+  /* animate display of flares */
+  .flare-group.activated {
+    opacity: 1;
+    transition: opacity linear 0.06s;
+  }
+
+  /* this just chains the display of flares to occur one after the other using transition delay - could be a better way to do this natively but using SASS or LESS this would be much more concise */
+  .flare-group.activated:nth-of-type(1) {
+    transition-delay: 0.06s;
+  }
+
+  .flare-group.activated:nth-of-type(2) {
+    transition-delay: 0.12s;
+  }
+
+  .flare-group.activated:nth-of-type(3) {
+    transition-delay: 0.18s;
+  }
+
+  .flare-group.activated:nth-of-type(4) {
+    transition-delay: 0.24s;
+  }
+
+  .flare-group.activated:nth-of-type(5) {
+    transition-delay: 0.3s;
+  }
+
+  .flare-group.activated:nth-of-type(6) {
+    transition-delay: 0.36s;
+  }
+
+  .cluster-group .flare-group.activated:nth-of-type(7) {
+    transition-delay: 0.42s;
+  }
+
+  .flare-group.activated:nth-of-type(8) {
+    transition-delay: 0.48s;
+  }
+
+  /*
+    Cross browser notes on the example CSS animations:
+    IE/Edge: These POS's don't support transforms on svg elements using css, so the css transform animations won't work.
+*/
+</style>
+<div class="flex">
+  <div>
+    <!-- <app-collapsible-side-nav> </app-collapsible-side-nav> -->
+    <div class="fleet-sidenav" [ngClass]="{ collapsed: !collapse }">
+      <div class="title flex ">
+        <div
+          style="height: 100%; border-bottom: 1px solid #707070;"
+          [ngClass]="{ collapsed: !collapse, expanded: collapse }"
+        >
+          <span
+            *ngIf="!fleetdata.showOverviewNav"
+            class="title-value"
+            [ngClass]="{ hide: !collapse }"
+          >
+            {{ 'GLOBAL.VEHICLE.PLURAL' | translate | uppercase }}</span
+          >
+          <span
+            (click)="navOverview()"
+            *ngIf="fleetdata.showOverviewNav"
+            class="title-value-overview"
+            [ngClass]="{ hide: !collapse }"
+          >
+            <mat-icon>keyboard_arrow_left</mat-icon>
+            {{ 'PAGE_MAIN.ALERTS.FLEET_OVERVIEW' | translate }}
+          </span>
+        </div>
+        <div
+          style="height: 100%; background-color: white;     border-bottom: 1px solid #707070;"
+          [ngClass]="{ menutop: !collapse }"
+        >
+          <img
+            src="assets\svg\collapse-panel.png"
+            class="floating-right-icon"
+            [ngClass]="{ buttonToggle: !collapse }"
+            (click)="collapse = !collapse; updateCollapseValue(collapse)"
+          />
+        </div>
+      </div>
+
+      <div class="selectOptions" [ngClass]="{ collapsed: !collapse }">
+        <ng-content select=".fleet-img"></ng-content>
+
+        <img class="fleet-img" [ngClass]="{ collapsed: !collapse }" src="assets/fleet.PNG" />
+        <div class="custom-select" [ngClass]="{ hide: !collapse }">
+          <app-dropdown
+            [list]="filterOptions"
+            [selectedValue]="selectedFilterOption"
+            (valueChange)="valuechange($event, item)"
+            [dropdownMinWidth]="121"
+            [dropdownMaxHeight]="90"
+          >
+          </app-dropdown>
+        </div>
+        <div
+          class="resetSelection"
+          *ngIf="showReset"
+          [ngClass]="{
+            cih: userService.getBrand() === brands.CIH,
+            nh: userService.getBrand() === brands.NH
+          }"
+        >
+          <span (click)="resetRoute(); showReset = false">{{
+            'PAGE_MAP.CLEAR' | translate | uppercase
+          }}</span>
+        </div>
+      </div>
+      <div class="side-nav-content">
+        <div class="loader" [ngClass]="{ hide: !collapse }" *ngIf="!vehicleDataLoaded">
+          <app-loader></app-loader>
+        </div>
+        <div *ngIf="vehicleDataLoaded">
+          <perfect-scrollbar
+            #listPS
+            [ngClass]="{
+              collapsed: !collapse,
+              filterOpenCIH: filtersBarOpen && userService.getBrand() === brands.CIH,
+              filterCloseCIH: !filtersBarOpen && userService.getBrand() === brands.CIH,
+              filterOpenNH: filtersBarOpen && userService.getBrand() === brands.NH,
+              filterCloseNH: !filtersBarOpen && userService.getBrand() === brands.NH
+            }"
+            style="max-width: 354px; "
+          >
+            <div *ngIf="filterValue === 'fleet'">
+              <div *ngFor="let fTypeItem of fleetType | keyvalue">
+                <div class="nav-content" *ngFor="let fType of fTypeItem.value | keyvalue">
+                  <span>{{ fType.length }}</span>
+                  <div class="filter-header flex flex-ai-c">
+                    <span class="filter-title">{{ fType.key }}</span>
+                    <span
+                      class="minus"
+                      [ngClass]="{ plus: fleetTypeCollapse[fType.key] }"
+                      (click)="fleetTypeCollapse[fType.key] = !fleetTypeCollapse[fType.key]"
+                    ></span>
+                  </div>
+                  <div
+                    class="vehicleContent"
+                    [@collapseVehicles]="fleetTypeCollapse[fType.key] ? 'collapsed' : 'expanded'"
+                  >
+                    <app-fleet-vehicle-list
+                      *ngFor="let vehicle of fType.value"
+                      [vehicle]="vehicle"
+                      (click)="changeRoute(vehicle); this.fleetService.clickedId = vehicle.id"
+                      [clickedId]="clickedId"
+                    >
+                    </app-fleet-vehicle-list>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div *ngIf="filterValue === 'vehicleType'">
+              <div *ngFor="let vTypeItem of vehicleType | keyvalue">
+                <div *ngFor="let vType of vTypeItem.value | keyvalue">
+                  <div class="filter-header flex flex-ai-c">
+                    <span class="filter-title">{{ vType.key }}</span>
+                    <span
+                      class="minus"
+                      [ngClass]="{ plus: vehicleTypeCollapse[vType.key] }"
+                      (click)="vehicleTypeCollapse[vType.key] = !vehicleTypeCollapse[vType.key]"
+                    ></span>
+                  </div>
+                  <div
+                    class="vehicleContent"
+                    [@collapseVehicles]="vehicleTypeCollapse[vType.key] ? 'collapsed' : 'expanded'"
+                  >
+                    <app-fleet-vehicle-list
+                      *ngFor="let vehicle of vType.value"
+                      [vehicle]="vehicle"
+                      (click)="
+                        changeRoute(vehicle);
+                        showReset = true;
+                        this.fleetService.clickedId = vehicle.id
+                      "
+                      [clickedId]="clickedId"
+                    >
+                    </app-fleet-vehicle-list>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </perfect-scrollbar>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div style="width:100%">
+    <div>
+      <div class="loader" [ngClass]="{ hide: !collapse }" *ngIf="!mapDataLoaded">
+        <app-loader></app-loader>
+      </div>
+      <div id="applicationDiv">
+        <div id="mapid" #mapViewNode [ngStyle]="{ height: totalMapheight }"></div>
+      </div>
+    </div>
+    <router-outlet></router-outlet>
+  </div>
+</div>

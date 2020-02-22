@@ -1,0 +1,19 @@
+<div class="main-page flex" [ngClass]="{ filterOpen: filtersBarOpen }">
+  <div class="left-container">
+    <app-collapsible-side-nav> </app-collapsible-side-nav>
+  </div>
+
+  <div class="right-content">
+    <div class="right-container">
+      <div class="table-body">
+        <app-faults-list-header></app-faults-list-header>
+      </div>
+      <div class="routerOutlet"><router-outlet></router-outlet></div>
+    </div>
+    <div class="element-count">
+      <span class="count-text">
+        {{ 'GLOBAL.PAGINATOR.PAGINATION' | translate: paginationOpts }}
+      </span>
+    </div>
+  </div>
+</div>

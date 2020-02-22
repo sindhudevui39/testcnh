@@ -1,0 +1,231 @@
+.cnh-modal-content {
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 20px 0;
+}
+.cnh-modal-content p {
+  font-size: 18px;
+  font-weight: 500;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: center;
+  color: #000;
+}
+.cnh-modal-content .form mat-form-field,
+.cnh-modal-content .form textarea {
+  display: block;
+  width: 100%;
+}
+.loader {
+  margin-top: 60px;
+  height: 180px;
+}
+.cnh-modal-content .form textarea {
+  height: 80px;
+  border-radius: 2px;
+  border: 1px solid #000;
+  font-size: 16px;
+  color: #707070;
+  padding: 15px;
+}
+.cnh-modal-content .icon {
+  text-align: center;
+  font-size: 60px;
+}
+.cnh-modal-content .icon .cnh-evo-icon-circle-check {
+  color: #417505;
+}
+.cnh-modal-content .icon .cnh-evo-icon-circle-cancel {
+  color: #f44336;
+}
+.cnh-modal-content .label {
+  font-size: 16px;
+  font-weight: 400;
+  text-align: center;
+  color: #000;
+}
+.cnh-modal-content .bold {
+  font-weight: 700;
+}
+
+.cnh-form-modal-with-header-background .mat-dialog-title {
+  padding: 5px;
+  font-size: 16px;
+  font-weight: 500;
+  padding-left: 15px;
+  padding-top: 8px;
+  color: #fff;
+  background-color: #262626;
+  margin: -24px;
+  margin-bottom: 20px;
+  height: 48px;
+  overflow: hidden;
+}
+.cnh-form-modal-with-header-background .mat-dialog-actions {
+  -webkit-box-pack: end;
+  -ms-flex-pack: end;
+  justify-content: flex-end;
+}
+.cnh-form-modal-with-header-background .mat-dialog-content {
+  overflow: visible;
+}
+.cnh-form-modal-with-header-background .mat-dialog-container {
+  border-radius: 5px !important;
+  -webkit-box-shadow: 0 0 4px 1px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 0 4px 1px rgba(0, 0, 0, 0.4);
+  padding: 24px;
+  overflow: visible;
+  position: relative;
+}
+.cnh-form-modal-with-header-background .modal-button {
+  text-transform: uppercase;
+}
+.cnh-form-modal-with-header-background .modal-button-accept {
+  margin-left: 10px;
+}
+.cnh-form-modal-with-header-background .close-icon {
+  color: #fff;
+}
+.cnh-form-modal {
+  width: 100%;
+  height: 100%;
+}
+.cnh-form-modal form {
+  padding-top: 10px;
+}
+.cnh-form-modal form .mat-dialog-actions {
+  padding: 0;
+  margin: 0;
+}
+.cnh-form-modal h2 {
+  font-size: 18px;
+  font-weight: 500;
+  color: #262626;
+}
+.cnh-form-modal .modal-button span {
+  text-transform: uppercase;
+}
+.cnh-form-modal .modal-button-accept {
+  font-weight: 700;
+  margin-left: 10px;
+}
+.close-icon {
+  background: none;
+  border: 0;
+  color: #262626;
+  font: inherit;
+  line-height: normal;
+  overflow: visible;
+  -webkit-appearance: button;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 16px;
+  padding: 5px;
+  cursor: pointer;
+}
+.close-icon:focus {
+  outline: none;
+}
+.close-icon:hover {
+  opacity: 0.8;
+}
+.close-icon span.cnh-evo-icon-close:before {
+  font-weight: 700;
+}
+.mat-dialog-container {
+  border-radius: 2px !important;
+  -webkit-box-shadow: 0 0 4px 1px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 0 4px 1px rgba(0, 0, 0, 0.4);
+  padding: 24px;
+  overflow: visible;
+  position: relative;
+}
+.mat-dialog-content {
+  overflow: initial;
+}
+.mat-dialog-actions {
+  -webkit-box-pack: end;
+  -ms-flex-pack: end;
+  justify-content: flex-end;
+}
+.cnh-evo-iconfont.cnh-evo-icon-chevron-right.arrow {
+  font-size: 10px;
+}
+.hide {
+  display: none;
+}
+.show {
+  display: block;
+}
+.mat-dialog-title {
+  margin: 0 0 20px;
+  display: block;
+  background-color: black;
+  color: white;
+  margin-top: -24px;
+  margin-left: -24px;
+  height: 40px;
+  padding-top: 10px;
+  padding-left: 24px;
+  width: 600px;
+  font: 500 18px Roboto, 'Helvetica Neue', sans-serif;
+}
+.fake-input {
+  position: relative;
+  width: 400px;
+}
+.fake-input input {
+  border: none;
+  background: #fff;
+  display: block;
+  width: 90%;
+  box-sizing: border-box;
+}
+.fake-input img {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+}
+.hide {
+  display: none;
+}
+.show {
+  display: block;
+}
+
+.email-exists-error {
+  font-size: 12px !important;
+  color: #ed1f24 !important;
+  margin-bottom: 6px;
+  margin-left: -20px;
+  margin-top: -10px;
+}
+
+::ng-deep .emailerror div.mat-form-field-underline {
+  background-color: #ed1f24;
+}
+
+::ng-deep .emailerror label.mat-form-field-label {
+  color: #ed1f24 !important;
+}
+.email-linked-error {
+  font-size: 12px !important;
+  color: #ed1f24 !important;
+  margin-bottom: 6px;
+  margin-left: -48%;
+  margin-top: -10px;
+}
+
+::ng-deep .linkedUser div.mat-form-field-underline {
+  background-color: #ed1f24;
+}
+
+::ng-deep .linkedUser label.mat-form-field-label {
+  color: #ed1f24 !important;
+}

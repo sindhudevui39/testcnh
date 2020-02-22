@@ -1,0 +1,58 @@
+<div class="cnh-utility-bar">
+  <div class="top-row">
+    <div class="cnh-utility-bar--searchbar">
+      <div class="utility-element" (click)="focusInput()">
+        <div class="utility-button" [ngClass]="{ searchBlack: !searchIconColor }">
+          <span class="cnh-evo-iconfont cnh-evo-icon-search"></span>
+        </div>
+        <cnh-search
+          [placeholder]="translate.instant('GLOBAL.SEARCH_PLACEHOLDER')"
+          [(value)]="searchValue"
+          (valueChange)="onSearchValueChange($event)"
+          (onblurAndFocus)="blurFocusChange($event)"
+        ></cnh-search>
+      </div>
+    </div>
+    <div class="cnh-utility-bar--left">
+      <ng-content select="[slot-left]"></ng-content>
+    </div>
+    <div class="cnh-utility-bar--right">
+      <ng-content select="[slot-right]"></ng-content>
+    </div>
+    <!-- <div class="cnh-utility-bar--buttons">
+        <mat-button-toggle-group
+          class="mat-but-group"
+          #group="matButtonToggleGroup"
+          [(ngModel)]="selected"
+          (change)="toggleChange($event)"
+        >
+          <mat-button-toggle value="user" class="mat-map-icons">
+            <mat-icon svgIcon="inbox-user" class="mat-map-icons"></mat-icon>
+          </mat-button-toggle>
+          <mat-button-toggle value="vehicle" class="mat-map-icons">
+            <mat-icon svgIcon="inbox-vehicle" class="mat-map-icons mat-font"></mat-icon>
+          </mat-button-toggle>
+        </mat-button-toggle-group>
+      </div> -->
+  </div>
+</div>
+
+<!--
+    <cnh-utility-bar
+        [hasFilters]="false"
+        [searchPlaceholder]="'Search'"
+        (searchValueChange)="onSearchValueChange($event)"
+    ></cnh-utility-bar>
+  -->
+<div class="cnh-page-inbox">
+  <div id="infinite-scroller" style="height:100%">
+    <cnh-inbox-list
+      [searchString]="currentSearch$ | async"
+      [dataSet]="fileList"
+      [selectedtype]="selected"
+      [scrollPos]="scrollPos"
+      [itemlength]="itemlength"
+      (collapsedList)="collapsedList($event)"
+    ></cnh-inbox-list>
+  </div>
+</div>

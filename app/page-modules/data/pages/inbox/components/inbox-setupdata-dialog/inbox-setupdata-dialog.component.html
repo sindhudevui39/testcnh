@@ -1,0 +1,216 @@
+<div class="cnh-form-modal-with-header-background send-vechicle-inbox">
+  <h2 class="mat-dialog-title" mat-dialog-title>
+    {{ 'SEND_DATA.FILE_TRANSFER_TITLE' | translate }}
+  </h2>
+
+  <form novalidate>
+    <mat-dialog-content class="mat-dialog-content">
+      <div class="tc-modal-content">
+        <div id="firstPage" *ngIf="!nextPage">
+          <div class="send-data">
+            <div class="send-data--title">
+              <span *ngIf="checkedCount === 0">{{ 'SEND_DATA.SELECT_VEHICLES' | translate }}</span>
+              <span *ngIf="checkedCount > 0">{{ 'SEND_DATA.SENDING_FILE' | translate }}</span>
+              <div class="subtitle">
+                {{ 'SEND_DATA.SELECT_VEHICLE_SUBTITLE' | translate }}
+              </div>
+            </div>
+          </div>
+          <div class="loaderOpen">
+            <div class="col-md-12">
+              <div class="col-md-10">
+                <div class="send-data--vehicles">
+                  <div
+                    class="cnh-tag small"
+                    *ngFor="let vname of checkedItems(); let index = index"
+                  >
+                    <div class="txt">{{ vname.name }}</div>
+                    <span class="closebtn" (click)="removeVehicle(vname.id, 'SELECT')"
+                      >&times;</span
+                    >
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-2" *ngIf="checkedCount > 0">
+                <div class="clear-all-btn" (click)="clearAll()" [style.color]="getBrandColor()">
+                  {{ 'SEND_DATA.CLEAR_ALL' | translate }}
+                </div>
+              </div>
+            </div>
+            <div class="col-md-12">
+              <div class="has-search">
+                <mat-icon class="form-control-feedback">search</mat-icon>
+                <input
+                  type="text"
+                  class="form-control"
+                  (keyup)="applyFilter($event.target.value)"
+                  [placeholder]="translate.instant('GLOBAL.SEARCH_PLACEHOLDER')"
+                />
+              </div>
+            </div>
+            <div class="col-md-12 col-table">
+              <mat-table #table [dataSource]="dataSource" class="header-table">
+                <!-- Vehicle Name Column -->
+                <ng-container matColumnDef="vehicleName">
+                  <mat-header-cell
+                    *matHeaderCellDef
+                    class="vehicle-name-cell"
+                    (click)="changeSorting()"
+                  >
+                    {{ 'SEND_DATA.VEHICLE_NAME' | translate | uppercase }}&nbsp;
+                    <span
+                      class="cnh-evo-iconfont "
+                      [ngClass]="{
+                        'cnh-evo-icon-sort-asc': !isSortingAsc,
+                        'cnh-evo-icon-sort-desc': isSortingAsc
+                      }"
+                    ></span>
+                  </mat-header-cell>
+                </ng-container>
+
+                <!-- Brand/Model Column -->
+                <ng-container matColumnDef="brandModel">
+                  <mat-header-cell *matHeaderCellDef>
+                    {{ 'SEND_DATA.BRAND_MODEL' | translate | uppercase }}
+                  </mat-header-cell>
+                </ng-container>
+
+                <!-- Pin Column -->
+                <ng-container matColumnDef="pin">
+                  <mat-header-cell *matHeaderCellDef>
+                    {{ 'SEND_DATA.PIN' | translate | uppercase }}
+                  </mat-header-cell>
+                </ng-container>
+
+                <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+              </mat-table>
+              <div class="loading-bar" *ngIf="isLoading"><app-loader></app-loader></div>
+              <div class="no-vehicle-msg" *ngIf="!isLoading && vNames.length === 0">
+                {{ 'SEND_DATA.NO_VEHICLES' | translate }}
+              </div>
+
+              <mat-table
+                #table
+                [dataSource]="dataSource"
+                data-simplebar
+                class="mat-table-rowtable"
+                *ngIf="!isLoading && vNames.length > 0"
+              >
+                <ng-container matColumnDef="vehicleName">
+                  <mat-cell *matCellDef="let element; let i = index" class="vehicle-name-cell">
+                    <mat-checkbox
+                      (click)="$event.stopPropagation()"
+                      (change)="onChange(element, $event)"
+                      [checked]="element.checked"
+                      style=" font-weight: 600"
+                    >
+                      <span [innerHTML]="element.name | cnhHighlight: filterValue"></span
+                    ></mat-checkbox>
+                  </mat-cell>
+                </ng-container>
+
+                <!-- Brand/Model Column -->
+                <ng-container matColumnDef="brandModel">
+                  <mat-cell *matCellDef="let element" class="brand-model-cell">
+                    <span [innerHTML]="element.brand | cnhHighlight: filterValue"></span
+                    >&nbsp;|&nbsp;
+                    <span
+                      [innerHTML]="element.model | cnhHighlight: filterValue"
+                      class="brandvalue"
+                    ></span>
+                    <!-- {{ element.brand }} | {{ element.model }} -->
+                  </mat-cell>
+                </ng-container>
+
+                <!-- Pin Column -->
+                <ng-container matColumnDef="pin">
+                  <mat-cell *matCellDef="let element" class="pin-cell">
+                    <span [innerHTML]="element.id | cnhHighlight: filterValue"></span>
+                  </mat-cell>
+                </ng-container>
+
+                <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+              </mat-table>
+            </div>
+          </div>
+        </div>
+        <div id="lastPage" *ngIf="nextPage">
+          <div class="col-md-12">
+            <div class="col-md-5">
+              <div class="col-title">File</div>
+              <div class="row">
+                <ul>
+                  <ul>
+                    <li class="spacer" *ngFor="let setup of data; let index = index">
+                      <div class="cnh-tag">
+                        <div class="img">
+                          <img alt="" src="./assets/svg/zipimg.svg" />
+                        </div>
+                        <div class="txt">{{ setup.fileName }}</div>
+                        <!-- <span class="closebtn" (click)="removeSetup(index)"
+                          >&times;</span
+                        > -->
+                      </div>
+                    </li>
+                  </ul>
+                  <div class="last-item" *ngIf="lastItem">
+                    {{ 'SEND_DATA.REMOVE_ITEM_WARNING' | translate }}
+                  </div>
+                </ul>
+              </div>
+            </div>
+            <div class="col-md-2 text-center">
+              <mat-icon class="arrow">arrow_forward</mat-icon>
+            </div>
+            <div class="col-md-5">
+              <div class="col-title">
+                {{ 'SEND_DATA.PLURAL' | translate }}
+              </div>
+              <div class="row">
+                <ul>
+                  <ul>
+                    <li class="spacer" *ngFor="let vehicle of checkedItems(); let index = index">
+                      <div class="cnh-tag">
+                        <div class="txt">{{ vehicle.name }}</div>
+                        <span class="closebtn" (click)="removeVehicle(vehicle.id, 'CONFIRM')"
+                          >&times;</span
+                        >
+                      </div>
+                    </li>
+                  </ul>
+                  <div class="last-item" *ngIf="lastVehicle">
+                    {{ 'SEND_DATA.REMOVE_VEHICLE_WARNING' | translate }}
+                  </div>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </mat-dialog-content>
+
+    <mat-dialog-actions class="col-md-12 dialog-action">
+      <div class="pull-left" *ngIf="nextPage">
+        <div class="back" (click)="setPageState()">
+          <mat-icon class=" arrow-icon">keyboard_arrow_left</mat-icon>
+          <span class="back-text">{{ 'SEND_DATA.VEHICLE_SELECTION' | translate }}</span>
+        </div>
+      </div>
+      <div class="pull-right">
+        <button mat-button mat-dialog-close cdkFocusInitial>
+          {{ 'GLOBAL.CANCEL' | translate | uppercase }}
+        </button>
+        <button
+          type="submit"
+          mat-button
+          [style.color]="'white'"
+          [disabled]="checkedCount === 0"
+          [style.background-color]="getBrandColor()"
+          (click)="pageChange(buttonText)"
+        >
+          {{ buttonText | uppercase }}
+        </button>
+      </div>
+    </mat-dialog-actions>
+  </form>
+</div>

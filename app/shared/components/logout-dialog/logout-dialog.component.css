@@ -1,0 +1,8 @@
+.mat-raised-button.mat-warn.cih {
+  background-color: #a21c22;
+  background-color: var(--color-primary-caseih);
+}
+.mat-raised-button.mat-warn.nh {
+  background-color: #003e85;
+  background-color: var(--color-primary-nh);
+}

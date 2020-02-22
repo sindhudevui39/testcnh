@@ -1,0 +1,25 @@
+<div class="cnh-collapsible" [ngClass]="{ open: open, closeHeader: showHeaderLine }">
+  <div
+    class="cnh-collapsible--header"
+    [class.centered-style]="centerHeaderContent"
+    (click)="toggle()"
+    [class.lined-style]="linedHeaderStyle"
+  >
+    <div class="cnh-collapsible-header--content">
+      <ng-content select="[slot-header]"></ng-content>
+    </div>
+    <div class="cnh-collapsible--toggle" [class.circle]="linedHeaderStyle" *ngIf="type !== 'arrow'">
+      <span class="plus"></span>
+      <span></span>
+    </div>
+    <div class="cnh-collapsible--toggle arrow" *ngIf="type == 'arrow'">
+      <span class="cnh-collapsible-toggle--icon cnh-evo-iconfont cnh-evo-icon-chevron-down"></span>
+    </div>
+  </div>
+  <div class="cnh-collapsible--body">
+    <div class="cnh-collapsible-body--content">
+      <!-- body slot -->
+      <ng-content select="[slot-body]"></ng-content>
+    </div>
+  </div>
+</div>

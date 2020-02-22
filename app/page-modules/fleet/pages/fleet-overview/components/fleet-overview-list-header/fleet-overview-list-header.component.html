@@ -1,0 +1,50 @@
+<div class="flex list-header">
+  <div
+    class="vehicle-info flex flex-ai-c hand-cursor"
+    [ngClass]="{ active: selectedSortItem === 'name' }"
+    (click)="sortBy('name')"
+  >
+    <span>
+      {{ 'GLOBAL.VEHICLE.PLURAL' | translate | uppercase }}
+    </span>
+    <img
+      class="sort-icon"
+      *ngIf="selectedSortItem === 'name'"
+      [ngClass]="{ desc: !isAsc, asc: isAsc }"
+      src="assets/svg/sort-button.svg"
+    />
+  </div>
+
+  <div class="alerts-info">
+    {{ 'PAGE_MAIN.ALERTS.ALERTS' | translate | uppercase }}
+  </div>
+
+  <div
+    class="status-info"
+    [ngClass]="{ active: selectedSortItem === 'statusText' }"
+    (click)="sortBy('statusText')"
+  >
+    <span>{{ 'PAGE_FAULTS.FILTER.STATUS' | translate | uppercase }}</span>
+    <img
+      class="sort-icon"
+      *ngIf="selectedSortItem === 'statusText'"
+      [ngClass]="{ desc: !isAsc, asc: isAsc }"
+      src="assets/svg/sort-button.svg"
+    />
+  </div>
+
+  <div class="hours-info">
+    {{ 'GLOBAL.DATETIME.HOUR.PLURAL' | translate | uppercase }}
+  </div>
+
+  <div class="custom1-info flex flex-ai-c " (click)="customDialogue('CUSTOM 1')">
+    <span>{{ 'GLOBAL.LABEL.CUSTOM' | translate: param1 | uppercase }}</span>
+    <img class="settings-icon" src="assets/global/settings.svg" />
+  </div>
+
+  <div class="custom2-info flex flex-ai-c" (click)="customDialogue('CUSTOM 2')">
+    <span> {{ 'GLOBAL.LABEL.CUSTOM' | translate: param2 | uppercase }}</span>
+    <img class="settings-icon" src="assets/global/settings.svg" />
+  </div>
+  <div class="menu-col"></div>
+</div>

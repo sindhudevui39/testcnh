@@ -1,0 +1,77 @@
+<div
+  [ngClass]="{ 'no-data': isDataEmpty }"
+  style="background-color: #f4f5f5; height: 100%; width: 100%"
+  *ngIf="dataLoaded; else loading"
+>
+  <div class="cnh-history-table" *ngIf="!isDataEmpty; else NoNotifications">
+    <div class="cnh-history-header">
+      <div class="cnh-history-row">
+        <div class="cnh-history-header-value">
+          {{ 'PAGE_NOTIFICATION.TAB_HISTORY.VEHICLE_NAME' | translate }}
+        </div>
+        <div class="cnh-history-header-value">
+          {{ 'PAGE_NOTIFICATION.TAB_HISTORY.CUSTOM_RULE' | translate }}
+        </div>
+        <div class="cnh-history-header-value">
+          {{ 'PAGE_NOTIFICATION.TAB_HISTORY.DATE_TIME' | translate }}
+        </div>
+      </div>
+    </div>
+    <div class="cnh-header-bottom"></div>
+    <div class="cnh-history-list">
+      <perfect-scrollbar
+        style="max-height: 1235px; padding-right: 1em;"
+        [ngStyle]="{
+          height: userService.getBrand() === 'New Holland AG' ? 'calc(100% - 20px)' : '100%'
+        }"
+      >
+        <div *ngFor="let key of orderedKeys; let i = index" class="cnh-history-body">
+          <div class="cnh-itemType-header">
+            <div class="cnh-date-key">
+              <p>{{ key }}</p>
+              <div class="cnh-line"></div>
+            </div>
+            <div
+              class="circle plus flex flex-center"
+              [ngClass]="{ rotate: !isCollapsed[i] }"
+              (click)="isCollapsed[i] = !isCollapsed[i]"
+            >
+              <span></span><span></span>
+            </div>
+          </div>
+
+          <div class="cnh-border" [@hideNotification]="isCollapsed[i] ? 'collapsed' : 'expanded'">
+            <div *ngFor="let historyData of histories[key]" class="cnh-collapsable">
+              <div class="cnh-history-data">
+                <div class="cnh-name">{{ historyData.vehicleName }}</div>
+                <div class="can-rule">
+                  {{ historyData.brand }} |
+                  {{ historyData.vehicleSerialNumber }}
+                </div>
+              </div>
+              <div class="cnh-history-data">
+                <div class="cnh-name">{{ historyData.name }}</div>
+                <span class="can-rule">
+                  {{ historyData.canRule.familyName }} /
+                  {{ 'GLOBAL.CONDITION.' + historyData.canRule.condition | translate }}
+                  /
+                  {{ historyData.canRule.numericThreshold | number: '1.2-2' }}
+                  {{ historyData.canRule.muLabel }} / {{ historyData.canRule.durationMs }} sec
+                </span>
+              </div>
+              <div class="cnh-history-data cnh-date">
+                {{ historyData.dateTime | date: 'MM/dd/yyyy h:mm a' }}
+              </div>
+            </div>
+          </div>
+        </div>
+      </perfect-scrollbar>
+    </div>
+  </div>
+</div>
+<ng-template #loading> <app-loader></app-loader> </ng-template>
+<ng-template #NoNotifications>
+  <div>
+    {{ 'PAGE_NOTIFICATION.TAB_HISTORY.NO_HISTORY' | translate }}
+  </div>
+</ng-template>

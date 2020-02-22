@@ -1,0 +1,212 @@
+.cnh-firmware-trowser {
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
+  font-family: Roboto, sans-serif;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+.cnh-firmware-head {
+  display: flex;
+  justify-content: space-between;
+  min-width: 1024px;
+  height: 60px;
+  width: 100%;
+  background-color: #262626;
+}
+.cnh-firmware-head-title {
+  color: #fff;
+  display: flex;
+  align-content: center;
+  align-items: center;
+  justify-content: flex-start;
+  font-size: 18px;
+  font-weight: 500;
+  height: 100%;
+  padding-left: 20px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.cnh-firmware-close {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  padding-right: 20px;
+}
+.cnh-firmware-content {
+  display: flex;
+  flex: 1;
+  width: 100%;
+  background-color: white;
+}
+.summary-details {
+  border-left: solid 1px var(--color-grey);
+  width: 25%;
+  min-width: 354px;
+  background: #f2f2f2;
+}
+.summary-content {
+  justify-content: center;
+  display: flex;
+  align-items: center;
+  font-weight: 500;
+  border-bottom: 1px solid gray;
+  height: 64px;
+  background-color: white;
+}
+.name-display {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding-left: 24px;
+  height: 56px;
+  border-bottom: 1px solid gray;
+  font-family: Roboto;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 1.25;
+  letter-spacing: normal;
+  color: var(--color-med-grey);
+  background-color: white;
+}
+.vehicle-display {
+  display: flex;
+  align-items: center;
+  padding-left: 24px;
+  background-color: var(--color-extra-light-grey);
+  height: 56px;
+  font-weight: 500;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.6), 0 0 1px 0 var(--color-grey);
+}
+.vehicle-list {
+  display: flex;
+  height: 571px;
+  flex-direction: column;
+  padding: 24px;
+}
+.cnh-list {
+  display: flex;
+  height: 32px;
+  padding-bottom: 40px;
+  justify-content: center;
+}
+.vehicle-name {
+  display: flex;
+  width: 306px;
+  height: 32px;
+  background-color: white;
+  border: 1px solid var(--color-grey);
+  box-shadow: 0px 1px 1px var(--color-grey);
+}
+.cnh-name {
+  display: flex;
+  align-items: center;
+  width: 232px;
+  font-weight: 500;
+}
+.cnh-close-img {
+  display: flex;
+  align-items: center;
+}
+.mat-stepper-horizontal {
+  height: 100%;
+  width: 75%;
+  min-width: 670px;
+}
+.cnh-firmware {
+  padding: 0 24px;
+  height: 100%;
+  margin: 0 auto;
+  max-width: 1086px;
+  overflow: hidden;
+}
+.cnh-confirmation {
+  height: 100%;
+  margin: 0 auto;
+  max-width: 1086px;
+  overflow: hidden;
+}
+.reset-width {
+  width: 100% !important;
+  display: flex;
+  justify-content: center;
+}
+.add-color {
+  color: white;
+  cursor: pointer;
+}
+.disable-button {
+  background-color: none;
+  cursor: not-allowed;
+  color: black;
+}
+.cnh-firmware-vehicle-list {
+  display: flex;
+  flex-direction: column;
+  height: calc(100% - 57px);
+}
+.confirmation-vehicles {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+}
+.cnh-firmware-footer {
+  height: 84px;
+  width: 100%;
+  min-width: 1024px;
+  display: flex;
+  align-items: center;
+  border-top: 0.5px solid black;
+  z-index: 1;
+}
+.cnh-firmware-footer button {
+  position: absolute;
+}
+.cnh-firmware-footer .cnh-evo-icon-chevron-left {
+  font-size: 12px;
+  top: -1px;
+  position: relative;
+  padding-right: 5px;
+}
+.cnh-firmware-footer .prev-step-btn {
+  left: 24px;
+}
+.cnh-firmware-footer .next-step-btn {
+  right: 24px;
+}
+::ng-deep .mat-horizontal-content-container {
+  overflow: hidden !important;
+}
+::ng-deep .mat-horizontal-stepper-header .mat-step-icon,
+.mat-horizontal-stepper-header .mat-step-icon-not-touched {
+  margin-right: 0px !important;
+}
+::ng-deep .mat-step-header.cdk-program-focused {
+  background-color: rgba(0, 0, 0, 0) !important;
+}
+::ng-deep mat-horizontal-stepper .mat-horizontal-content-container {
+  height: calc(100% - 40px);
+}
+::ng-deep
+  mat-horizontal-stepper
+  .mat-horizontal-stepper-header-container
+  .mat-horizontal-stepper-header[aria-posinset='1']
+  + div {
+  margin: 22px -53px;
+}
+::ng-deep
+  mat-horizontal-stepper
+  .mat-horizontal-stepper-header-container
+  .mat-stepper-horizontal-line {
+  margin: 22px -50px;
+}

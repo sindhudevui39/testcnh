@@ -1,0 +1,54 @@
+.loader {
+  position: relative;
+  top: 50%;
+  left: calc(50% + 0px);
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  height: calc(100% - 130px);
+}
+
+.right-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin: 0 auto;
+  height: calc(100% - 40px);
+  border-bottom: 1px solid;
+}
+.right-container-content {
+  height: calc(100% - 100px);
+
+  border-bottom: 1px solid #707070;
+}
+.main-page {
+  background: #f5f4f4;
+  height: calc(100% - 47px);
+}
+.right-content {
+  min-width: calc(100% - 354px);
+  padding: 0 24px;
+  width: 100%;
+}
+.table-body {
+  margin: 0 auto;
+  max-width: 1440px;
+  width: 100%;
+  border-bottom: 1px solid #707070;
+}
+.element-count {
+  position: relative;
+  bottom: 0;
+  float: right;
+  padding: 5px;
+  right: 50px;
+}
+.count-text {
+  font-weight: 700;
+  margin-right: 22px;
+}
+.routerOutlet {
+  height: calc(100% - 56px);
+}
+.filterOpen {
+  height: calc(100% - 92px);
+}

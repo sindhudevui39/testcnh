@@ -1,0 +1,40 @@
+<div class="cnh-main-modal">
+  <mat-dialog-content>
+    <div class="cnh-modal">
+      <div class="cnh-header">
+        <span class="cnh-img"><img src="assets/warning.PNG"/></span>
+        <span class="cnh-text" *ngIf="data.deleteButtonText === 'Delete'">
+          {{ 'GLOBAL.CTA.DELETE' | translate }} {{ data.name }}?
+        </span>
+        <span class="cnh-text" *ngIf="data.deleteButtonText === 'Remove'">
+          {{ 'PAGE_NOTIFICATION.TAB_MANAGE.REMOVE_TITLE' | translate }}
+        </span>
+      </div>
+      <div class="cnh-content" *ngIf="data.deleteButtonText === 'Delete'">
+        {{ 'PAGE_NOTIFICATION.TAB_MANAGE.DELETE_CAPTION' | translate }}
+      </div>
+      <div class="cnh-content" *ngIf="data.deleteButtonText === 'Remove'">
+        {{ 'PAGE_NOTIFICATION.TAB_MANAGE.REMOVE_CAPTION' | translate }}
+      </div>
+      <div class="sub-content"></div>
+    </div>
+  </mat-dialog-content>
+  <mat-dialog-actions class="mat-dialog-actions">
+    <button mat-button matDialogClose>
+      <span class="cnh-button-wrapper">{{ 'GLOBAL.CTA.CANCEL' | translate }}</span>
+    </button>
+    <button
+      mat-raised-button
+      color="primary"
+      [style.background-color]="buttonBGColor"
+      (click)="delete(data.id, data.notificationGroupId)"
+    >
+      <span class="cnh-button-delete" *ngIf="data.deleteButtonText === 'Delete'">{{
+        'GLOBAL.CTA.DELETE' | translate | uppercase
+      }}</span>
+      <span class="cnh-button-delete" *ngIf="data.deleteButtonText === 'Remove'">{{
+        'PAGE_NOTIFICATION.TAB_MANAGE.CONFIRM_REMOVE' | translate | uppercase
+      }}</span>
+    </button>
+  </mat-dialog-actions>
+</div>

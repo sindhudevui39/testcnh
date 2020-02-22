@@ -1,0 +1,138 @@
+<div class="cnh-itemType-header" *ngIf="notificationCount > 0">
+  <div class="cnh-key">
+    <p>
+      <span>{{ notificationTitle | uppercase }}</span>
+    </p>
+    <div class="cnh-line"></div>
+  </div>
+  <div
+    class="circle plus flex flex-center"
+    [ngClass]="{ rotate: !isCollapsed }"
+    (click)="isCollapsed = !isCollapsed"
+  >
+    <span></span><span></span>
+  </div>
+</div>
+<div class="cnh-border" [@hideNotification]="isCollapsed ? 'collapsed' : 'expanded'">
+  <div *ngFor="let element of notificationList" class="cnh-collapsable">
+    <div
+      class="cnh-manage-data cnh-name-row default-padding"
+      *ngIf="notificationType === 'DEFAULT'; else notificationDisplay"
+    >
+      <div class="notification-name">
+        <span class="notification-img" style="margin-top: 10px;">
+          <img src="assets/severity-high-active.png" />
+        </span>
+        <span style="padding-left: 10px;" *ngIf="element.name === 'Recent Fault Occurences'"
+          >{{ 'PAGE_MAIN.ALERTS.HIGH_FAULTS' | translate }}
+        </span>
+        <span style="padding-left: 10px;" *ngIf="element.name !== 'Recent Fault Occurences'"
+          >{{ element.name }}
+        </span>
+      </div>
+      <div class="can-rule" style="padding: 0 26px;">
+        <span *ngIf="!element.canRule">{{
+          'PAGE_NOTIFICATION.TAB_MANAGE.EXPLAIN_ALERT_PARAMS' | translate
+        }}</span>
+        <span *ngIf="element.canRule">
+          {{ element.canRule.label }}&nbsp;/&nbsp;
+          {{ 'GLOBAL.CONDITION.' + element.canRule.condition | translate }}
+          &nbsp;/&nbsp;{{ element.canRule.threshold }}&nbsp;{{
+            element.canRule.unit
+          }}
+          &nbsp;/&nbsp;{{ element.canRule.durationMs }}&nbsp;sec</span
+        >
+      </div>
+    </div>
+    <ng-template #notificationDisplay>
+      <div class="cnh-manage-data cnh-name-row">
+        <div class="notification-name">
+          {{ element.name }}
+        </div>
+        <div class="can-rule">
+          <span *ngIf="element.canRule">
+            {{ element.canRule.label }}&nbsp;/&nbsp;
+            {{ 'GLOBAL.CONDITION.' + element.canRule.condition | translate }}
+            &nbsp;/&nbsp;{{ element.canRule.threshold }}&nbsp;{{
+              element.canRule.unit
+            }}
+            &nbsp;/&nbsp;{{ element.canRule.durationMs }}&nbsp;sec</span
+          >
+        </div>
+      </div>
+    </ng-template>
+    <div class="cnh-manage-data cnh-count">
+      <span *ngIf="element.modelsCount === 'All'">{{ 'GLOBAL.ALL' | translate }}</span>
+      <span *ngIf="element.modelsCount !== 'All'">{{ element.modelsCount }}</span>
+    </div>
+    <div class="cnh-manage-data cnh-date">
+      <span *ngIf="element.vehiclesCount === 'All'">{{ 'GLOBAL.ALL' | translate }}</span>
+      <span *ngIf="element.vehiclesCount !== 'All'">{{ element.vehiclesCount }}</span>
+    </div>
+    <div class="cnh-manage-data cnh-date">
+      <span *ngIf="element.usersCount === 'All'">{{ 'GLOBAL.ALL' | translate }}</span>
+      <span *ngIf="element.usersCount !== 'All' && element.usersCount !== 'N/A'">{{
+        element.usersCount
+      }}</span>
+      <span *ngIf="element.usersCount === 'N/A'"> {{ 'GLOBAL.NO_DATA' | translate }}</span>
+    </div>
+    <div
+      class="cnh-manage-data cnh-fileType"
+      style="flex-direction: row;align-items: center;justify-content: left"
+    >
+      <p *ngFor="let channel of element.channels; let i = index">
+        <span *ngIf="channel === 'WEB' || channel === 'Web'">{{
+          'PAGE_VEHICLE_DETAILS.PREFERENCES.WEB' | translate
+        }}</span>
+        <span *ngIf="channel === 'SMS' && checkSMSValue > 0">{{
+          'PAGE_VEHICLE_DETAILS.PREFERENCES.SMS' | translate
+        }}</span>
+        <span *ngIf="channel === 'SMS' && notificationType !== 'DEFAULT'">{{
+          'PAGE_VEHICLE_DETAILS.PREFERENCES.SMS' | translate
+        }}</span>
+        <span *ngIf="channel === 'N/A' && notificationType !== 'DEFAULT'">
+          {{ 'GLOBAL.NO_DATA' | translate }}
+        </span>
+        <span *ngIf="i !== element.channels.length - 1 && checkSMSValue > 0">,</span>
+        <span *ngIf="i !== element.channels.length - 1 && notificationType !== 'DEFAULT'">,</span>
+      </p>
+    </div>
+    <div class="cnh-manage-data cnh-icon" *ngIf="!(notificationType === 'DEFAULT' && phoneCheck)">
+      <i class="material-icons farm-more" [matMenuTriggerFor]="actionMenu">
+        more_vert
+      </i>
+    </div>
+    <mat-menu class="action-menu" #actionMenu="matMenu" [backdropClass]="'full-width'">
+      <button
+        mat-menu-item
+        class="edit-action-menu"
+        (click)="editCustomNotification(element.id)"
+        *ngIf="notificationType === 'Created By Me'"
+      >
+        {{ 'PAGE_NOTIFICATION.TAB_MANAGE.EDIT_NOTIFICATION' | translate }}
+      </button>
+      <button
+        mat-menu-item
+        class="edit-action-menu"
+        (click)="childEditPreference(element.id)"
+        *ngIf="!phoneCheck"
+      >
+        {{ 'PAGE_NOTIFICATION.TAB_MANAGE.EDIT_PREFERENCE' | translate }}
+      </button>
+      <button
+        mat-menu-item
+        *ngIf="!(notificationType === 'DEFAULT')"
+        class="themeTextColor edit-action-menu"
+        (click)="childDeleteNotification(element.id)"
+        [ngClass]="{ cih: brand === 'CSAG', nh: brand === 'NHAG' }"
+      >
+        <span *ngIf="notificationType === 'Created By Me'">
+          {{ 'GLOBAL.CTA.DELETE' | translate }}
+        </span>
+        <span *ngIf="notificationType === 'Created For Me'">
+          {{ 'PAGE_NOTIFICATION.TAB_MANAGE.REMOVE_FROM_LIST' | translate }}
+        </span>
+      </button>
+    </mat-menu>
+  </div>
+</div>

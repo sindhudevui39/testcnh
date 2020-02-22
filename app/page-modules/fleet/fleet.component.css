@@ -1,0 +1,14 @@
+.toolbar {
+  height: 56px;
+  border: 1px solid black;
+  z-index: 1;
+}
+.fleet-footer {
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  z-index: 500;
+  transition: bottom 0.3s ease-out;
+}

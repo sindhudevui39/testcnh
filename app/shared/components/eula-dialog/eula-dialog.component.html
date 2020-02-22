@@ -1,0 +1,53 @@
+<div class="eula-dialog">
+  <div class="ed__title">{{ 'PAGE_EULA.TITLE' | translate }}</div>
+
+  <form class="ed__content" [formGroup]="eulaForm">
+    <div *ngFor="let control of checkboxes.controls; let i = index">
+      <div class="ed__content__item">
+        <mat-checkbox
+          class="ed__checkbox"
+          [formControl]="control"
+          [ngClass]="{
+            cih: userBrand === brands.CIH,
+            nh: userBrand === brands.NH
+          }"
+        ></mat-checkbox>
+        <span>{{ data[i]['copy'] }}</span>
+        <a
+          class="right-chevron"
+          [href]="data[i]['link']"
+          target="_blank"
+          [ngClass]="{
+            cih: userBrand === brands.CIH,
+            nh: userBrand === brands.NH
+          }"
+        >
+          &#8250;
+        </a>
+      </div>
+      <hr />
+    </div>
+  </form>
+
+  <div class="ed__actions">
+    <div class="mat-dialog-actions">
+      <button mat-button (click)="onDecline()">
+        {{ 'PAGE_EULA.DECLINE' | translate | uppercase }}
+      </button>
+
+      <button
+        class="mat-warn"
+        cdkFocusInitial
+        mat-button
+        mat-raised-button
+        [disabled]="!eulaForm.valid"
+        [ngStyle]="{
+          'background-color': eulaForm.valid ? brandColor : ''
+        }"
+        (click)="onAccept()"
+      >
+        {{ 'PAGE_EULA.ACCEPT' | translate | uppercase }}
+      </button>
+    </div>
+  </div>
+</div>

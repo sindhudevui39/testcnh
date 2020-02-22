@@ -1,0 +1,115 @@
+<div class="cnh-firmware-trowser">
+  <div class="cnh-firmware-head">
+    <div class="cnh-firmware-head-title">
+      {{ 'TROWSER.FOTA.TITLE' | translate }}
+    </div>
+
+    <div class="cnh-firmware-close">
+      <img src="assets/svg/24-light.svg" (click)="onNoClick()" />
+    </div>
+  </div>
+
+  <div class="cnh-firmware-content" [ngClass]="{ 'reset-width': currentStepIndex === 2 }">
+    <mat-horizontal-stepper #stepper style="height: 100%;">
+      <ng-template matStepperIcon="edit" style="height: 116px;">
+        <mat-icon style="margin-top: 2px; margin-left: 2px;">check</mat-icon></ng-template
+      >
+
+      <mat-step [label]="'TROWSER.FOTA.STEP_NAME.SOFTWARE' | translate">
+        <div class="cnh-firmware" *ngIf="currentStepIndex === 0">
+          <app-fleet-firmware-selection
+            class="cnh-firmware-vehicle-list"
+            (selectedCampaign)="campaignSelected($event)"
+          >
+          </app-fleet-firmware-selection>
+        </div>
+      </mat-step>
+
+      <mat-step [label]="'TROWSER.FOTA.STEP_NAME.VEHICLES' | translate">
+        <div class="cnh-firmware" *ngIf="currentStepIndex === 1">
+          <app-fleet-firmware-vehicle-selection
+            class="cnh-firmware-vehicle-list"
+            [selectedCampaignId]="selectedCampaignId"
+            [selectedCampaignName]="selectedCampaignName"
+          >
+          </app-fleet-firmware-vehicle-selection>
+        </div>
+      </mat-step>
+
+      <mat-step [label]="'TROWSER.FOTA.STEP_NAME.SUMMARY' | translate">
+        <div class="cnh-confirmation" *ngIf="currentStepIndex === 2">
+          <app-fleet-firmware-confirmation
+            class="confirmation-vehicles"
+            [success]="success"
+            [software]="selectedCampaignName"
+            [vehicleCount]="vehicleCount"
+          >
+          </app-fleet-firmware-confirmation>
+        </div>
+      </mat-step>
+    </mat-horizontal-stepper>
+
+    <div class="summary-details" *ngIf="currentStepIndex !== 2">
+      <div class="summary-content">
+        {{ 'TROWSER.FOTA.STEP_NAME.SUMMARY' | translate | uppercase }}
+      </div>
+
+      <div class="name-display">
+        <span class="" style="font-size: 12px">
+          {{ 'GLOBAL.CTA.SOFTWARE' | translate | uppercase }}:
+        </span>
+        <span style="font-weight: bold"> {{ selectedCampaignName }} </span>
+      </div>
+
+      <div class="vehicle-display" *ngIf="this.currentStepIndex === 1">
+        {{ 'GLOBAL.VEHICLE.PLURAL' | translate | uppercase }}
+      </div>
+
+      <div class="vehicle-list">
+        <div class="cnh-list" *ngFor="let vehicle of selectedVehicleIds">
+          <div class="vehicle-name">
+            <img
+              style="padding-right: 12px; padding-left: 12px;"
+              src="assets/svg/firmware/ic-placeholder-24.svg"
+            />
+            <span class="cnh-name"> {{ vehicle.name }} </span>
+            <span class="cnh-close-img">
+              <img
+                style="width: 10px; height: 10px; display:flex; cursor: pointer;"
+                src="assets/svg/firmware/24-grey.svg"
+                (click)="vehicleClick(vehicle.id)"
+              />
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="cnh-firmware-footer">
+    <button
+      mat-button
+      class="prev-step-btn"
+      *ngIf="currentStepIndex === 1"
+      [ngClass]="{
+        cih: userService.getBrand() === 'Case IH',
+        nh: userService.getBrand() === 'New Holland AG'
+      }"
+      (click)="goBack()"
+    >
+      <span class="cnh-evo-iconfont cnh-evo-icon-chevron-left"></span>
+      {{ 'TROWSER.FOTA.STEP_NAME.SOFTWARE' | translate | uppercase }}
+    </button>
+
+    <button
+      mat-raised-button
+      class="next-step-btn"
+      [ngClass]="enableNext() ? 'add-color' : 'disable-button'"
+      [style.background-color]="enableNext() ? brandColor : 'rgba(0,0,0,.12)'"
+      [disabled]="!enableNext()"
+      (click)="changeStep()"
+    >
+      {{ nextButtonText | translate | uppercase }}
+    </button>
+  </div>
+</div>

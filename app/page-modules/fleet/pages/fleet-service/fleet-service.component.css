@@ -1,0 +1,21 @@
+.fleet-service-contents {
+  display: flex;
+  align-content: space-between;
+}
+.fleet-service-vehicle--info {
+  margin-left: 3px;
+  min-width: calc(100% - 381px);
+  max-width: 100%;
+}
+.expanded {
+  width: 354px;
+}
+.collapsed {
+  width: 0px;
+  z-index: -1;
+}
+.fleet-img {
+  height: 39px;
+  width: 39px;
+  align-self: center;
+}

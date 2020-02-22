@@ -1,0 +1,74 @@
+.tfc-content {
+  display: flex;
+  flex-direction: row;
+}
+.tfc-content-child {
+  display: block;
+  width: 80%;
+}
+.box {
+  display: flex;
+  align-items: center;
+  height: 18px;
+  margin-bottom: 7px;
+}
+.bar-graph:first-child {
+  margin-top: 11px;
+}
+.bar-graph:last-child {
+  margin-bottom: 8px;
+}
+.date {
+  font-size: 10px;
+  line-height: 1.6;
+  color: var(--color-med-grey);
+  margin-left: 8px;
+}
+.bar {
+  height: 14px;
+  margin-left: 8px;
+  border-radius: 2px;
+}
+.totalFuel {
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.33;
+  color: var(--color-main-grey);
+  margin-left: 4px;
+}
+.chart-labels {
+  width: 20%;
+  padding-bottom: 15px;
+}
+.label-title {
+  font-size: 0.8em;
+  color: #707070;
+  margin-top: 1.5em;
+}
+.label-value {
+  margin-top: 0.3em;
+}
+.text-style-1 {
+  font-weight: 300;
+  font-size: 0.8em;
+}
+.text-style-2 {
+  font-size: 1.25em;
+  font-weight: 700;
+  color: #262626;
+}
+.vehicle-data {
+  height: 188px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.no-data {
+  display: flex;
+  flex: 1;
+}
+.no-data-text {
+  font-size: 0.8em;
+  color: var(--color-grey);
+  margin: auto;
+}

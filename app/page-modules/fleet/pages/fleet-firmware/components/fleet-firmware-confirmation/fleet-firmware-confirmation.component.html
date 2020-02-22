@@ -1,0 +1,38 @@
+<div class="cnh-summary">
+  <div class="cnh-summary-list" *ngIf="success; else errorMessage">
+    <div class="icon">
+      <img style="height: 100px" src="assets/svg/success.svg" />
+    </div>
+    <div
+      class="cnh-title"
+      [translate]="'TROWSER.FOTA.SUMMARY.TITLE'"
+      [translateParams]="{ count: vehicleCount }"
+    ></div>
+
+    <div class="cnh-summary-values">
+      <ul class="cnh-ul">
+        <li class="cnh-values">
+          <span class="heading">
+            <img style="height: 24px; width: 24px" src="assets/svg/checkmark.svg" />
+            <!-- {{ 'TROWSER.FOTA.SUMMARY.SOFTWARE' | translate }}: {{ software }}</span -->
+            Software: {{ software }}</span
+          >
+        </li>
+        <li class="cnh-values">
+          <p class="cnh-notes">{{ 'TROWSER.FOTA.SUMMARY.NOTES' | translate }}</p>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<ng-template class="cnh-summary" #errorMessage>
+  <div class="cnh-summary-list">
+    <div class="icon" style="height: 10%">
+      <img style="width: 10%;" src="assets/error.PNG" />
+    </div>
+    <div class="cnh-title" style="height: 35.6px">
+      {{ 'TROWSER.FOTA.SUMMARY.NOTIFY_ERROR' | translate }}
+    </div>
+  </div>
+</ng-template>

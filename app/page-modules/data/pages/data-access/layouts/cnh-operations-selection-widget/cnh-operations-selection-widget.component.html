@@ -1,0 +1,80 @@
+<div class="cnh-operations-selection-wideget" data-simplebar>
+  <div class="operation-selection">
+    <div class="operation-selection--title">
+      {{ 'DATA_ACCESS.OPERATIONS_TITLE' | translate }}
+    </div>
+    <div class="operation-selection--subtitle">
+      {{ 'DATA_ACCESS.OPERATIONS_SUBTITLE' | translate }}
+    </div>
+  </div>
+  <mat-card class="operation-selection-box">
+    <mat-card-content>
+      <div class="operation-selection-box--header">
+        <mat-checkbox
+          role="checkbox"
+          class="checkbox"
+          [checked]="checkedAll"
+          [indeterminate]="indeterminateAll"
+          (change)="onToggleAll()"
+        >
+          <div class="operation-selection-all-label operation-selection-title">
+            <div class="operation-selection-box--title">
+              {{ 'DATA_ACCESS.OPERATIONS_CARD_TITLE' | translate }}
+            </div>
+            <div class="operation-selection-box--subtitle">
+              {{ 'DATA_ACCESS.OPERATIONS_CARD_SUBTITLE' | translate }}
+            </div>
+          </div>
+        </mat-checkbox>
+        <div class="operation-selection-box--icon field">
+          <img src="./assets/svg/icon-data-access-field-new.svg" alt="Field" />
+        </div>
+      </div>
+      <div
+        *ngFor="let operation of operations; trackBy: trackByFn"
+        class="operation-selection-box-operation-row operation-row"
+      >
+        <mat-checkbox
+          role="checkbox"
+          class="checkbox"
+          [checked]="checkedOperations?.has(operation)"
+          (change)="onToggleOperation(operation)"
+        >
+          <div class="icon">
+            <img
+              src="{{ operationImgBaseUrl + operation?.styles?.iconField }}"
+              alt="Operation icon"
+            />
+          </div>
+          <div class="txt">
+            <div class="title">
+              {{ 'GLOBAL.OPERATIONS.' + operation?.name | translate }}
+            </div>
+          </div>
+        </mat-checkbox>
+      </div>
+    </mat-card-content>
+  </mat-card>
+  <mat-card class="operation-selection-box" id="map-operation-selection-box">
+    <mat-card-content>
+      <div class="operation-selection-box--swaths-header operation-row">
+        <mat-checkbox
+          role="checkbox"
+          class="checkbox"
+          [checked]="checkedMapOperations"
+          (change)="onToggleMapOperation()"
+        >
+          <div class="operation-selection-box--title operation-selection-title">
+            {{ 'DATA_ACCESS.SETUP_DATA_ALL' | translate }}
+          </div>
+          <div class="operation-selection-box--subtitle-Long">
+            {{ 'DATA_ACCESS.SETUP_DATA_ALL_SUBTITLE' | translate }}
+          </div>
+        </mat-checkbox>
+        <div class="operation-selection-box--icon operation">
+          <img src="./assets/svg/icon-data-access-swath.svg" alt="Swaths" />
+        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>

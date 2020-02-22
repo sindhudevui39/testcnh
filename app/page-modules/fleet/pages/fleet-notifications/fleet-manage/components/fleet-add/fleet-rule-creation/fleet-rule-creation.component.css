@@ -1,0 +1,120 @@
+.cnh-list {
+  border: 1px solid #bbb;
+  width: 100%;
+}
+.rule-creation-step {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  background-color: #f4f5f5;
+}
+.rule-creation-step .step-header,
+.rule-creation-step .step-content {
+  width: 100%;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 500;
+  display: flex;
+}
+::ng-deep .step-content-item.disabled .dropdown-label,
+.step-content-item.disabled {
+  color: #707070;
+  cursor: pointer;
+  pointer: not-allowed;
+}
+.rule-creation-step .step-header {
+  height: 48px;
+}
+.step-header .step-header-item,
+.step-content .step-content-item {
+  width: 20%;
+  display: flex;
+  align-items: center;
+}
+.step-header .step-header-item {
+  height: 48px;
+  /* border-right: 1px solid #979797; */
+  padding-left: 24px;
+}
+.rule-creation-step .step-content {
+  height: 56px;
+  border-bottom: 1px solid #bbb;
+  border-top: 1px solid #bbb;
+  background-color: #fff;
+}
+.step-content .step-content-item {
+  justify-content: center;
+}
+/** Util Class **/
+.prev-bg-color {
+  background-color: #707070;
+}
+.prev-right-border {
+  border-right: 1px solid #979797;
+}
+.current-bg-color {
+  background-color: #000;
+}
+.next-bg-color {
+  background-color: #f4f5f5;
+}
+.next-text-color {
+  color: #f4f5f5;
+}
+
+.util-step1 {
+  background-color: black;
+}
+.header-cell {
+  height: 48px;
+  line-height: 48px;
+  padding-left: 24px;
+  color: #fff;
+  text-transform: uppercase;
+  font-size: 12px;
+  font-weight: 500;
+}
+.cnh-filter-bar {
+  display: flex;
+  min-height: 56px;
+  max-height: 56px;
+  line-height: 56px;
+  font-size: 12px;
+  font-weight: 500;
+  text-rendering: geometricPrecision;
+  color: #fff;
+  border-bottom: 1px solid #bbb;
+  border-top: 1px solid #bbb;
+}
+.cnh-name {
+  padding-left: 40px;
+  font-size: 14px;
+  font-weight: 500;
+  text-rendering: geometricPrecision;
+  color: #262626;
+  width: 40%;
+}
+.cnh-id {
+  font-size: 12px;
+  color: #707070;
+  width: 26.66666667%;
+}
+.cnh-model {
+  width: 100%;
+  font-size: 12px;
+  color: #707070;
+  width: 20%;
+}
+.cnh-all {
+  width: 13.3333333333%;
+  display: flex;
+  color: #a21c22;
+  height: 100%;
+  padding: 5px 0;
+  text-align: center;
+}
+.percent-value {
+  margin-left: 15px;
+  font-size: 14px;
+  color: black;
+}

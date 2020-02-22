@@ -1,0 +1,263 @@
+.full-width{
+    margin-left:-14px !important;
+    margin-right:-15px !important;
+}
+
+
+.title {
+    font-weight: 500;
+    height: 56px;
+    /* border-bottom: 1px solid #707070; */
+  }
+  .minus {
+    position: relative;
+    right: 1em;
+    font-size: 25px;
+    transform: rotate(0deg);
+    transition: transform 0.3s;
+    cursor: pointer;
+  }
+  .minus::after {
+    content: '-';
+    transition: transform 0.3s;
+  }
+  .title-value {
+    font-size: 14px;
+    text-transform: uppercase;
+    font-weight: 700;
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    padding: 15px 0;
+  }
+  .title-value-overview{
+    font-size: 14px;
+    text-transform: uppercase;
+    font-weight: 700;
+    display: flex;
+    margin-left:20px;
+    width: 100%;
+    padding: 18px 0;
+    cursor: pointer;
+  }
+  .material-icons{
+    font-size: 27px !important;
+    line-height: 0.8 !important;
+  }
+  .selectOptions {
+    display: flex;
+    justify-content: flex-start;
+    padding-left: 16px;
+    border-bottom: 1px solid #707070;
+  }
+  .floating-right-icon {
+    position: relative;
+    /* right: -5em; */
+    cursor: pointer;
+    padding: 15px 0;
+    background-color: white;
+  }
+  .buttonToggle {
+    transform: scaleX(-1);
+    /* right: -1em; */
+    padding: 15px 0;
+  
+    /* border-bottom: 1px solid; */
+    position: inherit;
+    height: 100%;
+  }
+  .fleet-sidenav {
+    box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.5), 0 0 5px 0 rgba(0, 0, 0, 0.12);
+    transition: width 0.75s ease-in-out;
+    height: 100%;
+  }
+  .fleet-img {
+    height: 25px;
+    width: 22px;
+    align-self: center;
+  }
+  .custom-select {
+    height: 56px;
+    padding: 18px;
+    width: 168px;
+  }
+  .nav-select {
+    height: 22px;
+    width: 121px;
+    border: none;
+    margin: 0 0 0 10px;
+  }
+  .collapsed {
+    width: 0px;
+    padding-left: 0;
+    display: block;
+  }
+  .hide {
+    display: none;
+  }
+  .vehicleContent.droppedDown {
+    max-height: 0px;
+    overflow: hidden;
+    height: 0px;
+    transition: height 0.3s ease-in-out;
+  }
+  .nav-content {
+    height: 100%;
+    transition: height 0.3s ease-in-out;
+  }
+  .nav-content.droppedDown {
+    height: 40px;
+    overflow: hidden;
+  }
+  
+  .ps__rail-y {
+    opacity: 0.6;
+  }
+  .fleet-sidenav .filter-header {
+    height: 40px;
+    background-color: #f4f5f5;
+    /* border: 1px solid #707070; */
+    border-top: none;
+  
+    border-right: none;
+    justify-content: space-between;
+    padding: 0 0.5em;
+  }
+  .select-style {
+    width: 120px;
+    border-radius: 3px;
+    overflow: hidden;
+  }
+  .selectValues {
+    min-height: 40px;
+    max-height: 40px;
+    padding: 0 10px;
+    overflow: hidden;
+    font-size: 20px;
+  }
+  /* .select-selected:after {
+    position: absolute;
+    content: '';
+    top: 14px;
+    right: 10px;
+    width: 0;
+    height: 0;
+    border: 6px solid transparent;
+    border-color: #fff transparent transparent transparent;
+    background-color: red;
+  }
+  .select-selected {
+    background-color: red;
+  } */
+  .select-selected.select-arrow-active:after {
+    border-color: transparent transparent #fff transparent;
+    top: 7px;
+  }
+  .resetSelection {
+    align-self: center;
+    font-size: 12px;
+    cursor: pointer;
+    height: 56px;
+    padding: 18px;
+  }
+  .resetDisplay {
+    display: none;
+  }
+  .plus::after {
+    transform: rotate(90deg);
+    transition: transform 0.3s;
+    content: '+';
+  }
+  .plus {
+    transform: rotate(90deg);
+    transition: transform 0.3s;
+    font-size: 25px;
+    cursor: pointer;
+  }
+  .loader {
+    position: relative;
+    height: calc(100vh - 272px);
+  }
+  .side-nav-content {
+    height: 100%;
+  }
+  .filterOpenNH {
+    height: calc(100vh - 367px);
+  }
+  .filterCloseNH {
+    height: calc(100vh - 325px);
+  }
+  .filterOpenCIH {
+    height: calc(100vh - 328px);
+  }
+  .filterCloseCIH {
+    height: calc(100vh - 280px);
+  }
+  .menutop {
+    z-index: 999;
+  }
+  .expanded {
+    width: 330px;
+  }
+  .cih {
+    color: #a21c22;
+  }
+  .nh {
+    color: #003e85;
+  }
+
+  
+
+  
+
+        /* Set up some css rules to animate things */
+        /* Some rules to change the appearance of clusters and it's text when activated */
+        /* Scale up the clusters when activated */
+        .cluster-group.activated {
+          transform-origin: center;
+          transform: scale(1.2);
+          transition: transform linear 0.4s;
+      }
+          /* Change the appearance of clusters when activated */
+          .cluster-group.activated .cluster {
+              stroke: rgba(255,255,255,1);
+              stroke-width: 2;
+              transition: all ease 1s;
+          }
+          .cluster-group.activated .cluster-text {
+              fill: #000;
+              font-weight: bold;
+              transition: all ease 1s;
+          }
+      /* hide flares by default */
+       /* animate display of flares */
+          .flare-group.activated {
+              opacity: 1;
+              transition: opacity linear 0.06s;
+          }
+              /* this just chains the display of flares to occur one after the other using transition delay - could be a better way to do this natively but using SASS or LESS this would be much more concise */
+              .flare-group.activated:nth-of-type(1) {
+                  transition-delay: 0.06s;
+              }
+              .flare-group.activated:nth-of-type(2) {
+                  transition-delay: 0.12s;
+              }
+              .flare-group.activated:nth-of-type(3) {
+                  transition-delay: 0.18s;
+              }
+              .flare-group.activated:nth-of-type(4) {
+                  transition-delay: 0.24s;
+              }
+              .flare-group.activated:nth-of-type(5) {
+                  transition-delay: 0.30s;
+              }
+              .flare-group.activated:nth-of-type(6) {
+                  transition-delay: 0.36s;
+              }
+      .cluster-group .flare-group.activated:nth-of-type(7) {
+          transition-delay: 0.42s;
+      }
+      .flare-group.activated:nth-of-type(8) {
+          transition-delay: 0.48s;
+      }
+ 

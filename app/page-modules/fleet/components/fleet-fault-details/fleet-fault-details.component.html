@@ -1,0 +1,142 @@
+<div
+  class="fault-list-container"
+  [ngClass]="{
+    filtersExpanded: !filtersBarOpen,
+    filtersCollapsed: filtersBarOpen
+  }"
+>
+  <perfect-scrollbar
+    [ngClass]="{
+      filtersExpandedNH: !filtersBarOpen && userService.getBrand() === brands.NH,
+      filtersCollapsedNH: filtersBarOpen && userService.getBrand() === brands.NH,
+      filtersExpandedCIH: !filtersBarOpen && userService.getBrand() === brands.CIH,
+      filtersCollapsedCIH: filtersBarOpen && userService.getBrand() === brands.CIH
+    }"
+    style="max-width: 100%; "
+  >
+    <div class="sortable-table">
+      <div
+        class="fault-contents"
+        *ngFor="let data of dataSource; let i = index"
+        [ngClass]="{ expanded: dataSource[i].data }"
+      >
+        <div class="fixed-content">
+          <div class="fault-name">
+            <span>{{ data ? (data.title | capitalizeFirst) : '' }}</span>
+            <div class="brand-model">
+              <span
+                >{{ data ? data.assetDetail.name : '' }} |
+                {{ data ? data.assetDetail.model : '' }}</span
+              >
+            </div>
+          </div>
+          <div class="source">
+            <span class="spanTag" *ngIf="data && data.active">{{
+              'PAGE_FAULTS.FILTER.ACTIVE' | translate
+            }}</span>
+            <span class="spanTag" *ngIf="data && !data.active">{{
+              'PAGE_FAULTS.FILTER.INACTIVE' | translate
+            }}</span>
+          </div>
+          <div class="source">
+            <div
+              class="severity head"
+              [ngClass]="{
+                low: data.severity === 'LOW',
+                medium: data.severity === 'MEDIUM',
+                high: data.severity === 'HIGH'
+              }"
+            ></div>
+            <span class="label spanTag" *ngIf="data && data.severity === 'LOW'" translate
+              >GLOBAL.SEVERITY.LOW</span
+            >
+            <span class="label spanTag" *ngIf="data && data.severity === 'MEDIUM'" translate
+              >GLOBAL.SEVERITY.MEDIUM</span
+            >
+            <span class="label spanTag" *ngIf="data && data.severity === 'HIGH'" translate
+              >GLOBAL.SEVERITY.HIGH</span
+            >
+          </div>
+          <div class="source">
+            <span class="spanTag">{{ data ? data.code : '' }}</span>
+          </div>
+          <div class="source">
+            <span class="spanTag">{{ data ? data.source : '' }}</span>
+          </div>
+          <div class="source">
+            <span class="spanTag">
+              {{
+                (data.created | date: dateFormat:tzOffset) ===
+                (currentDate | date: dateFormat:tzOffset)
+                  ? (data.created | date: 'hh:mm a':tzOffset)
+                  : (data.created | date: dateFormat:tzOffset)
+              }}</span
+            >
+          </div>
+          <div class="ngstar">
+            <i
+              class="arrow"
+              [ngClass]="{
+                down: !dataSource[i].data,
+                up: dataSource[i].data
+              }"
+              (click)="dataSource[i].data = !dataSource[i].data"
+            ></i>
+          </div>
+        </div>
+
+        <div class="additional-fault-details" [ngClass]="{ expanded: dataSource[i].data }">
+          <div class="left-container">
+            <div class="left-container-main">
+              <div>
+                <div class="time">
+                  {{ data.created | date: 'MM/dd/yyyy h:mm a':tzOffset }}
+                </div>
+
+                <div class="text">{{ data ? data.message : '' }}</div>
+              </div>
+              <div class="lower-left">
+                <span class="tag">{{ 'PAGE_FAULTS.OCCURRENCES' | translate }}</span>
+                <span class="value">{{ data ? data.occurrences : '' }}</span>
+
+                <span
+                  class="history"
+                  *ngIf="data.occurrences !== 0"
+                  (click)="
+                    showHistoryModal(
+                      data.assetDetail.id,
+                      data.code,
+                      data.title,
+                      data.assetDetail.name
+                    )
+                  "
+                  >{{ 'PAGE_FAULTS.VIEW_HISTORY' | translate | uppercase }}</span
+                >
+                <span class="tag">{{ 'PAGE_FAULTS.ENGINE_HOURS' | translate | uppercase }}</span>
+                <span class="value">{{
+                  data.assetDetail.engineHours
+                    ? (data.assetDetail.engineHours.value | number: '1.1-2')
+                    : ''
+                }}</span>
+                <span class="tag">
+                  {{ data.assetDetail.engineHours ? data.assetDetail.engineHours.unit : '' }}</span
+                >
+              </div>
+            </div>
+          </div>
+          <div class="right-container">
+            <div class="right-container-main">
+              <div class="name">{{ data ? data.assetDetail.name : '' }}</div>
+              <div class="model">{{ data ? data.assetDetail.brand : '' }}</div>
+              <span class="company">{{ 'PAGE_VEHICLE_DETAILS.COMPANY' | translate }}</span>
+              <span class="na"> {{ data ? data.assetDetail.fleets[0].name : '' }}</span>
+              <br />
+              <span class="company">{{ 'PAGE_FAULTS.VIN' | translate }}</span>
+              <span class="na"> {{ data ? data.assetDetail.serialNumber : '' }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </perfect-scrollbar>
+</div>

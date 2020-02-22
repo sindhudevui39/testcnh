@@ -1,0 +1,11 @@
+<div class="fault" [ngStyle]="{ padding: '0.66em' }">
+  <div class="fault-img"><img src="assets/severity-high-active.svg" alt="warning icon" /></div>
+  <div class="fault-vehicle">
+    <p class="fault-name">{{ fault.faultName }}</p>
+    <p class="fault-pin">{{ fault.vehicleName }} | {{ fault.model }}</p>
+  </div>
+  <div class="fault-id">
+    <span>{{ fault.id }}</span>
+  </div>
+  <div class="fault-time">{{ fault.faultTime }}</div>
+</div>

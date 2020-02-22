@@ -1,0 +1,30 @@
+<div class="fault-header flex flex-ai-c">
+  <div class="row-1__title" (click)="onTitleCLick('name')">
+    <span class="row-1__title__name" [ngClass]="{ active: selectedTitle === 'name' }">{{
+      'PAGE_FAULTS.NAME' | translate | uppercase
+    }}</span>
+    <img
+      *ngIf="selectedTitle === 'name'"
+      class="sort-icon"
+      [ngClass]="{ desc: isDesc, asc: isAsc }"
+      src="assets/svg/sort-button.svg"
+    />
+  </div>
+  <div class="row-2__title" *ngFor="let item of titlesList" (click)="onTitleCLick(item.id)">
+    <div class="row-2__title__name word-wrap" [ngClass]="{ active: item.id == selectedTitle }">
+      {{ item.title }}
+    </div>
+    <div>
+      <img
+        *ngIf="item.id === selectedTitle"
+        class="sort-icon"
+        [ngClass]="{
+          desc: isDesc,
+          asc: isAsc
+        }"
+        src="assets/svg/sort-button.svg"
+      />
+    </div>
+  </div>
+  <div class="row-2__title"></div>
+</div>

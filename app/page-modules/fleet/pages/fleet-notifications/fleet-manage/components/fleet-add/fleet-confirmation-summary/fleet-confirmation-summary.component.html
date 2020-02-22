@@ -1,0 +1,60 @@
+<div class="cnh-summary">
+  <div class="cnh-summary-list" *ngIf="success; else errorMessage">
+    <div class="icon">
+      <img style="height: 100px" src="assets/svg/success.svg" />
+    </div>
+    <div
+      *ngIf="vehicleCount === 1; else vehiclesMessage"
+      class="cnh-title"
+      [translate]="'TROWSER.CUSTOM_NOTIFICATION.SUMMARY.TITLE.SUCCESS.ONE'"
+      [translateParams]="{ title: finalNotificationName }"
+    ></div>
+    <ng-template class="cnh-title" #vehiclesMessage>
+      <div
+        class="cnh-title"
+        [translate]="'TROWSER.CUSTOM_NOTIFICATION.SUMMARY.TITLE.SUCCESS.MANY'"
+        [translateParams]="{ title: finalNotificationName }"
+      ></div>
+    </ng-template>
+    <div class="cnh-summary-values">
+      <ul class="cnh-ul">
+        <li class="cnh-values">
+          <span class="heading">
+            <img style="height: 24px; width: 24px" src="assets/svg/checkmark.svg" />
+            {{ 'TROWSER.CUSTOM_NOTIFICATION.SUMMARY.RULE.TITLE' | translate }}:</span
+          >
+          <div class="cnh-wrap">
+            {{ customParameter }} is {{ customCondition }}&nbsp;{{
+              customThreshold | number: '1.2-2'
+            }}{{ customthresholdValue }}&nbsp;for more than&nbsp;{{ customDuration / 1000 }} sec for
+            {{ vehicleCount }} vehicles
+          </div>
+        </li>
+        <li class="cnh-values">
+          <span class="heading">
+            <img style="height: 24px; width: 24px" src="assets/svg/checkmark.svg" />
+            {{ 'TROWSER.CUSTOM_NOTIFICATION.SUMMARY.USERS.TITLE' | translate }}:</span
+          >
+          <div class="cnh-wrap">{{ usersCount }} users</div>
+        </li>
+        <li class="cnh-values">
+          <span class="heading">
+            <img style="height: 24px; width: 24px" src="assets/svg/checkmark.svg" />
+            {{ 'PAGE_NOTIFICATION.TAB_MANAGE.PREFERENCE' | translate }}:</span
+          >
+          <div class="cnh-wrap">{{ channel }}</div>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <ng-template class="cnh-summary" #errorMessage>
+    <div class="cnh-summary-list">
+      <div class="icon" style="height: 24%">
+        <img style="width: 16%;" src="assets/error.PNG" />
+      </div>
+      <div class="cnh-title" style="height: 35.6px">
+        {{ 'TROWSER.CUSTOM_NOTIFICATION.SUMMARY.TITLE.ERROR' | translate }}
+      </div>
+    </div>
+  </ng-template>
+</div>

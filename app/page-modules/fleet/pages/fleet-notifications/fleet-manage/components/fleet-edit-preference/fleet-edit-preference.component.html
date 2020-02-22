@@ -1,0 +1,57 @@
+<div class="cnh-main-modal">
+  <div class="cnh-header">
+    <span
+      class="cnh-text"
+      [translate]="'MODAL.EDIT_NOTIFICATION.MODAL_TITLE'"
+      [translateParams]="{ name: data.name }"
+    >
+    </span>
+  </div>
+  <mat-dialog-content>
+    <div class="cnh-modal">
+      <div class="cnh-content">
+        <span style="font-size: 16px; font-weight: 500;">
+          {{ 'MODAL.EDIT_NOTIFICATION.TITLE' | translate }}
+        </span>
+        <div class="text-reduced">
+          {{ 'MODAL.EDIT_NOTIFICATION.CONTENT' | translate }}
+        </div>
+      </div>
+      <div class="sub-content"></div>
+      <div class="text-email-checkbox">
+        <mat-checkbox [checked]="data.checked" (change)="data.checked = !data.checked">
+        </mat-checkbox>
+        <span
+          class="phone-display"
+          [translate]="'MODAL.EDIT_NOTIFICATION.PHONE'"
+          [translateParams]="{ phone: '+*******' + data.phone }"
+        >
+        </span>
+      </div>
+      <!-- <div class="text-email-checkbox">
+        <mat-checkbox
+          [checked]="data.emailChecked"
+          (change)="data.emailChecked = !data.emailChecked"
+          >Email ({{ data.email }})
+        </mat-checkbox>
+      </div> -->
+    </div>
+  </mat-dialog-content>
+  <mat-dialog-actions class="mat-dialog-actions">
+    <button mat-button matDialogClose>
+      <span class="cnh-button-wrapper"> {{ 'GLOBAL.CTA.CANCEL' | translate | uppercase }}</span>
+    </button>
+    <button
+      mat-raised-button
+      color="primary"
+      [style.background-color]="buttonBGColor"
+      (click)="
+        edit(data.checked, data.emailChecked, data.groupId, data.name, data.notificationType)
+      "
+    >
+      <span class="cnh-button-delete">
+        {{ 'GLOBAL.CTA.CONFIRM' | translate | uppercase }}
+      </span>
+    </button>
+  </mat-dialog-actions>
+</div>

@@ -1,0 +1,121 @@
+<app-loader *ngIf="isLoading"></app-loader>
+<div class="no-files-msg" *ngIf="!isLoading && dataSet.length === 0">
+  {{ 'GLOBAL.NO_FILES' | translate }}
+</div>
+<div class="cnh-inbox" *ngIf="!isLoading && dataSet.length > 0">
+  <div class="cnh-table--header">
+    <div class="cnh-inbox--sorter">
+      <cnh-inbox-sorter (sorting)="onSortableClicked($event)"></cnh-inbox-sorter>
+    </div>
+  </div>
+  <!-- <div [style.height.px]="topScroll()"></div> -->
+  <div class="cnh-table--body">
+    <div class="cnh-inbox--table">
+      <div class="cnh-loader cnh-loader-default">
+        <div class="tc-content-box">
+          <cnh-collapsible
+            *ngFor="let fileByNamedDate of dataSet"
+            [startOpen]="startOpen(fileByNamedDate.key)"
+            [linedHeaderStyle]="true"
+            (isOpen)="checkCollapsible($event, fileByNamedDate.key)"
+            [ngClass]="{ checkTab: onTabClicked(fileByNamedDate) }"
+            [showHeaderLine]="fileByNamedDate.key === null"
+          >
+            <ng-container slot-header>
+              <div class="cnh-list-header indent-0">
+                <div class="title">{{ fileByNamedDate.key | translate }}</div>
+              </div>
+            </ng-container>
+
+            <ng-container slot-body>
+              <mat-table #table [dataSource]="dataSource[fileByNamedDate.key]">
+                <ng-container matColumnDef="fileName">
+                  <mat-cell *matCellDef="let element">
+                    <div class="image-text">
+                      <div class="element-image">
+                        <img src="./assets/svg/zipimg.svg" alt="" />
+                      </div>
+                    </div>
+                    <div
+                      class="element-text"
+                      [innerHTML]="element.fileName | cnhHighlight: searchString"
+                    ></div>
+                  </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="source">
+                  <mat-cell *matCellDef="let element">
+                    <div class="text">
+                      <div class="element-icon" *ngIf="selectedtype === 'user'">
+                        <img
+                          *ngIf="element.UserType === 'Grower'"
+                          src="./assets/svg/ic-operator.svg"
+                          alt="ic-operator"
+                        />
+                        <img
+                          *ngIf="element.UserType === 'Advisor'"
+                          src="./assets/svg/ic-operator-advisor.svg"
+                          alt="ic-operator"
+                        />
+                      </div>
+                      <!-- <div class="element-icon" *ngIf="selectedtype === 'vehicle'">
+                        <img
+                          *ngIf="element.source !== 'FMIS'"
+                          src="./assets/svg/vechicle.png"
+                          alt="ic-operator"
+                        />
+                        <img
+                          *ngIf="element.source === 'FMIS'"
+                          src="./assets/svg/farm.png"
+                          alt="ic-operator"
+                        />
+                      </div> -->
+                      <div class="element-text">
+                        <p [innerHTML]="element.UserFullName | cnhHighlight: searchString"></p>
+                        <p [innerHTML]="element.UserEmail | cnhHighlight: searchString"></p>
+                      </div>
+                    </div>
+                  </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="bytesToSize">
+                  <mat-cell *matCellDef="let element">
+                    {{ element.FileSize }}
+                  </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="creationDate">
+                  <mat-cell *matCellDef="let element">
+                    {{ element.creationDate | date: userTimeFormat:tzOffset }}
+                  </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="extension">
+                  <mat-cell
+                    #downloadZipLink
+                    *matCellDef="let element"
+                    [matMenuTriggerFor]="partnerMenu"
+                  >
+                    <span mat-icon-button class="cnh-evo-iconfont cnh-evo-icon-more2 menu"></span>
+                    <mat-menu
+                      #partnerMenu="matMenu"
+                      class="downloAdd"
+                      [backdropClass]="'full-width'"
+                    >
+                      <button mat-menu-item class="downloadFile" (click)="downloadFile(element)">
+                        {{ 'GLOBAL.SAVE_FILE' | translate }}
+                      </button>
+                      <button mat-menu-item class="" (click)="sendtoVechicle(element)">
+                        {{ 'SEND_DATA.SEND_TO_VEHICLE' | translate }}
+                      </button>
+                    </mat-menu>
+                  </mat-cell>
+                </ng-container>
+
+                <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+              </mat-table>
+            </ng-container>
+          </cnh-collapsible>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- <div [style.height.px]="bottomScroll()"></div> -->
+</div>

@@ -1,0 +1,26 @@
+<div class="flex">
+  <app-filter-dropdown
+    [dropdownName]="translatedDropdownNames.fleetFilterName"
+    [dropdownList]="fleetList$ | async"
+    [dropdownId]="'FLEETS'"
+    (selectedOptions)="applyFilters($event, 'FLEETS')"
+  ></app-filter-dropdown>
+  <app-filter-dropdown
+    [dropdownName]="translatedDropdownNames.typeFilterName"
+    [dropdownList]="typesList$ | async"
+    [dropdownId]="'TYPES'"
+    (selectedOptions)="applyFilters($event, 'TYPES')"
+  ></app-filter-dropdown>
+  <app-filter-dropdown
+    [dropdownName]="translatedDropdownNames.brandFilterName"
+    [dropdownList]="brandsList$ | async"
+    [dropdownId]="'BRANDS'"
+    (selectedOptions)="applyFilters($event, 'BRANDS')"
+  ></app-filter-dropdown>
+  <app-filter-dropdown
+    [dropdownName]="translatedDropdownNames.ModelFilterName"
+    [dropdownList]="modelsList$ | async"
+    [dropdownId]="'MODELS'"
+    (selectedOptions)="applyFilters($event, 'MODELS')"
+  ></app-filter-dropdown>
+</div>

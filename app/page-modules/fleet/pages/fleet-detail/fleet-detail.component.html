@@ -1,0 +1,32 @@
+<div class="fleet-detail">
+  <div>
+    <app-collapsible-side-nav> </app-collapsible-side-nav>
+  </div>
+
+  <div *ngIf="!loaded" class="fleet-detail-loader">
+    <app-loading-ring></app-loading-ring>
+  </div>
+
+  <div class="fleet-detail-content" *ngIf="loaded">
+    <app-fleet-vehicle-info
+      *ngIf="fleetService.selectedOption == 'details'"
+      class="vehicle-information"
+      [vehicleInfo]="vehicleInfo"
+    ></app-fleet-vehicle-info>
+    <app-fleet-duty-report
+      *ngIf="fleetService.selectedOption == 'details'"
+      class="duty-report"
+      [vehicleId]="vehicleId"
+      [lastUpdate]="lastUpdate"
+    ></app-fleet-duty-report>
+    <app-fleet-fuel-report
+      *ngIf="fleetService.selectedOption == 'details'"
+      class="fuel-report"
+      [vehicleId]="vehicleId"
+      [lastUpdate]="lastUpdate"
+    ></app-fleet-fuel-report>
+    <div class="canFeature" *ngIf="fleetService.selectedOption == 'canData'">
+      <app-fleet-candata-parameter [vehicleInfo]="vehicleInfo"> </app-fleet-candata-parameter>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,20 @@
+<div class="flex">
+  <app-filter-dropdown
+    [dropdownName]="translatedFilterNames.statusFiltername"
+    [dropdownList]="statusesList$"
+    [dropdownId]="'STATUSES'"
+    (selectedOptions)="applyFilters($event, 'STATUSES')"
+  ></app-filter-dropdown>
+  <app-filter-dropdown
+    [dropdownName]="translatedFilterNames.severityFiltername"
+    [dropdownList]="severitiesList$"
+    [dropdownId]="'SEVERITIES'"
+    (selectedOptions)="applyFilters($event, 'SEVERITIES')"
+  ></app-filter-dropdown>
+  <app-filter-dropdown
+    [dropdownName]="translatedFilterNames.daysFilterName"
+    [dropdownList]="daysList"
+    [dropdownId]="'DAYS'"
+    (selectedOptions)="applyFilters($event, 'DAYS')"
+  ></app-filter-dropdown>
+</div>
